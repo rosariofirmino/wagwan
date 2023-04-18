@@ -2,12 +2,12 @@
 <html>
 <head>
 	<title>Wagwan Home Page</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="event.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 	<style>
       .card-block {
         min-height: 400px;
@@ -99,29 +99,29 @@ class Event {
 		$topPostsArray = array();
 		 
 		 // Examples just for prototype; eventually will read from database.
-		  $Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		  array_push($topPostsArray, $Grog);
-		//  const Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		//  topPostsArray.push(Market);
-		//  const Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		//  topPostsArray.push(Concert);
-		//  const Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		//  topPostsArray.push(Restaurant);
-		//  const Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		//  topPostsArray.push(Museum);
-		//  const Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		//  topPostsArray.push(Grog2);
-		//  const Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		//  topPostsArray.push(Market2);
-		//  const Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		//  topPostsArray.push(Concert2);
-		//  const Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		//  topPostsArray.push(Restaurant2);
-		//  const Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		//  topPostsArray.push(Museum2);
+		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog);
+		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market);
+		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert);
+		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant);
+		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum);
+		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog2);
+		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market2);
+		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert2);
+		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant2);
+		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum2);
 
 		for ($i = 0; $i < count($topPostsArray); $i++) {
-			echo  "<div id='card' class='card card-block mx-2' style='minWidth: 400px'>
+			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
             <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
             <div class='card-img-overlay'>
     
@@ -145,17 +145,155 @@ class Event {
     <br>
     <h2><strong>Wagwan Tonight</strong></h2>
     <div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
+	<?php
+	 	// will read from database eventually
+		$topPostsArray = array();
+		 
+		 // Examples just for prototype; eventually will read from database.
+		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog);
+		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market);
+		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert);
+		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant);
+		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum);
+		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog2);
+		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market2);
+		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert2);
+		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant2);
+		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum2);
 
+		for ($i = 0; $i < count($topPostsArray); $i++) {
+			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
+            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+            <div class='card-img-overlay'>
+    
+              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() ."</h3>
+    
+              <p style='color: white'>" . $topPostsArray[$i]->getDescription() ."</p>
+    
+            </div>
+            <div class='card-img-overlay d-flex align-items-end'>
+              <button onClick={} type='button' class='align-self-end btn btn-dark'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+                        <path d='". $topPostsArray[$i]->getLikedIcon() . "'}/>
+                      </svg>
+              </button>
+              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() ."</h3>
+            </div>
+          </div>";
+		}
+	  ?>
     </div>
     <br>
     <h2><strong>Wagwan this Weekend</strong></h2>
     <div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<?php
+	 	// will read from database eventually
+		$topPostsArray = array();
+		 
+		 // Examples just for prototype; eventually will read from database.
+		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog);
+		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market);
+		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert);
+		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant);
+		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum);
+		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog2);
+		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market2);
+		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert2);
+		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant2);
+		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum2);
 
+		for ($i = 0; $i < count($topPostsArray); $i++) {
+			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
+            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+            <div class='card-img-overlay'>
+    
+              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() ."</h3>
+    
+              <p style='color: white'>" . $topPostsArray[$i]->getDescription() ."</p>
+    
+            </div>
+            <div class='card-img-overlay d-flex align-items-end'>
+              <button onClick={} type='button' class='align-self-end btn btn-dark'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+                        <path d='". $topPostsArray[$i]->getLikedIcon() . "'}/>
+                      </svg>
+              </button>
+              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() ."</h3>
+            </div>
+          </div>";
+		}
+	  ?>
     </div>
     <br>
     <h2><strong>Your liked Wagwans</strong></h2>
     <div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
+	<?php
+	 	// will read from database eventually
+		$topPostsArray = array();
+		 
+		 // Examples just for prototype; eventually will read from database.
+		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog);
+		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market);
+		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert);
+		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant);
+		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum);
+		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
+		array_push($topPostsArray, $Grog2);
+		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
+		array_push($topPostsArray, $Market2);
+		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
+		array_push($topPostsArray, $Concert2);
+		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
+		array_push($topPostsArray, $Restaurant2);
+		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
+		array_push($topPostsArray, $Museum2);
 
+		for ($i = 0; $i < count($topPostsArray); $i++) {
+			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
+            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+            <div class='card-img-overlay'>
+    
+              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() ."</h3>
+    
+              <p style='color: white'>" . $topPostsArray[$i]->getDescription() ."</p>
+    
+            </div>
+            <div class='card-img-overlay d-flex align-items-end'>
+              <button onClick={} type='button' class='align-self-end btn btn-dark'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+                        <path d='". $topPostsArray[$i]->getLikedIcon() . "'}/>
+                      </svg>
+              </button>
+              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() ."</h3>
+            </div>
+          </div>";
+		}
+	  ?>
     </div>
   </body>
 </body>
