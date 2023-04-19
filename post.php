@@ -11,9 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 </head>
-<?php
 
-?>
 
 <body style="background-color: black; color: white;">
 
@@ -24,45 +22,37 @@
         <div class="card post-card">
             <div class="card-header text-center">
                 <h4 class="card-title">Wagwan?</h4>
-                <button type="button" class="close" aria-label="Close">
+                <button type="button" class="close" aria-label="Close" onclick="window.location.href='./'">
                     <span aria-hidden="true" class="text-light">&times;</span>
                 </button>
             </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="what">What?</label>
-                    <input type="text" class="form-control" id="what">
+            <form action="actions/submitPost.php" method="POST">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="what">What?</label>
+                        <input type="text" class="form-control" id="what" name="what" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="where">Where?</label>
+                        <input type="text" class="form-control" id="where" name="where" required>
+                    </div>
+                    <div class=" form-group">
+                        <label for="when">When?</label>
+                        <input type="text" class="form-control" id="when" name="when" required>
+                    </div>
+                    <div class=" form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="8" required></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="where">Where?</label>
-                    <input type="text" class="form-control" id="where">
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
                 </div>
-                <div class="form-group">
-                    <label for="when">When?</label>
-                    <input type="text" class="form-control" id="when">
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="8"></textarea>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button type="button" class="btn btn-primary float-right">Submit</button>
-            </div>
+            </form>
         </div>
 
 
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.close').click(function () {
-                $('.card').hide();
-            });
-        });
-    </script>
 
 </body>
 
