@@ -34,6 +34,10 @@
     margin-bottom: 2rem;
 }
 
+.app-header {
+    padding: 1rem;
+}
+
 .post-card {
     position: fixed;
     bottom: 0;
@@ -45,7 +49,7 @@
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
     background-color: #343a40;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 30px 30px 0px 0px;
     color: #fff;
     overflow-y: auto;
     z-index: 1;
@@ -81,7 +85,7 @@
 
 .post-card .card-title {
     margin-top: 0;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .post-card .form-group label {
@@ -127,4 +131,75 @@
 
 .post-card .text-light {
     color: #f8f9fa;
+}
+
+.add-button {
+    display: inline-block;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background-color: #212529;
+    color: #fff;
+    font-size: 24px;
+    width: 100px;
+    height: 60px;
+    border-radius: 20%;
+    text-align: center;
+    line-height: 48px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.add-button:hover {
+    background-color: #6c757d;
+}
+
+.add-button:active {
+    background-color: #007bff;
+}
+
+.add-button:focus {
+    outline: none;
+}
+
+.add-button:hover,
+.add-button:active,
+.add-button:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+.add-button:hover:before {
+    display: none;
+}
+
+.add-button:before {
+    content: "+";
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    line-height: 1;
+}
+
+.add-button:hover:after {
+    display: block;
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: #6c757d;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.add-button:active:after {
+    width: 120%;
+    height: 120%;
+    opacity: 0.2;
 }

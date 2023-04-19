@@ -9,6 +9,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 
 </head>
 <?php
@@ -81,7 +82,8 @@ class Event
 	<body style="background-color: black; color: white;">
 		<div id="root"></div>
 		<br>
-		<h2><strong>Top Wagwans</strong></h2>
+		<h2 class="app-header"><strong>Top Wagwans</strong></h2>
+		<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
 			<?php
 			// will read from database eventually
