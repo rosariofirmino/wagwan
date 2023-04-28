@@ -12,6 +12,14 @@
 	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 
 </head>
+
+<script>
+function like(title) {
+	console.log("test");
+
+}
+</script>
+
 <?php
 // making Event class with php
 class Event
@@ -122,7 +130,7 @@ class Event
     
             </div>
             <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
+              <button onClick='like(".$topPostsArray[$i]->getTitle().")' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
                         <path d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
                       </svg>
