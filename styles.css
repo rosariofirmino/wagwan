@@ -53,6 +53,12 @@
     color: #fff;
     overflow-y: auto;
     z-index: 1;
+    transform: translateY(100%);
+    transition: transform 0.5s ease-out;
+}
+
+.post-card.show {
+    transform: translateY(0%);
 }
 
 .close {

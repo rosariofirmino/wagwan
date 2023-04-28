@@ -54,6 +54,17 @@
 
     </div>
 
+
+    <script>
+        const postCard = document.querySelector('.post-card');
+
+        window.onload = function () {
+            setTimeout(function () {
+                postCard.classList.add('show');
+            }, 500);
+        }
+    </script>
+
 </body>
 
 </html>
