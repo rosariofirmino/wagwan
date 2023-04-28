@@ -1,6 +1,6 @@
 function email_err(email_str) {
     $.ajax({
-        url:"error_ajax.php",
+        url:"../php/error_ajax.php",
         type: "get",
         dataType: 'json',
         data: {error_type: "email", email: email_str},
@@ -12,7 +12,7 @@ function email_err(email_str) {
 
 function username_err(username_str) {
     $.ajax({
-        url:"error_ajax.php",
+        url:"../php/error_ajax.php",
         type: "get",
         dataType: 'json',
         data: {error_type: "username", username: username_str},
