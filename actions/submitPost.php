@@ -14,18 +14,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    $table_name = "test_post";
+    $table_name = "homepage_posts_test";
 
     // Retrieve the form data
+    $userId = "admin"; // admin is temporary, need to get user ID from session?
     $what = $_POST['what'];
     $loc = $_POST['where'];
+    $when = $_POST['when'];
+    $category = $_POST['category'];
     $details = $_POST['description'];
+    $age = $_POST['age'];
+    $price = $_POST['price'];
 
     // Sanitize the form data to prevent SQL injection
     $what = mysqli_real_escape_string($conn, $what);
     $loc = mysqli_real_escape_string($conn, $loc);
     $details = mysqli_real_escape_string($conn, $details);
 
+    // Convert date to proper MySQL datetime format
+    $when = new DateTime($when);
+    $when = $when->format('Y-m-d H:i:s');
 
     // Check connection
     if (!$conn) {
@@ -33,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert the form data into the database
-    $sql = "INSERT INTO $table_name (what, loc, details)
-          VALUES ('$what', '$loc', '$details')";
+    $sql = "INSERT INTO $table_name(UserId, Address, Title, Description, Price, AgeRestrictions, CategoryId, DateEvent, Rating) 
+          VALUES ('$userId', '$loc', '$what', '$details', $price, '$age', '$category','$when', 5)";
 
     if (mysqli_query($conn, $sql)) {
         echo "Record added successfully";

@@ -36,13 +36,39 @@
                         <label for="where">Where?</label>
                         <input type="text" class="form-control" id="where" name="where" required>
                     </div>
-                    <div class=" form-group">
+                    <div class="form-group">
                         <label for="when">When?</label>
-                        <input type="text" class="form-control" id="when" name="when" required>
+                        <input
+                            id="when"
+                            type="datetime-local"
+                            name="when"
+                            min="<?php echo date("Y-m-d H:i");?>"
+                            required>
                     </div>
-                    <div class=" form-group">
+                    <div class="form-group">
+                        <label for="category">Category?</label>
+                        <select class="form-control" id="category" name="category" required>
+                            <option value="nightlife">nightlife</option>
+                            <option value="market">market</option>
+                            <option value="concert">concert</option>
+                            <option value="food">food</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="8" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age?</label>
+                        <select class="form-control" id="age" name="age" required>
+                            <option value="All Ages">All Ages</option>
+                            <option value="18+">18+</option>
+                            <option value="21+">21+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        $ <input type="range" id="price" name="price"> $$$
                     </div>
                 </div>
                 <div class="card-footer">
