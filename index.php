@@ -14,9 +14,24 @@
 </head>
 
 <script>
-function like(title) {
-	console.log("test");
+function likeButtonPress(Row, PostId, Likes) {
 
+	// check if unlike
+	if("&nbsp; "+(Likes + 1) == document.getElementById(Row + "likes" + PostId).innerHTML) {
+		$("#" + Row + "path" + PostId).attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
+		Likes = Likes - 1;
+	}
+	else {
+		$("#" + Row + "path" + PostId).attr("d", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z");
+	}
+
+	// AJAX for like update / update like in database
+	const xhttp = new XMLHttpRequest();
+	xhttp.onload = function() {
+		document.getElementById(Row + "likes" + PostId).innerHTML = this.responseText;
+	}
+	xhttp.open("GET", "like.php?PostId=" + PostId + "&Likes=" + Likes, true);
+	xhttp.send();
 }
 </script>
 
@@ -98,6 +113,35 @@ class Event
 	{
 		return $this->likedIcon;
 	}
+	public function getPostId()
+	{
+		return $this->PostId;
+	}
+	public function getRating()
+	{
+		return $this->rating;
+	}
+	public function getAgeRestrictions()
+	{
+		return $this->AgeRestrictions;
+	}
+	public function getDateEvent()
+	{
+		return $this->DateEvent;
+	}
+	public function getPrice()
+	{
+		return $this->Price;
+	}
+	public function getAddress()
+	{
+		return $this->Address;
+	}
+	public function getUserId()
+	{
+		return $this->UserId;
+	}
+	
 
 }
 ?>
@@ -141,7 +185,8 @@ class Event
 				array_push($topPostsArray, $Event);
 			}
 
-
+			$row = 0; // keeps track of row we are on
+			
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
             <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
@@ -153,12 +198,12 @@ class Event
     
             </div>
             <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick='like('testing')' type='button' class='align-self-end btn btn-dark'>
+              <button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
+                        <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
                       </svg>
               </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
+			  <h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
             </div>
           </div>";
 			}
@@ -169,26 +214,29 @@ class Event
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
 			<?php
 
+			$row = $row + 1;
+						
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
-            </div>
-          </div>";
+			<img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+			<div class='card-img-overlay'>
+
+			<h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
+
+			<p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
+
+			</div>
+			<div class='card-img-overlay d-flex align-items-end'>
+			<button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
+					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+						<path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
+					</svg>
+			</button>
+			<h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
+			</div>
+			</div>";
 			}
+
 			?>
 		</div>
 		<br>
@@ -196,25 +244,27 @@ class Event
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
 			<?php
 
+			$row = $row + 1;
+						
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
-            </div>
-          </div>";
+			<img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+			<div class='card-img-overlay'>
+
+			<h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
+
+			<p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
+
+			</div>
+			<div class='card-img-overlay d-flex align-items-end'>
+			<button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
+					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+						<path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
+					</svg>
+			</button>
+			<h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
+			</div>
+			</div>";
 			}
 			?>
 		</div>
@@ -223,25 +273,27 @@ class Event
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
 			<?php
 
+			$row = $row + 1;
+									
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
-            </div>
-          </div>";
+			<img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+			<div class='card-img-overlay'>
+
+			<h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
+
+			<p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
+
+			</div>
+			<div class='card-img-overlay d-flex align-items-end'>
+			<button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
+					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+						<path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
+					</svg>
+			</button>
+			<h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
+			</div>
+			</div>";
 			}
 			?>
 		</div>
