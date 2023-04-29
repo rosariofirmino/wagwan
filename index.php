@@ -111,7 +111,7 @@ class Event
 		<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
 			<?php
-			// will read from database eventually
+			// reads from database
 			$topPostsArray = array();
 
 			$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
@@ -168,7 +168,6 @@ class Event
 		<h2><strong>Wagwan Tonight</strong></h2>
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
 			<?php
-			// will read from database eventually
 
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
@@ -196,30 +195,6 @@ class Event
 		<h2><strong>Wagwan this Weekend</strong></h2>
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
 			<?php
-			// will read from database eventually
-			$topPostsArray = array();
-
-			// Examples just for prototype; eventually will read from database.
-			$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-			array_push($topPostsArray, $Grog);
-			$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-			array_push($topPostsArray, $Market);
-			$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-			array_push($topPostsArray, $Concert);
-			$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-			array_push($topPostsArray, $Restaurant);
-			$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-			array_push($topPostsArray, $Museum);
-			$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-			array_push($topPostsArray, $Grog2);
-			$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-			array_push($topPostsArray, $Market2);
-			$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-			array_push($topPostsArray, $Concert2);
-			$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-			array_push($topPostsArray, $Restaurant2);
-			$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-			array_push($topPostsArray, $Museum2);
 
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
@@ -247,30 +222,6 @@ class Event
 		<h2><strong>Your liked Wagwans</strong></h2>
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
 			<?php
-			// will read from database eventually
-			$topPostsArray = array();
-
-			// Examples just for prototype; eventually will read from database.
-			$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-			array_push($topPostsArray, $Grog);
-			$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-			array_push($topPostsArray, $Market);
-			$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-			array_push($topPostsArray, $Concert);
-			$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-			array_push($topPostsArray, $Restaurant);
-			$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-			array_push($topPostsArray, $Museum);
-			$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-			array_push($topPostsArray, $Grog2);
-			$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-			array_push($topPostsArray, $Market2);
-			$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-			array_push($topPostsArray, $Concert2);
-			$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-			array_push($topPostsArray, $Restaurant2);
-			$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-			array_push($topPostsArray, $Museum2);
 
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
