@@ -190,14 +190,9 @@ class Event
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
             <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
+
+            <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
+			
               <button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
                         <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
@@ -205,7 +200,45 @@ class Event
               </button>
 			  <h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
             </div>
-          </div>";
+
+			<div class='card-img-overlay' style='height: 335px' data-toggle='modal' data-target='#modalpost".$topPostsArray[$i]->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
+    
+			<h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
+  
+			<p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
+
+		  </div>
+          </div>
+		  <div class='modal fade' id='modalpost".$topPostsArray[$i]->getPostId()."row".$row."'>
+		  <div class='modal-dialog modal-dialog-centered'>
+			<div class='modal-content'>
+			
+			  <!-- Modal Header -->
+			  <div class='modal-header'>
+				<h4 class='modal-title'>". $topPostsArray[$i]->getTitle() ."</h4>
+			  </div>
+			  
+			  <!-- Modal body -->
+			  <div class='modal-body'>
+			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
+				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
+				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>
+				<p><strong>Price: </strong>".$topPostsArray[$i]->getPrice()."</p>
+				<p><strong>Age: </strong>".$topPostsArray[$i]->getAgeRestrictions()."</p>
+				<p><strong>Date: </strong>".$topPostsArray[$i]->getDateEvent()."</p>
+				<p><strong>Rating: </strong>".$topPostsArray[$i]->getRating()."/5 stars</p>
+
+			  </div>
+			  
+			  <!-- Modal footer -->
+			  <div class='modal-footer'>
+				<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+			  </div>
+			  
+			</div>
+		  </div>
+		</div>";
 			}
 			?>
 		</div>
@@ -218,25 +251,57 @@ class Event
 						
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-			<img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-			<div class='card-img-overlay'>
+            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
 
+            <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
+			
+              <button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+                        <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
+                      </svg>
+              </button>
+			  <h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
+            </div>
+
+			<div class='card-img-overlay' style='height: 335px' data-toggle='modal' data-target='#modalpost".$topPostsArray[$i]->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
+    
 			<h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
-
+  
 			<p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
 
-			</div>
-			<div class='card-img-overlay d-flex align-items-end'>
-			<button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
-					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-						<path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
-					</svg>
-			</button>
-			<h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
-			</div>
-			</div>";
-			}
+		  </div>
+          </div>
+		  <div class='modal fade' id='modalpost".$topPostsArray[$i]->getPostId()."row".$row."'>
+		  <div class='modal-dialog modal-dialog-centered'>
+			<div class='modal-content'>
+			
+			  <!-- Modal Header -->
+			  <div class='modal-header'>
+				<h4 class='modal-title'>". $topPostsArray[$i]->getTitle() ."</h4>
+			  </div>
+			  
+			  <!-- Modal body -->
+			  <div class='modal-body'>
+			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
+				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
+				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>
+				<p><strong>Price: </strong>".$topPostsArray[$i]->getPrice()."</p>
+				<p><strong>Age: </strong>".$topPostsArray[$i]->getAgeRestrictions()."</p>
+				<p><strong>Date: </strong>".$topPostsArray[$i]->getDateEvent()."</p>
+				<p><strong>Rating: </strong>".$topPostsArray[$i]->getRating()."/5 stars</p>
 
+			  </div>
+			  
+			  <!-- Modal footer -->
+			  <div class='modal-footer'>
+				<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+			  </div>
+			  
+			</div>
+		  </div>
+		</div>";
+			}
 			?>
 		</div>
 		<br>
@@ -248,23 +313,56 @@ class Event
 						
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-			<img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-			<div class='card-img-overlay'>
+            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
 
+            <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
+			
+              <button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+                        <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
+                      </svg>
+              </button>
+			  <h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
+            </div>
+
+			<div class='card-img-overlay' style='height: 335px' data-toggle='modal' data-target='#modalpost".$topPostsArray[$i]->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
+    
 			<h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
-
+  
 			<p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
 
+		  </div>
+          </div>
+		  <div class='modal fade' id='modalpost".$topPostsArray[$i]->getPostId()."row".$row."'>
+		  <div class='modal-dialog modal-dialog-centered'>
+			<div class='modal-content'>
+			
+			  <!-- Modal Header -->
+			  <div class='modal-header'>
+				<h4 class='modal-title'>". $topPostsArray[$i]->getTitle() ."</h4>
+			  </div>
+			  
+			  <!-- Modal body -->
+			  <div class='modal-body'>
+			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
+				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
+				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>
+				<p><strong>Price: </strong>".$topPostsArray[$i]->getPrice()."</p>
+				<p><strong>Age: </strong>".$topPostsArray[$i]->getAgeRestrictions()."</p>
+				<p><strong>Date: </strong>".$topPostsArray[$i]->getDateEvent()."</p>
+				<p><strong>Rating: </strong>".$topPostsArray[$i]->getRating()."/5 stars</p>
+
+			  </div>
+			  
+			  <!-- Modal footer -->
+			  <div class='modal-footer'>
+				<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+			  </div>
+			  
 			</div>
-			<div class='card-img-overlay d-flex align-items-end'>
-			<button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
-					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-						<path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
-					</svg>
-			</button>
-			<h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
-			</div>
-			</div>";
+		  </div>
+		</div>";
 			}
 			?>
 		</div>
@@ -277,23 +375,56 @@ class Event
 									
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-			<img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-			<div class='card-img-overlay'>
+            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
 
+            <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
+			
+              <button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
+                        <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
+                      </svg>
+              </button>
+			  <h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
+            </div>
+
+			<div class='card-img-overlay' style='height: 335px' data-toggle='modal' data-target='#modalpost".$topPostsArray[$i]->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
+    
 			<h3 style='color: white'>" . $topPostsArray[$i]->getTitle() . "</h3>
-
+  
 			<p style='color: white'>" . $topPostsArray[$i]->getDescription() . "</p>
 
+		  </div>
+          </div>
+		  <div class='modal fade' id='modalpost".$topPostsArray[$i]->getPostId()."row".$row."'>
+		  <div class='modal-dialog modal-dialog-centered'>
+			<div class='modal-content'>
+			
+			  <!-- Modal Header -->
+			  <div class='modal-header'>
+				<h4 class='modal-title'>". $topPostsArray[$i]->getTitle() ."</h4>
+			  </div>
+			  
+			  <!-- Modal body -->
+			  <div class='modal-body'>
+			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
+				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
+				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>
+				<p><strong>Price: </strong>".$topPostsArray[$i]->getPrice()."</p>
+				<p><strong>Age: </strong>".$topPostsArray[$i]->getAgeRestrictions()."</p>
+				<p><strong>Date: </strong>".$topPostsArray[$i]->getDateEvent()."</p>
+				<p><strong>Rating: </strong>".$topPostsArray[$i]->getRating()."/5 stars</p>
+
+			  </div>
+			  
+			  <!-- Modal footer -->
+			  <div class='modal-footer'>
+				<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+			  </div>
+			  
 			</div>
-			<div class='card-img-overlay d-flex align-items-end'>
-			<button onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
-					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-						<path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
-					</svg>
-			</button>
-			<h3 style='color: white' id='".$row."likes".$topPostsArray[$i]->getPostId()."'>&nbsp; " . $topPostsArray[$i]->getLikes() . "</h3>
-			</div>
-			</div>";
+		  </div>
+		</div>";
 			}
 			?>
 		</div>

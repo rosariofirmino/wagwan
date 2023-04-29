@@ -210,3 +210,7 @@
     height: 120%;
     opacity: 0.2;
 }
+.modal-content {
+    background-color: black;
+    color: white;
+  }
