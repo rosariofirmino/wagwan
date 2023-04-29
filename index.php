@@ -31,13 +31,30 @@ class Event
 	private $likes;
 	private $liked = false;
 	private $likedIcon = "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z";
+	private $rating;
+	private $AgeRestrictions;
+	private $DateEvent;
+	private $Price;
+	private $Address;
+	private $UserId;
+	private $PostId;
 
-	public function __construct($title, $description, $category)
+
+	public function __construct($title, $description, $category, $rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId)
 	{
 		$this->title = $title;
 		$this->description = $description;
 		$this->category = $category;
 		$this->likes = rand(1, 100); //random like amount for now
+		$this->liked = false;
+		$this->rating = $rating;
+		$this->AgeRestrictions = $AgeRestrictions;
+		$this->DateEvent = $DateEvent;
+		$this->Price = $Price;
+		$this->Address = $Address;
+		$this->UserId = $UserId;
+		$this->PostId = $PostId;
+
 
 		$this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image i guess
 		if ($category == "nightlife") {
@@ -97,27 +114,33 @@ class Event
 			// will read from database eventually
 			$topPostsArray = array();
 
-			// Examples just for prototype; eventually will read from database.
-			$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-			array_push($topPostsArray, $Grog);
-			$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-			array_push($topPostsArray, $Market);
-			$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-			array_push($topPostsArray, $Concert);
-			$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-			array_push($topPostsArray, $Restaurant);
-			$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-			array_push($topPostsArray, $Museum);
-			$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-			array_push($topPostsArray, $Grog2);
-			$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-			array_push($topPostsArray, $Market2);
-			$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-			array_push($topPostsArray, $Concert2);
-			$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-			array_push($topPostsArray, $Restaurant2);
-			$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-			array_push($topPostsArray, $Museum2);
+			$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+			// Check connection
+			if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+			}
+
+			$sql = "SELECT * FROM homepage_posts_test";
+			$result = $conn->query($sql);
+			
+			
+			while($row = $result->fetch_assoc())
+			{	
+				$PostId = $row["PostId"];
+				$UserId = htmlspecialchars($row["UserId"]);
+				$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
+				$Title = htmlspecialchars($row["Title"], ENT_QUOTES);
+				$Description = htmlspecialchars($row["Description"], ENT_QUOTES);
+				$Price = $row["Price"];
+				$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
+				$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+				$Rating = $row["Rating"];
+				$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+			
+				$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId);
+				array_push($topPostsArray, $Event);
+			}
+
 
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
