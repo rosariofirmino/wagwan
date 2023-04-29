@@ -169,7 +169,6 @@ class Event
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
 			<?php
 			// will read from database eventually
-			$topPostsArray = array();
 
 			for ($i = 0; $i < count($topPostsArray); $i++) {
 				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
