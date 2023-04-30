@@ -107,6 +107,9 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 				array_push($likedPostsArray, $Event);
 			}
 
+			// reverse array so most recent posts are first
+			$likedPostsArray = array_reverse($likedPostsArray);
+
 			$row = 0; // keeps track of row we are on
 			
 			for ($i = 0; $i < count($likedPostsArray); $i++) {
@@ -161,7 +164,14 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 			</div>
 		  </div>
 		</div>";
+
+			//layout for cards: 3 cards per row
+			if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
+				echo "</div><br>";
+				echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts".$i."'>";
+
 			}
+		}
 			?>
 		</div>
 		<br>
