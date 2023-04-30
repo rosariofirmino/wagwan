@@ -137,7 +137,7 @@ xhttp.send();
 			  
 			  <!-- Modal body -->
 			  <div class='modal-body'>
-			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$topPostsArray[$i]->getUserId().">".$topPostsArray[$i]->getUserId()."</a></p>
 			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
 				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
 				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>
@@ -199,7 +199,7 @@ xhttp.send();
 			  
 			  <!-- Modal body -->
 			  <div class='modal-body'>
-			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$topPostsArray[$i]->getUserId().">".$topPostsArray[$i]->getUserId()."</a></p>
 			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
 				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
 				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>
@@ -261,7 +261,7 @@ xhttp.send();
 			  
 			  <!-- Modal body -->
 			  <div class='modal-body'>
-			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$topPostsArray[$i]->getUserId().">".$topPostsArray[$i]->getUserId()."</a></p>
 			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
 				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
 				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>
@@ -323,7 +323,7 @@ xhttp.send();
 			  
 			  <!-- Modal body -->
 			  <div class='modal-body'>
-			    <p><strong>Posted By: </strong>".$topPostsArray[$i]->getUserId()."</p>
+			    <p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$topPostsArray[$i]->getUserId().">".$topPostsArray[$i]->getUserId()."</a></p>
 			    <p><strong>Address: </strong>".$topPostsArray[$i]->getAddress()."</p>
 				<p><strong>Category: </strong>".$topPostsArray[$i]->getCategory()."</p>
 				<p><strong>Description: </strong>".$topPostsArray[$i]->getDescription()."</p>

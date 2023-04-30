@@ -2,7 +2,10 @@
 <html>
 
 <head>
-	<title>Your Liked Wagwans</title>
+	<?php
+		$UserId = $_GET["UserId"];
+		echo "<title>$UserId's Profile</title>";
+	?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -63,7 +66,7 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 	<body style="background-color: black; color: white;">
 		<div id="root"></div>
 		<br>
-		<h2 class="app-header"><strong>Your Liked Wagwans</strong></h2>
+		<h2 class="app-header"><strong><?php echo "$UserId's"?> Wagwans</strong></h2>
 		<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
 		<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
 			<?php
@@ -80,18 +83,12 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 
 
 			// get liked posts from likes table
-			$sql = "SELECT * FROM dev_likes WHERE UserId = '$UserId'";
+			$sql = "SELECT * FROM dev_posts WHERE UserId = '$UserId'";
 			$result = $conn->query($sql);
 			
 
 			while($row = $result->fetch_assoc())
 			{
-				$PostId = $row["PostId"];
-				$sql = "SELECT * FROM dev_posts WHERE PostId = '$PostId'";
-				$resultPosts = $conn->query($sql);
-
-				$row = $resultPosts->fetch_assoc();
-
 				$PostId = $row["PostId"];
 				$UserId = htmlspecialchars($row["UserId"]);
 				$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
@@ -145,7 +142,7 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 			  
 			  <!-- Modal body -->
 			  <div class='modal-body'>
-			    <p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$likedPostsArray[$i]->getUserId().">".$likedPostsArray[$i]->getUserId()."</a></p>
+			    <p><strong>Posted By: </strong>".$likedPostsArray[$i]->getUserId()."</p>
 			    <p><strong>Address: </strong>".$likedPostsArray[$i]->getAddress()."</p>
 				<p><strong>Category: </strong>".$likedPostsArray[$i]->getCategory()."</p>
 				<p><strong>Description: </strong>".$likedPostsArray[$i]->getDescription()."</p>
