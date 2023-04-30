@@ -162,5 +162,16 @@ class Event
 	}
 	
 
+
 }
+
+function compareLikes($a, $b) {
+	// compares likes of two posts, used to sort array of posts
+	// use: usort($postsArr, 'compareLikes');
+	if ($a->getLikes() == $b->getLikes()) {
+		return 0;
+	}
+	return ($a->getLikes() > $b->getLikes()) ? -1 : 1;
+}
+
 ?>

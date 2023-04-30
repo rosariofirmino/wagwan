@@ -99,6 +99,9 @@ xhttp.send();
 				array_push($topPostsArray, $Event);
 			}
 
+			// Sort based on liked count
+			usort($topPostsArray, 'compareLikes');
+
 			$row = 0; // keeps track of row we are on
 			
 			for ($i = 0; $i < count($topPostsArray); $i++) {
