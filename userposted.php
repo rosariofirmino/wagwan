@@ -57,6 +57,22 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 
 	xhttp.send();
 }
+
+function deletePost(PostId) {
+	// AJAX for deletion in database
+
+	// get UserId
+	var UserId = "admin"; // TODO: get UserId from session
+
+	const xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "actions/deletePost.php?PostId=" + PostId + "&UserId=" + UserId, true);
+	xhttp.send();
+
+	// reload page to remove deleted post from page
+	setTimeout(function(){ // reloads after 0.5 seconds
+		location.reload();
+	}, 500);
+}
 </script>
 <body>
 
@@ -153,6 +169,7 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 			  
 			  <!-- Modal footer -->
 			  <div class='modal-footer'>
+			  	<button type='button' class='btn btn-danger' data-dismiss='modal' onClick='deletePost(".$likedPostsArray[$i]->getPostId().")'>🗑️ Delete this Wagwan</button>
 				<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
 			  </div>
 			  
