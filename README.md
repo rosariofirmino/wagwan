@@ -11,3 +11,4 @@ Developers: Rosario Firmino, David Payne, Edward Zhang, Sebastian Martinez
 
 ## Wireframe
 [Link](https://www.figma.com/file/gLIxWm6uR4drrRfTmhG8pk/Wagwan-Wireframe?node-id=0-1)
+
