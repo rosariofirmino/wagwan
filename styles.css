@@ -54,7 +54,7 @@
     overflow-y: auto;
     z-index: 1;
     transform: translateY(100%);
-    transition: transform 0.5s ease-out;
+    transition: transform 0.3s ease-out;
 }
 
 .post-card.show {
@@ -210,7 +210,8 @@
     height: 120%;
     opacity: 0.2;
 }
+
 .modal-content {
     background-color: black;
     color: white;
-  }
+}

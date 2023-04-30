@@ -38,11 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="when">When?</label>
-                        <input
-                            id="when"
-                            type="datetime-local"
-                            name="when"
-                            min="<?php echo date("Y-m-d H:i");?>"
+                        <input id="when" type="datetime-local" name="when" min="<?php echo date("Y-m-d H:i"); ?>"
                             required>
                     </div>
                     <div class="form-group">
@@ -87,7 +83,7 @@
         window.onload = function () {
             setTimeout(function () {
                 postCard.classList.add('show');
-            }, 500);
+            }, 300);
         }
     </script>
 
