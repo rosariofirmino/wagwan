@@ -164,7 +164,7 @@ class Event
 			die("Connection failed: " . $conn->connect_error);
 			}
 
-			$sql = "SELECT * FROM homepage_posts_test";
+			$sql = "SELECT * FROM dev_posts";
 			$result = $conn->query($sql);
 			
 			

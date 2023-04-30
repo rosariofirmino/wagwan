@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    $table_name = "homepage_posts_test";
+    $table_name = "dev_posts";
 
     // Retrieve the form data
     $userId = "admin"; // admin is temporary, need to get user ID from session?
