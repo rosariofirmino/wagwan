@@ -9,3 +9,6 @@ Developers: Rosario Firmino, David Payne, Edward Zhang, Sebastian Martinez
 ## Design Doc
 [Link](https://docs.google.com/document/d/1vzG1S7-oyhTfZD3Rs0STXMjRKu5vYSAmpi-0jyU2o9E/edit?usp=sharing)
 
+## Wireframe
+[Link](https://www.figma.com/file/gLIxWm6uR4drrRfTmhG8pk/Wagwan-Wireframe?node-id=0-1)
+

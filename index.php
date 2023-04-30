@@ -1,6 +1,5 @@
 #!/usr/local/bin/php
 <html>
-
 <head>
 	<title>Wagwan Home Page</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -60,6 +59,42 @@ xhttp.send();
 // making Event class with php
 class Event
 {
+=======
+<head>
+	<title>Wagwan Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+	<style>
+      .card-block {
+        min-height: 400px;
+      }
+      ::-webkit-scrollbar {
+         width: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1);
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          background-color:#fff;
+          -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
+      }
+      #card {
+        color:black;
+        background-color: black;
+      }
+
+    </style>
+</head>
+<?php
+// making Event class with php
+class Event {
 	private $title;
 	private $description;
 	private $category;
