@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Wagwan Home Page</title>
+	<title>Your Liked Wagwans</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -14,23 +14,44 @@
 </head>
 
 <script>
-function likeButtonPress(Row, PostId, Likes) {
+function likeButtonPress(Row, PostId, Likes, UserLiked) {
 
-	// check if unlike
-	if("&nbsp; "+(Likes) == document.getElementById(Row + "likes" + PostId).innerHTML) {
+	if(UserLiked == true) { // unlike
+		// set icon to unlike
 		$("#" + Row + "path" + PostId).attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
-		Likes = Likes - 1;
+		
+		// set like count to likes - 1
+		$("#" + Row + "likes" + PostId).html("&nbsp; " + (Likes - 1) + "");
+
+		// change button onclick
+		$("#button"+ Row + "" + PostId).attr("onClick","likeButtonPress(" + Row + ", " + PostId + ", " + (Likes - 1) + ", " + !UserLiked + ")");
 	}
-	else {
+	else { // like
+		// set icon to like4
 		$("#" + Row + "path" + PostId).attr("d", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z");
+		
+		// set like count to likes - 1
+		$("#" + Row + "likes" + PostId).html("&nbsp; " + (Likes + 1) + "");
+
+		// change button onclick
+		$("#button"+ Row + "" + PostId).attr("onClick","likeButtonPress(" + Row + ", " + PostId + ", " + (Likes + 1) + ", " + !UserLiked + ")");
 	}
+
 
 	// AJAX for like update / update like in database
+
+	// get UserId
+	var UserId = "admin"; // TODO: get UserId from session
+
 	const xhttp = new XMLHttpRequest();
-	xhttp.onload = function() {
-		document.getElementById(Row + "likes" + PostId).innerHTML = this.responseText;
+
+	if (UserLiked == true) { // unlike
+		xhttp.open("GET", "actions/dislike.php?PostId=" + PostId + "&UserId=" + UserId, true);
 	}
-	xhttp.open("GET", "like.php?PostId=" + PostId + "&Likes=" + Likes, true);
+	if (UserLiked == false) { // like
+		xhttp.open("GET", "actions/like.php?PostId=" + PostId + "&UserId=" + UserId, true);
+	}
+
 	xhttp.send();
 }
 </script>
@@ -203,7 +224,7 @@ class Event
 
             <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
 			
-              <button onClick='likeButtonPress(".$row.", ".$likedPostsArray[$i]->getPostId().", ".$likedPostsArray[$i]->getLikes().")' type='button' class='align-self-end btn btn-dark'>
+              <button id='button".$row."".$likedPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$likedPostsArray[$i]->getPostId().", ".$likedPostsArray[$i]->getLikes().", true)' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
                         <path id='".$row."path".$likedPostsArray[$i]->getPostId()."' d='" . $likedPostsArray[$i]->getLikedIcon() . "'}/>
                       </svg>
