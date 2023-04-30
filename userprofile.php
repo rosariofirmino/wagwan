@@ -79,10 +79,8 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 			die("Connection failed: " . $conn->connect_error);
 			}
 
-			$UserId = "admin"; // get from session, admin is temporary...
 
-
-			// get liked posts from likes table
+			// get posts from posts table
 			$sql = "SELECT * FROM dev_posts WHERE UserId = '$UserId'";
 			$result = $conn->query($sql);
 			
