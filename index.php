@@ -81,7 +81,6 @@ class Event
 		$this->title = $title;
 		$this->description = $description;
 		$this->category = $category;
-		$this->likes = rand(1, 100); //random like amount for now
 		$this->liked = false;
 		$this->rating = $rating;
 		$this->AgeRestrictions = $AgeRestrictions;
@@ -90,6 +89,10 @@ class Event
 		$this->Address = $Address;
 		$this->UserId = $UserId;
 		$this->PostId = $PostId;
+		$this->liked = false;
+
+		$this->checkIfLiked($PostId);
+		$this->calculateLikes($PostId);
 
 
 		$this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image i guess
@@ -109,7 +112,49 @@ class Event
 			$this->img = "https://www.ringling.org/sites/default/files/styles/800x450_mcrop/public/basic_page_image/DSC00490_web_0.jpg?itok=kgk7MO8l";
 		}
 	}
+	public function checkIfLiked($PostId)
+	{
+		// checks if post is liked and updates likedIcon.
+		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		// Check connection
+		if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+		}
 
+		$UserId = "admin"; // get from session, admin is temporary...
+
+		// get liked posts from likes table matching userid and postid
+		$sql = "SELECT LikeId FROM dev_likes WHERE UserId = '$UserId' AND PostId = $PostId";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		if($row['LikeId'] > 0)
+		{
+			$this->liked = true;
+			$this->likedIcon = "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z";
+		}
+	}
+	public function calculateLikes($PostId) {
+		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+		// get likes from likes table matching postid
+		$sql = "SELECT * FROM dev_likes WHERE PostId = $PostId";
+		$result = $conn->query($sql);
+		
+		// check how many results
+		$likes = 0;
+		while($row = $result->fetch_assoc())
+		{
+			$likes++;
+		}
+
+		// update object
+		$this->likes = $likes;
+
+	}
 	public function getTitle()
 	{
 		return $this->title;
@@ -133,6 +178,15 @@ class Event
 	public function getLikedIcon()
 	{
 		return $this->likedIcon;
+	}
+	public function getLiked()
+	{
+		if ($this->liked == true) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
 	}
 	public function getPostId()
 	{
@@ -214,7 +268,7 @@ class Event
 
             <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
 			
-             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", false)' type='button' class='align-self-end btn btn-dark'>
+             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", ".$topPostsArray[$i]->getLiked().")' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
                         <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
                       </svg>
@@ -276,7 +330,7 @@ class Event
 
             <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
 			
-             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", false)' type='button' class='align-self-end btn btn-dark'>
+             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", ".$topPostsArray[$i]->getLiked().")' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
                         <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
                       </svg>
@@ -338,7 +392,7 @@ class Event
 
             <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
 			
-             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", false)' type='button' class='align-self-end btn btn-dark'>
+             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", ".$topPostsArray[$i]->getLiked().")' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
                         <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
                       </svg>
@@ -400,7 +454,7 @@ class Event
 
             <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
 			
-             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", false)' type='button' class='align-self-end btn btn-dark'>
+             <button id='button".$row."".$topPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$topPostsArray[$i]->getPostId().", ".$topPostsArray[$i]->getLikes().", ".$topPostsArray[$i]->getLiked().")' type='button' class='align-self-end btn btn-dark'>
                       <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
                         <path id='".$row."path".$topPostsArray[$i]->getPostId()."' d='" . $topPostsArray[$i]->getLikedIcon() . "'}/>
                       </svg>
