@@ -1,301 +1,278 @@
 #!/usr/local/bin/php
+<style>
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+.bg-light {
+	background-color: transparent !important;
+}
+.carousel-item {
+	height: 100vh;
+	min-height: 300px;
+}
+.carousel-caption {
+	bottom: 220px;
+}
+.add-button{
+	z-index: 10;
+}
+.carousel-caption h5 {
+	font-size: 45px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	margin-top: 25px;
+}
+.carousel-caption p {
+	width: 60%;
+	margin: auto;
+	font-size: 18px;
+	line-height: 1.9;
+}
+.carousel-caption a {
+	text-transform: uppercase;
+	text-decoration: none;
+	background: darkorange;
+	padding: 10px 30px;
+	display: inline-block;
+	color: #000;
+	margin-top: 15px;
+}
+.navbar-nav a {
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.navbar-light .navbar-brand {
+	color: #fff;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+	color: #fff;
+}
+.navbar-light .navbar-nav .nav-link {
+	color: #fff;
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+	color: #fff;
+}
+.w-100 {
+	height: 100vh;
+}
+.navbar-toggler {
+	padding: 1px 5px;
+	font-size: 18px;
+	line-height: 0.3;
+	background: #fff;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+	text-transform: uppercase;
+  color: #fff;
+}
+img{
+	object-fit: cover;
+}
+.modal-header {
+  background-color: #212529;
+  color: white;
+}
+.modal-body {
+  background-color: #212529;
+  color: white;
+}
+.modal-footer {
+  background-color: #212529;
+  color: white;
+}
+.titletext{
+  font-size: 60px;
+}
+.input-group-append{
+  border-radius:50px;
+}
+
+@media only screen and (max-width: 767px) {
+	.navbar-nav {
+		text-align: center;
+		background: rgba(0, 0, 0, 0.5);
+	}
+	.carousel-caption {
+		bottom: 165px;
+	}
+	.carousel-caption h5 {
+		font-size: 17px;
+	}
+	.carousel-caption a {
+		padding: 10px 15px;
+		font-size: 15px;
+	}
+}
+
+</style>
 <html>
+
 <head>
 	<title>Wagwan Home Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="./styles.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-	<style>
-      .card-block {
-        min-height: 400px;
-      }
-      ::-webkit-scrollbar {
-         width: 12px;
-      }
-      ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1);
-        border-radius: 10px;
-      }
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
+	<script src="js/functions.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+	</script> 
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js">
+	</script> 
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js">
+	</script>
+	<?php
+		// Include Event class with php
+		require_once('Event.php');
 
-      ::-webkit-scrollbar-thumb {
-          border-radius: 10px;
-          background-color:#fff;
-          -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
-      }
-      #card {
-        color:black;
-        background-color: black;
-      }
+		// Include Event Object printer with php
+		require_once("postprinter.php");
+	?>
 
-    </style>
 </head>
-<?php
-// making Event class with php
-class Event {
-	private $title;
-	private $description;
-	private $category;
-	private $img;
-	private $likes;
-	private $liked = false;
-	private $likedIcon = "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z";
-  
-	public function __construct($title, $description, $category) {
-	  $this->title = $title;
-	  $this->description = $description;
-	  $this->category = $category;
-	  $this->likes = rand(1,100); //random like amount for now
 
-	  $this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image i guess
-	  if ($category == "nightlife") {
-	  $this->img = "https://www.squareclub.si/images/hero/2.jpg";
-	  }
-	  if ($category == "market") {
-	  $this->img = "https://bloximages.chicago2.vip.townnews.com/tucson.com/content/tncms/assets/v3/editorial/6/45/645ff446-eb80-5fcc-bc85-c6e7d8ea091f/5fb81c841e82f.image.jpg?resize=1200%2C900";
-	  }
-	  if ($category == "concert") {
-	  $this->img = "https://upload.wikimedia.org/wikipedia/commons/c/cb/Classical_spectacular10.jpg";
-	  }
-	  if ($category == "food") {
-	  $this->img = "https://cdn.vox-cdn.com/thumbor/5d_RtADj8ncnVqh-afV3mU-XQv0=/0x0:1600x1067/1200x900/filters:focal(672x406:928x662)/cdn.vox-cdn.com/uploads/chorus_image/image/57698831/51951042270_78ea1e8590_h.7.jpg";
-	  }
-	  if ($category == "museum") {
-	  $this->img = "https://www.ringling.org/sites/default/files/styles/800x450_mcrop/public/basic_page_image/DSC00490_web_0.jpg?itok=kgk7MO8l";
-	  }
-	}
-  
-	public function getTitle() {
-	  return $this->title;
-	}
-	public function getDescription() {
-	  return $this->description;
-	}
-	public function getCategory() {
-		return $this->category;
-	}
-	public function getImg() {
-		return $this->img;
-	}
-	public function getLikes() {
-		return $this->likes;
-	}
-	public function getLikedIcon() {
-		return $this->likedIcon;
-	}
-
-  }
-?>
-<body>
 <body style="background-color: black; color: white;">
-    <div id="root"></div>
-    <br>
-    <h2><strong>Top Wagwans</strong></h2>
-    <div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
-	  <?php
-	 	// will read from database eventually
-		$topPostsArray = array();
-		 
-		 // Examples just for prototype; eventually will read from database.
-		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog);
-		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market);
-		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert);
-		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant);
-		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum);
-		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog2);
-		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market2);
-		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert2);
-		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant2);
-		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum2);
-
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() ."</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() ."</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='". $topPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() ."</h3>
-            </div>
-          </div>";
-		}
-	  ?>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">Wagwan</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="index.php">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Search</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="userliked.php">Likes</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="userprofile.php?UserId=admin">Account</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
+		<div class="carousel-indicators">
+			<button aria-label="Slide 1" class="active" data-bs-slide-to="0" data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 2" data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators" type="button"></button>
+		</div>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img alt="..." class="d-block w-100" src="Homepage/hp/gv1.jpeg">
+			</div>
+			<div class="carousel-item">
+				<img alt="..." class="d-block w-100" src="Homepage/hp/gv2.jpeg">
+			</div>
+			<div class="carousel-item">
+				<img alt="..." class="d-block w-100" src="Homepage/hp/gv3.jpeg">
+			</div>
+      <div class="centered"><h5 class="titletext">Wagwan Near Me</h5>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter Location" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+      </div>
     </div>
-    <br>
-    <h2><strong>Wagwan Tonight</strong></h2>
-    <div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
-	<?php
-	 	// will read from database eventually
+		</div><button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> </button> <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> </button>
+	</div>
+	<br>
+	<h2 class="app-header"><strong>Top Wagwans</strong></h2>
+	<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
+		<?php
+		// reads from database
 		$topPostsArray = array();
-		 
-		 // Examples just for prototype; eventually will read from database.
-		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog);
-		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market);
-		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert);
-		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant);
-		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum);
-		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog2);
-		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market2);
-		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert2);
-		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant2);
-		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum2);
 
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() ."</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() ."</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='". $topPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() ."</h3>
-            </div>
-          </div>";
+		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		// Check connection
+		if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
 		}
-	  ?>
-    </div>
-    <br>
-    <h2><strong>Wagwan this Weekend</strong></h2>
-    <div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
-	<?php
-	 	// will read from database eventually
-		$topPostsArray = array();
-		 
-		 // Examples just for prototype; eventually will read from database.
-		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog);
-		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market);
-		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert);
-		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant);
-		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum);
-		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog2);
-		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market2);
-		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert2);
-		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant2);
-		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum2);
 
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() ."</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() ."</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='". $topPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() ."</h3>
-            </div>
-          </div>";
+		$sql = "SELECT * FROM dev_posts";
+		$result = $conn->query($sql);
+		
+		
+		while($row = $result->fetch_assoc())
+		{	
+			$PostId = $row["PostId"];
+			$UserId = htmlspecialchars($row["UserId"]);
+			$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
+			$Title = htmlspecialchars($row["Title"], ENT_QUOTES);
+			$Description = htmlspecialchars($row["Description"], ENT_QUOTES);
+			$Price = $row["Price"];
+			$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
+			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+			$Rating = $row["Rating"];
+			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+		
+			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId);
+			array_push($topPostsArray, $Event);
 		}
-	  ?>
-    </div>
-    <br>
-    <h2><strong>Your liked Wagwans</strong></h2>
-    <div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
-	<?php
-	 	// will read from database eventually
-		$topPostsArray = array();
-		 
-		 // Examples just for prototype; eventually will read from database.
-		$Grog = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog);
-		$Market = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market);
-		$Concert = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert);
-		$Restaurant = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant);
-		$Museum = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum);
-		$Grog2 = new Event("Closing Rager @ Grog", "Celebrate Grog's final month in Gainesville!", "nightlife");
-		array_push($topPostsArray, $Grog2);
-		$Market2 = new Event("Vintage Market @ Midpoint Park", "Come check out the latest threads from your favorite local vendors", "market");
-		array_push($topPostsArray, $Market2);
-		$Concert2 = new Event("Kanye West Concert @ Stephen O'Connell Center", "Kanye is back! Come watch him perform the much anticipated Yandhi, his next studio album coming soon", "concert");
-		array_push($topPostsArray, $Concert2);
-		$Restaurant2 = new Event("Free Appetizer Night @ Piesanos", "We know how much you love those classic Piesanos rolls! Come stop by for some free Appetizers", "food");
-		array_push($topPostsArray, $Restaurant2);
-		$Museum2 = new Event("Museum Night @ Harn Art Museum", "Come see our new exhibit, called 'Wagwan', and the artists behind its creation", "museum");
-		array_push($topPostsArray, $Museum2);
 
+		// Sort based on liked count
+		usort($topPostsArray, 'compareLikes');
+
+		$row = 0; // keeps track of row we are on
+		
 		for ($i = 0; $i < count($topPostsArray); $i++) {
-			echo  "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $topPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
-            <div class='card-img-overlay'>
-    
-              <h3 style='color: white'>" . $topPostsArray[$i]->getTitle() ."</h3>
-    
-              <p style='color: white'>" . $topPostsArray[$i]->getDescription() ."</p>
-    
-            </div>
-            <div class='card-img-overlay d-flex align-items-end'>
-              <button onClick={} type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path d='". $topPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-              <h3 style='color: white'>&nbsp; " . $topPostsArray[$i]->getLikes() ."</h3>
-            </div>
-          </div>";
+			printEvent($topPostsArray[$i], $row);
 		}
-	  ?>
-    </div>
-  </body>
+		?>
+	</div>
+	<br>
+	<h2><strong>Wagwan Tonight</strong></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
+		<?php
+
+		$row = $row + 1;
+					
+		for ($i = 0; $i < count($topPostsArray); $i++) {
+			printEvent($topPostsArray[$i], $row);
+		}
+		?>
+	</div>
+	<br>
+	<h2><strong>Wagwan this Weekend</strong></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+		<?php
+
+		$row = $row + 1;
+					
+		for ($i = 0; $i < count($topPostsArray); $i++) {
+			printEvent($topPostsArray[$i], $row);
+		}
+		?>
+	</div>
+	<br>
+	<h2><strong>Your liked Wagwans</strong></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
+		<?php
+
+		$row = $row + 1;
+								
+		for ($i = 0; $i < count($topPostsArray); $i++) {
+			printEvent($topPostsArray[$i], $row);
+		}
+		?>
+	</div>
 </body>
+
 </html>
