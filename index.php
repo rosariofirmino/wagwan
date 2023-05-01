@@ -153,16 +153,16 @@ img{
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link" href="#">Home</a>
+						<a class="nav-link" href="index.php">Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Search</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Likes</a>
+						<a class="nav-link" href="userliked.php">Likes</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Account</a>
+						<a class="nav-link" href="userprofile.php?UserId=admin">Account</a>
 					</li>
 				</ul>
 			</div>
