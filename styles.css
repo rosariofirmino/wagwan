@@ -244,3 +244,39 @@
     transition: all 0.4s;
     transform: scale(1.1);
   }
+
+  .image-container input[type="radio"] {
+    display: none;
+  }
+  
+  .image-container img {
+    border: 5px solid transparent;
+    border-radius: 12px;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+  }
+  
+  .image-container input[type="radio"]:checked + label img {
+    border-color: darkviolet;
+    transform: scale(1.0);
+    transition: all 0.4s;
+    transform: scale(1.1);
+    z-index: 100;
+  }
+
+  .image-container:hover {
+    transition: all 0.4s;
+    transform: scale(1.3);
+  }
+
+  .image-container:not(:hover) {
+    transition: all 0.4s;
+    transform: scale(1.0);
+  }
+  
+  .image-container {
+    display: inline-block;
+    margin-right: 12px;
+    
+  }
