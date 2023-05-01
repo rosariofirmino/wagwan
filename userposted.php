@@ -68,16 +68,16 @@
 			$row = 0; // keeps track of row we are on
 			
 			for ($i = 0; $i < count($userPostsArray); $i++) {
-			// print each event object
-			printEvent($userPostsArray[$i], $row);
+				// print each event object
+				printEventMadeByUser($userPostsArray[$i], $row);
 
-			//layout for cards: 3 cards per row
-			if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
-				echo "</div><br>";
-				echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts".$i."'>";
-
+				//layout for cards: 3 cards per row
+				if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
+					echo "</div><br>";
+					echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts".$i."'>";
+					$row++;
+				}
 			}
-		}
 			?>
 		</div>
 		<br>
