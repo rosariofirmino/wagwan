@@ -241,7 +241,7 @@
 
   .rating input:checked ~ label {
     color: rgb(255, 102, 0);
-    transition: all 0.4s;
+    transition: all 0.2s;
     transform: scale(1.1);
   }
 
@@ -260,18 +260,18 @@
   .image-container input[type="radio"]:checked + label img {
     border-color: darkviolet;
     transform: scale(1.0);
-    transition: all 0.4s;
+    transition: all 0.2s;
     transform: scale(1.1);
     z-index: 100;
   }
 
   .image-container:hover {
-    transition: all 0.4s;
+    transition: all 0.2s;
     transform: scale(1.3);
   }
 
   .image-container:not(:hover) {
-    transition: all 0.4s;
+    transition: all 0.2s;
     transform: scale(1.0);
   }
   
