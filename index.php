@@ -13,6 +13,9 @@
 .carousel-caption {
 	bottom: 220px;
 }
+.add-button{
+	z-index: 10;
+}
 .carousel-caption h5 {
 	font-size: 45px;
 	text-transform: uppercase;
