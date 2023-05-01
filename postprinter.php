@@ -45,7 +45,73 @@ function printEvent($event, $row) {
 					<p><strong>Price: </strong>".$event->getPrice()."</p>
 					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
 					<p><strong>Date: </strong>".$event->getDateEvent()."</p>
-					<p><strong>Rating: </strong>".$event->getRating()."/5 stars</p>
+					<p><strong>Rating: </strong>".$event->getRating()."/5 stars </p>
+
+					<fieldset class='rating'>
+						<input type='radio' id='star5".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='5'";
+						if ($event->getRating() == 5) {
+							echo " checked";
+						}
+						else {
+							echo " disabled";
+						}
+						echo ">
+						<label for='star5".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='star4".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='4'";
+						if ($event->getRating() == 4) {
+							echo " checked";
+						}
+						else {
+							echo " disabled";
+						}
+						echo ">
+						<label for='star4".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='star3".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='3'";
+						if ($event->getRating() == 3) {
+							echo " checked";
+						}
+						else {
+							echo " disabled";
+						}
+						echo ">
+						<label for='star3".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='star2".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='2'";
+						if ($event->getRating() == 2) {
+							echo " checked";
+						}
+						else {
+							echo " disabled";
+						}
+						echo ">
+						<label for='star2".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='star1".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='1'";
+						if ($event->getRating() == 1) {
+							echo " checked";
+						}
+						else {
+							echo " disabled";
+						}
+						echo ">
+						<label for='star1".$event->getPostId()."".$row."'></label>
+				  	</fieldset>
+					
+
+					<br><br>
+
+					<!-- User Rating -->
+					<p><strong>Rate this event: </strong></p>
+					<fieldset class='rating'>
+						<input type='radio' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
+						<label for='userstar5".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>
+						<label for='userstar4".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='userstar3".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='3'>
+						<label for='userstar3".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='userstar2".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='2'>
+						<label for='userstar2".$event->getPostId()."".$row."'></label>
+						<input type='radio' id='userstar1".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='1'>
+						<label for='userstar1".$event->getPostId()."".$row."'></label>
+				  	</fieldset>
 
 				</div>
 				

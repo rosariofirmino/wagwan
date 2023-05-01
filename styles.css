@@ -143,7 +143,7 @@
 .add-button {
     display: inline-block;
     position: fixed;
-    top: 30px;
+    bottom: 30px;
     right: 30px;
     background-color: #212529;
     color: #fff;
@@ -215,3 +215,32 @@
     background-color: black;
     color: white;
 }
+
+.rating {
+    border: none;
+    float: left;
+  }
+  
+  .rating input {
+    display: none;
+  }
+  
+  .rating label {
+    float: right;
+    color: grey;
+    font-size: 30px;
+  }
+  
+  .rating label:before {
+    content: '\2605';
+  }
+  
+  .rating input:checked ~ label {
+    color: rgb(255, 102, 0);
+  }
+
+  .rating input:checked ~ label {
+    color: rgb(255, 102, 0);
+    transition: all 0.4s;
+    transform: scale(1.1);
+  }
