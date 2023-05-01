@@ -280,3 +280,43 @@
     margin-right: 12px;
     
   }
+
+
+
+  .price-container {
+    background: transparent;
+    padding: 4px;
+    position: relative;
+    width: fit-content;
+  }
+
+  .price-container input {
+    appearance: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 10px;
+    background: transparent;
+    font-size: 25px;
+    transition: all 0.2s;
+  }
+
+  .price-container input:checked {
+    transform: scale(1.7) !important;
+    filter: grayscale(0%);
+  }
+  .price-container input:not(:checked){
+    filter: grayscale(100%);
+    transform:scale(0.8)
+  }
+
+  .price-container input:hover {
+      filter: grayscale(0%);
+      transition: all 0.2s;
+      transform:scale(1.1)
+  }
+
+  .price-container input::before {
+    content: attr(label);
+    text-align: center;
+  }

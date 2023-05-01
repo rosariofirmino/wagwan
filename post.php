@@ -52,24 +52,28 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="8" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
                     </div>
-                    <div class="form-group">
+                    
                         <label for="age">Age?</label>
                         <select class="form-control" id="age" name="age" required>
                             <option value="All Ages">All Ages</option>
                             <option value="18+">18+</option>
                             <option value="21+">21+</option>
                         </select>
-                    </div>
+                    
                     <div class="form-group">
-                        <label for="price">Price</label>
-                        $ <input type="range" id="price" name="price"> $$$
+                        <label for="age">Price?</label>  
+                        <div class="price-container">
+                            <input label="💲" type="radio" name="price" value="1" checked required>
+                            <input label="💸" type="radio" name="price" value="2">
+                            <input label="💰" type="radio" name="price" value="3">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for ="image">Image</label>
                             <div class="image-container">
-                            <input type="radio" id="club1" name="image" value="club1">
+                            <input type="radio" id="club1" name="image" value="club1" required>
                             <label for="club1">
                                 <img src="posts_images/club1.jpeg" alt="club1">
                             </label>
