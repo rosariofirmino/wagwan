@@ -20,7 +20,7 @@ class Event
 	private $PostId;
 
 
-	public function __construct($title, $description, $category, $rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId)
+	public function __construct($title, $description, $category, $rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId)
 	{
 		$this->title = $title;
 		$this->description = $description;
@@ -38,23 +38,8 @@ class Event
 		$this->checkIfLiked($PostId);
 		$this->calculateLikes($PostId);
 
-
-		$this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image i guess
-		if ($category == "nightlife") {
-			$this->img = "https://www.squareclub.si/images/hero/2.jpg";
-		}
-		if ($category == "market") {
-			$this->img = "https://bloximages.chicago2.vip.townnews.com/tucson.com/content/tncms/assets/v3/editorial/6/45/645ff446-eb80-5fcc-bc85-c6e7d8ea091f/5fb81c841e82f.image.jpg?resize=1200%2C900";
-		}
-		if ($category == "concert") {
-			$this->img = "https://upload.wikimedia.org/wikipedia/commons/c/cb/Classical_spectacular10.jpg";
-		}
-		if ($category == "food") {
-			$this->img = "https://cdn.vox-cdn.com/thumbor/5d_RtADj8ncnVqh-afV3mU-XQv0=/0x0:1600x1067/1200x900/filters:focal(672x406:928x662)/cdn.vox-cdn.com/uploads/chorus_image/image/57698831/51951042270_78ea1e8590_h.7.jpg";
-		}
-		if ($category == "museum") {
-			$this->img = "https://www.ringling.org/sites/default/files/styles/800x450_mcrop/public/basic_page_image/DSC00490_web_0.jpg?itok=kgk7MO8l";
-		}
+		$this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image
+		$this->setImg($ImageId);
 	}
 	public function checkIfLiked($PostId)
 	{
@@ -98,6 +83,10 @@ class Event
 		// update object
 		$this->likes = $likes;
 
+	}
+	public function setImg($ImageId) {
+		// set image based on ImageId
+		$this->img = "posts_images/".$ImageId.".jpeg";
 	}
 	public function getTitle()
 	{

@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $details = $_POST['description'];
     $age = $_POST['age'];
     $price = $_POST['price'];
+    $image = $_POST['image'];
 
     // Sanitize the form data to prevent SQL injection
     $what = mysqli_real_escape_string($conn, $what);
@@ -41,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert the form data into the database
-    $sql = "INSERT INTO $table_name(UserId, Address, Title, Description, Price, AgeRestrictions, CategoryId, DateEvent, Rating) 
-          VALUES ('$userId', '$loc', '$what', '$details', $price, '$age', '$category','$when', 5)";
+    $sql = "INSERT INTO $table_name(UserId, Address, Title, Description, Price, AgeRestrictions, CategoryId, DateEvent, Rating, ImageId) 
+          VALUES ('$userId', '$loc', '$what', '$details', $price, '$age', '$category','$when', 5, '$image')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Record added successfully";

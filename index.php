@@ -1,15 +1,4 @@
 #!/usr/local/bin/php
-<?php
-
-// session_start();
-
-// // Check if the user is already logged in
-// if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-//     header("location: ./php/login.php");
-//     exit;
-// }
-
-?>
 <style>
 * {
 	font-family: 'Montserrat', sans-serif;
@@ -233,8 +222,9 @@ img{
 			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
 			$Rating = $row["Rating"];
 			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+			$ImageId = htmlspecialchars($row["ImageId"]);
 		
-			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId);
+			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
 			array_push($topPostsArray, $Event);
 		}
 

@@ -70,10 +70,17 @@
                             <input label="💰" type="radio" name="price" value="3">
                         </div>
                     </div>
+<script>
+    function test() {
+        alert("test");
+        
+    }
+    </script>
+
                     <div class="form-group">
                         <label for ="image">Image</label>
                             <div class="image-container">
-                            <input type="radio" id="club1" name="image" value="club1" required>
+                            <input type="radio" id="club1" name="image" value="club1" onclick="test()" checked>
                             <label for="club1">
                                 <img src="posts_images/club1.jpeg" alt="club1">
                             </label>
