@@ -283,7 +283,7 @@
   }
   
   .image-container input[type="radio"]:checked + label img {
-    border-color: darkviolet;
+    border-color: #802BB1;
     transform: scale(1.0);
     transition: all 0.2s;
     transform: scale(1.1);
