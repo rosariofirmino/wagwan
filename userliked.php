@@ -32,7 +32,7 @@
 		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
 		// Check connection
 		if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
+			die("Connection failed: " . $conn->connect_error);
 		}
 
 		$UserId = "admin"; // get from session, admin is temporary...
@@ -60,9 +60,9 @@
 			$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
 			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
 			$Rating = $row["Rating"];
-			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+			$ImageId = htmlspecialchars($row["ImageId"]);
 		
-			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId);
+			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
 			array_push($likedPostsArray, $Event);
 		}
 
