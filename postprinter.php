@@ -126,15 +126,15 @@ function printEvent($event, $row) {
 					<!-- User Rating -->
 					<p><strong>Rate this event: </strong></p>
 					<fieldset class='rating' style='padding: 0px; margin: 0px;'>
-						<input type='radio' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 5)' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
 						<label for='userstar5".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 4)' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>
 						<label for='userstar4".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar3".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='3'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 3)' id='userstar3".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='3'>
 						<label for='userstar3".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar2".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='2'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 2)' id='userstar2".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='2'>
 						<label for='userstar2".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar1".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='1'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 1)' id='userstar1".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='1'>
 						<label for='userstar1".$event->getPostId()."".$row."'></label>
 				  	</fieldset>
 

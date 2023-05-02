@@ -54,3 +54,23 @@ function deletePost(PostId) {
 		location.reload();
 	}, 500);
 }
+
+function rating(PostId, Rating) {
+    // AJAX for rating update / update rating in database
+    var UserId = "admin"; // TODO: get UserId from session
+
+    // add rating entry
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "actions/addUserRating.php?PostId=" + PostId + "&UserId=" + UserId + "&Rating=" + Rating, true);
+    xhttp.send();
+
+    // update total rating of post
+    setTimeout(function(){ // waits 0.5 seconds to prevent executing before entry was added
+        const xhttp2 = new XMLHttpRequest();
+        xhttp2.open("GET", "actions/calculateRating.php?PostId=" + PostId, true);
+        xhttp2.send();
+	}, 500);
+
+
+
+}
