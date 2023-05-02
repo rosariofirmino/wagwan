@@ -85,13 +85,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             <input label="💎" type="radio" name="price" value="3" style="margin-right: 90px">
                         </div>
                     </div>
-                    <script>
-                        function test() {
-                            alert("test");
-
-                        }
-                    </script>
-
                     <div class="form-group">
                         <label for="image">Image</label>
                         <div class="image-container">

@@ -1,7 +1,37 @@
 .card-block {
   min-height: 400px;
+
 }
 
+.card-block:hover {
+  transition: all 0.1s;
+  transform: scale(1.00);
+}
+
+.card-block:not(:hover) {
+  transition: all 0.1s;
+  transform: scale(0.97);
+}
+
+::-webkit-scrollbar {
+  width: 17px;
+  height: 17px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d1d7e0;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4c495d;
+}
 
 
 #card {
@@ -254,7 +284,7 @@
 }
 
 .image-container input[type="radio"]:checked+label img {
-  border-color: darkviolet;
+  border-color: #802BB1;
   transform: scale(1.0);
   transition: all 0.2s;
   transform: scale(1.1);

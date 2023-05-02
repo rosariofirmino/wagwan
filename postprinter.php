@@ -7,9 +7,9 @@ function printEvent($event, $row) {
 	echo "
 	<!-- Card for ".$event->getTitle()." -->
 	<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-		<img class='card-img-body' src='" . $event->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.7; border-radius: 1.25rem;'></img>
+		<img class='card-img-body' src='" . $event->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.6; border-radius: 1.25rem;'></img>
 
-		<div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
+		<div class='card-img-overlay d-flex align-items-end' style='height: 400px; padding:2rem'>
 			<button id='button".$row."".$event->getPostId()."' onClick='likeButtonPress(".$row.", ".$event->getPostId().", ".$event->getLikes().", ".$event->getLiked().")' type='button' class='align-self-end btn btn-dark' style='background-color: transparent; border-color: transparent;'>
 					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
 						<path id='".$row."path".$event->getPostId()."' d='" . $event->getLikedIcon() . "'}/>
@@ -18,7 +18,7 @@ function printEvent($event, $row) {
 			<h3 style='color: white' id='".$row."likes".$event->getPostId()."'>&nbsp; " . $event->getLikes() . "</h3>
 		</div>
 
-		<div class='card-img-overlay' style='height: 335px' data-toggle='modal' data-target='#modalpost".$event->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
+		<div class='card-img-overlay' style='height: 335px; padding:2rem' data-toggle='modal' data-target='#modalpost".$event->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
 
 			<h3 style='color: white'>" . $event->getTitle() . "</h3>
 			<p style='color: white'>" . $event->getDescription() . "</p>
@@ -78,7 +78,7 @@ function printEvent($event, $row) {
 						echo ">
 						<label for='star5".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star4".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='4'";
-						if ($event->getRating() == 4) {
+						if ($event->getRating() >= 4 && $event->getRating() < 5) {
 							echo " checked";
 						}
 						else {
@@ -87,7 +87,7 @@ function printEvent($event, $row) {
 						echo ">
 						<label for='star4".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star3".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='3'";
-						if ($event->getRating() == 3) {
+						if ($event->getRating() >= 3 && $event->getRating() < 4) {
 							echo " checked";
 						}
 						else {
@@ -96,7 +96,7 @@ function printEvent($event, $row) {
 						echo ">
 						<label for='star3".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star2".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='2'";
-						if ($event->getRating() == 2) {
+						if ($event->getRating() >= 2 && $event->getRating() < 3) {
 							echo " checked";
 						}
 						else {
@@ -105,7 +105,7 @@ function printEvent($event, $row) {
 						echo ">
 						<label for='star2".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star1".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='1'";
-						if ($event->getRating() == 1) {
+						if ($event->getRating() == 1 && $event->getRating() < 2) {
 							echo " checked";
 						}
 						else {
