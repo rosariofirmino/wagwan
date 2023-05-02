@@ -57,10 +57,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <div class="form-group">
                         <label for="category">Category?</label>
                         <select class="form-control" id="category" name="category" required>
-                            <option value="nightlife">nightlife</option>
-                            <option value="market">market</option>
-                            <option value="concert">concert</option>
-                            <option value="food">food</option>
+                        <option value="nightlife">Nightlife</option>
+                            <option value="shop">Shop</option>
+                            <option value="performances">Performances</option>
+                            <option value="food">Food</option>
+                            <option value="activity">Activity</option>
                         </select>
                     </div>
                     <div class="form-group">
