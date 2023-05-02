@@ -8,6 +8,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	$isLoggedIn = false;
 	exit;
 }
+$config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
 
 ?>
@@ -26,6 +27,7 @@ require_once('Event.php');
 require_once("postprinter.php");
 ?>
 <html>
+
 
 <head>
 	<?php
@@ -107,18 +109,65 @@ require_once("postprinter.php");
 	<h2 class="app-header"><strong>
 			<?php echo "$UserId's" ?> Wagwans
 		</strong></h2>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="text-center">User Account Page</h3>
+					</div>
+					<div class="card-body">
+						<form method="post" action="update.php" enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="username">Username</label>
+								<input type="text" class="form-control" id="username" name="username"
+									value="<?php echo $_SESSION['username']; ?>" required>
+							</div>
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" class="form-control" id="email" name="email"
+									value="<?php echo $_SESSION['email']; ?>" required>
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" id="password" name="password" required>
+							</div>
+							<div class="form-group">
+								<label for="confirm_password">Confirm Password</label>
+								<input type="password" class="form-control" id="confirm_password"
+									name="confirm_password" required>
+							</div>
+							<div class="form-group">
+								<label for="profile_picture">Profile Picture</label>
+								<input type="file" class="form-control-file" id="profile_picture"
+									name="profile_picture">
+							</div>
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- <a href="post.php" class="add-button"><i class="fas fa-plus"></i></a> -->
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
 		<?php
 		// reads from database
 		$likedPostsArray = array();
 
-		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		$servername = $config["servername"];
+		$username = $config["username"];
+		$password = $config["password"];
+		$dbname = $config["dbname"];
+
+		$conn = new mysqli($servername, $username, $password, $dbname);
+
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
-
 
 		// get posts from posts table
 		$sql = "SELECT * FROM dev_posts WHERE UserId = '$UserId'";

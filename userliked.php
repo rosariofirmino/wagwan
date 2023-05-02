@@ -7,7 +7,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
 }
+$config = parse_ini_file("./db_config.ini");
+$UserId = $_SESSION["id"];
 ?>
+
 <html>
 
 <head>
@@ -64,14 +67,16 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 		// reads from database
 		$likedPostsArray = array();
 
-		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		$servername = $config["servername"];
+		$username = $config["username"];
+		$password = $config["password"];
+		$dbname = $config["dbname"];
+		$conn = new mysqli($servername, $username, $password, $dbname);
+
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
-
-		$UserId = "admin"; // get from session, admin is temporary...
-		
 
 		// get liked posts from likes table
 		$sql = "SELECT * FROM dev_likes WHERE UserId = '$UserId'";
