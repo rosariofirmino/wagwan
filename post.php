@@ -65,10 +65,10 @@
                     <div class="form-group">
                         <label for="age">Price?</label>  
                         <div class="price-container">
-                            <input label="🆓" type="radio" name="price" value="0" style="margin-right: 50px">
-                            <input label="💸" type="radio" name="price" value="1" style="margin-right: 50px" checked required>
-                            <input label="💰" type="radio" name="price" value="2" style="margin-right: 50px">
-                            <input label="💎" type="radio" name="price" value="3" style="margin-right: 50px">
+                            <input label="🆓" type="radio" name="price" value="0" style="margin-right: 90px">
+                            <input label="💸" type="radio" name="price" value="1" style="margin-right: 90px" checked required>
+                            <input label="💰" type="radio" name="price" value="2" style="margin-right: 90px">
+                            <input label="💎" type="radio" name="price" value="3" style="margin-right: 90px">
                         </div>
                     </div>
 <script>
