@@ -347,3 +347,50 @@
   content: attr(label);
   text-align: center;
 }
+
+.list-group-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+
+.user-profile {
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+}
+
+.user-profile .card-header {
+  background-color: #343a40;
+  border-bottom: none;
+}
+
+.user-profile h3 {
+  color: #f5f5f5;
+}
+
+.user-profile label {
+  color: #f5f5f5;
+}
+
+.user-profile input[type="text"],
+.user-profile input[type="email"],
+.user-profile input[type="password"] {
+  background-color: #2c2c2c;
+  color: #f5f5f5;
+  border-color: #f5f5f5;
+}
+
+.user-profile .form-control-file {
+  color: #f5f5f5;
+}
+
+.user-profile button[type="submit"] {
+  background-color: #007bff;
+  color: #f5f5f5;
+  border-color: #007bff;
+}
+
+.user-profile button[type="submit"]:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}

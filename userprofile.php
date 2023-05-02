@@ -19,6 +19,24 @@ $UserId = $_SESSION["id"];
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
+
+<script>
+	var activeTab = "account-management";
+	var oldTab = "manage-wagwans";
+
+	function openTab(tabName) {
+		oldTab = activeTab;
+		activeTab = tabName;
+
+		document.getElementById(oldTab).style.display = "none";
+		document.getElementById(activeTab).style.display = "block";
+
+		document.getElementById(oldTab + "-link").classList.remove("active");
+		document.getElementById(activeTab + "-link").classList.add("active");
+	}
+
+</script>
+
 <?php
 // Include Event class with php
 require_once('Event.php');
@@ -29,7 +47,56 @@ require_once("postprinter.php");
 <html>
 
 
+
 <head>
+	<style>
+		.list-group-item.active {
+			background-color: #007bff;
+			color: #fff;
+		}
+
+		.user-profile {
+			background-color: #1c1c1c;
+			color: #f5f5f5;
+		}
+
+		.user-profile .card-header {
+			background-color: #343a40;
+			border-bottom: none;
+		}
+
+		.user-profile h3 {
+			color: #f5f5f5;
+		}
+
+		.user-profile label {
+			color: #f5f5f5;
+		}
+
+		.user-profile input[type="text"],
+		.user-profile input[type="email"],
+		.user-profile input[type="password"] {
+			background-color: #2c2c2c;
+			color: #f5f5f5;
+			border-color: #f5f5f5;
+		}
+
+		.user-profile .form-control-file {
+			color: #f5f5f5;
+		}
+
+		.user-profile button[type="submit"] {
+			background-color: #007bff;
+			color: #f5f5f5;
+			border-color: #007bff;
+		}
+
+		.user-profile button[type="submit"]:hover {
+			background-color: #0069d9;
+			border-color: #0062cc;
+		}
+	</style>
+
 	<?php
 	echo "<title>$UserId's Profile</title>";
 	?>
@@ -78,7 +145,7 @@ require_once("postprinter.php");
 	}
 </script>
 
-<body style="background-color: black; color: white;">
+<body style="background-color: black; color: white;" onload="openTab('account-management')">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
 			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
@@ -109,106 +176,121 @@ require_once("postprinter.php");
 	<h2 class="app-header"><strong>
 			<?php echo "$UserId's" ?> Wagwans
 		</strong></h2>
-	<div class="container mt-5">
-		<div class="row justify-content-center">
-			<div class="col-lg-6">
-				<div class="card">
-					<div class="card-header">
-						<h3 class="text-center">User Account Page</h3>
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="list-group">
+					<a href="#" class="list-group-item list-group-item-action" id="account-management-link"
+						onclick="openTab('account-management')">Account Management</a>
+					<a href="#" class="list-group-item list-group-item-action " id="manage-wagwans-link"
+						onclick="openTab('manage-wagwans')">Manage Wagwans</a>
+				</div>
+			</div>
+			<div class="col-lg-9">
+				<div id="account-management">
+					<div class="card user-profile">
+						<div class="card-header">
+							<h3 class="text-center">Account Management</h3>
+						</div>
+						<div class="card-body">
+							<form method="post" action="updateAccount.php" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="username">Username</label>
+									<input type="text" class="form-control" id="username" name="username"
+										value="<?php echo $_SESSION['id']; ?>" required disabled>
+								</div>
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="email" class="form-control" id="email" name="email"
+										value="<?php echo $_SESSION['email']; ?>" required>
+								</div>
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" class="form-control" id="password" name="password" required>
+								</div>
+								<div class="form-group">
+									<label for="confirm_password">Confirm Password</label>
+									<input type="password" class="form-control" id="confirm_password"
+										name="confirm_password" required>
+								</div>
+								<div class="form-group">
+									<label for="profile_picture">Profile Picture</label>
+									<input type="file" class="form-control-file" id="profile_picture"
+										name="profile_picture">
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">Update</button>
+								</div>
+							</form>
+						</div>
 					</div>
-					<div class="card-body">
-						<form method="post" action="update.php" enctype="multipart/form-data">
-							<div class="form-group">
-								<label for="username">Username</label>
-								<input type="text" class="form-control" id="username" name="username"
-									value="<?php echo $_SESSION['username']; ?>" required>
-							</div>
-							<div class="form-group">
-								<label for="email">Email</label>
-								<input type="email" class="form-control" id="email" name="email"
-									value="<?php echo $_SESSION['email']; ?>" required>
-							</div>
-							<div class="form-group">
-								<label for="password">Password</label>
-								<input type="password" class="form-control" id="password" name="password" required>
-							</div>
-							<div class="form-group">
-								<label for="confirm_password">Confirm Password</label>
-								<input type="password" class="form-control" id="confirm_password"
-									name="confirm_password" required>
-							</div>
-							<div class="form-group">
-								<label for="profile_picture">Profile Picture</label>
-								<input type="file" class="form-control-file" id="profile_picture"
-									name="profile_picture">
-							</div>
-							<div class="text-center">
-								<button type="submit" class="btn btn-primary">Update</button>
-							</div>
-						</form>
+				</div>
+				<div id="manage-wagwans">
+					<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
+						<?php
+						// reads from database
+						$likedPostsArray = array();
+
+						$servername = $config["servername"];
+						$username = $config["username"];
+						$password = $config["password"];
+						$dbname = $config["dbname"];
+
+						$conn = new mysqli($servername, $username, $password, $dbname);
+
+						// Check connection
+						if ($conn->connect_error) {
+							die("Connection failed: " . $conn->connect_error);
+						}
+
+						// get posts from posts table
+						$sql = "SELECT * FROM dev_posts WHERE UserId = '$UserId'";
+						$result = $conn->query($sql);
+
+
+						while ($row = $result->fetch_assoc()) {
+							$PostId = $row["PostId"];
+							$UserId = htmlspecialchars($row["UserId"]);
+							$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
+							$Title = htmlspecialchars($row["Title"], ENT_QUOTES);
+							$Description = htmlspecialchars($row["Description"], ENT_QUOTES);
+							$Price = $row["Price"];
+							$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
+							$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+							$Rating = $row["Rating"];
+							$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+							$ImageId = htmlspecialchars($row["ImageId"]);
+
+							$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+							array_push($likedPostsArray, $Event);
+						}
+
+						// reverse array so most recent posts are first
+						$likedPostsArray = array_reverse($likedPostsArray);
+
+						$row = 0; // keeps track of row we are on
+						
+						for ($i = 0; $i < count($likedPostsArray); $i++) {
+							printEventMadeByUser($likedPostsArray[$i], $row);
+
+							//layout for cards: 3 cards per row
+							if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
+								echo "</div><br>";
+								echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts" . $i . "'>";
+
+							}
+						}
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- <a href="post.php" class="add-button"><i class="fas fa-plus"></i></a> -->
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
-		<?php
-		// reads from database
-		$likedPostsArray = array();
+		<!-- <a href="post.php" class="add-button"><i class="fas fa-plus"></i></a> -->
 
-		$servername = $config["servername"];
-		$username = $config["username"];
-		$password = $config["password"];
-		$dbname = $config["dbname"];
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
-
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
-
-		// get posts from posts table
-		$sql = "SELECT * FROM dev_posts WHERE UserId = '$UserId'";
-		$result = $conn->query($sql);
-
-
-		while ($row = $result->fetch_assoc()) {
-			$PostId = $row["PostId"];
-			$UserId = htmlspecialchars($row["UserId"]);
-			$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
-			$Title = htmlspecialchars($row["Title"], ENT_QUOTES);
-			$Description = htmlspecialchars($row["Description"], ENT_QUOTES);
-			$Price = $row["Price"];
-			$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
-			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
-			$Rating = $row["Rating"];
-			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
-			$ImageId = htmlspecialchars($row["ImageId"]);
-
-			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
-			array_push($likedPostsArray, $Event);
-		}
-
-		// reverse array so most recent posts are first
-		$likedPostsArray = array_reverse($likedPostsArray);
-
-		$row = 0; // keeps track of row we are on
-		
-		for ($i = 0; $i < count($likedPostsArray); $i++) {
-			printEventMadeByUser($likedPostsArray[$i], $row);
-
-			//layout for cards: 3 cards per row
-			if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
-				echo "</div><br>";
-				echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts" . $i . "'>";
-
-			}
-		}
-		?>
-	</div>
-	<br>
+		<br>
 </body>
+
+
+</head>
 
 </html>
