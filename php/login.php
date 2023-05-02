@@ -16,8 +16,8 @@ if ($link->connect_error) {
   die("Connection failed: " . $link->connect_error);
 }
 
-$email = $password = "";
-$email_err = $password_err = $login_err = "";
+$userid = $password = "";
+$userid_err = $password_err = $login_err = "";
 
 if(array_key_exists("error", $_GET)){
    $login_err = "Please login first.";
@@ -25,10 +25,10 @@ if(array_key_exists("error", $_GET)){
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-  if(empty(trim($_POST["email"]))){
-      $email_err = "Please enter email.";
+  if(empty(trim($_POST["userid"]))){
+      $userid_err = "Please enter username.";
   } else{
-      $email = trim($_POST["email"]);
+      $userid = trim($_POST["userid"]);
   }
   
   if(empty(trim($_POST["password"]))){
@@ -37,34 +37,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       $password = trim($_POST["password"]);
   }
   
-  if(empty($email_err) && empty($password_err)){
-      $sql = "SELECT UserId, Email, Password FROM dev_users WHERE email = ?";
+  if(empty($userid_err) && empty($password_err)){
+      $sql = "SELECT UserId, Email, Password FROM dev_users WHERE UserId = ?";
       
       if($stmt = mysqli_prepare($link, $sql)){
-          mysqli_stmt_bind_param($stmt, "s", $param_email);
+          mysqli_stmt_bind_param($stmt, "s", $param_userid);
           
-          $param_email = $email;
+          $param_userid = $userid;
           
           if(mysqli_stmt_execute($stmt)){
               mysqli_stmt_store_result($stmt);
               
               if(mysqli_stmt_num_rows($stmt) == 1){                    
-                  mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+                  mysqli_stmt_bind_result($stmt, $id, $userid, $hashed_password);
                   if(mysqli_stmt_fetch($stmt)){
                       if(password_verify($password, $hashed_password)){
                           session_start();
                           
                           $_SESSION["loggedin"] = true;
                           $_SESSION["id"] = $id;
-                          $_SESSION["email"] = $email;                            
+                          $_SESSION["UserId"] = $userid;                            
                           
                           header("location: ../index.php");
                       } else{
-                          $login_err = "Invalid email or password.";
+                          $login_err = "Invalid username or password.";
                       }
                   }
               } else{
-                  $login_err = "Invalid email or password.";
+                  $login_err = "Invalid username or password.";
               }
           } else{
               echo "Oops! Something went wrong. Please try again later.";
@@ -105,14 +105,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <hr>
             <div class="row justify-content-center">
                 <div class="col-md-auto">
-                    <h6 class="font-weight-light">Log in with your Email</h6>
+                    <h6 class="font-weight-light">Log in with your username</h6>
                 </div>
             </div>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
-                    <p class="text-danger" id="email_err"><?php echo $email_err; ?></p>
+                    <label>Username</label>
+                    <input type="text" name="userid" class="form-control <?php echo (!empty($userid_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $userid; ?>">
+                    <p class="text-danger" id="userid_err"><?php echo $userid_err; ?></p>
                 </div>   
                 <div class="form-group">
                     <label>Password</label>
