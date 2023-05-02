@@ -109,7 +109,7 @@ function printEvent($event, $row) {
 					<br><br>
 
 					<!-- User Rating -->
-					<p><strong>Rate this event: </strong></p>
+					<p><strong>Review this Wagwan: </strong></p>
 					<fieldset class='rating' style='padding: 0px; margin: 0px;'>
 						<input type='radio' onClick='rating(".$event->getPostId().", 5, ".$row.")' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
 						<label for='userstar5".$event->getPostId()."".$row."'></label>
