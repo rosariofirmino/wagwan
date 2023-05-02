@@ -188,7 +188,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 <body style="background-color: #2D283E ; color:#D1D7E0 ;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -221,13 +221,13 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img alt="..." class="d-block w-100" src="Homepage/hp/gv2.jpeg">
+				<img alt="..." class="d-block w-100" src="homepage/hp/gv2.jpeg">
 			</div>
 			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="Homepage/hp/gv1.jpeg">
+				<img alt="..." class="d-block w-100" src="homepage/hp/gv1.jpeg">
 			</div>
 			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="Homepage/hp/gv3.jpeg">
+				<img alt="..." class="d-block w-100" src="homepage/hp/gv3.jpeg">
 			</div>
 			<div class="centered">
 				<h5 class="titletext">Wagwan Near Me</h5>

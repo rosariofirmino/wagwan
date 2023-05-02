@@ -28,19 +28,24 @@ function printEvent($event, $row) {
 
   	<!-- Modal for ".$event->getTitle()." -->
   	<div class='modal fade' id='modalpost".$event->getPostId()."row".$row."'>
-		<div class='modal-dialog modal-dialog-centered'>
+		<div class='modal-dialog modal-dialog-centered' style='width:100%; max-width:750px;'>
 			<div class='modal-content' style='border-radius:1.25rem'>
 				
 				<!-- Modal Header -->
-				<div class='modal-header' style='justify-content: center; border-top-left-radius: 1rem; border-top-right-radius: 1rem; background-color: #4C495D;'>
-					<h4 class='modal-title'>". $event->getTitle() ."</h4>
+				<div class='modal-header' style='display: inline; border-top-left-radius: 1rem; border-top-right-radius: 1rem; background-color: #4C495D;'>
+					<h4 class='modal-title' style='padding: 5px'>". $event->getTitle() ."</h4>
+					<span style='background:#2D283E; border-radius: 10px; padding:5px;'><strong >Posted By: &nbsp; </strong><a href=userprofile.php?UserId=".$event->getUserId().">".$event->getUserId()."</a></span>
+					
 				</div>
 				
-				<!-- Modal body -->
-				<div class='modal-body' style='background-color: #2D283E;'>
-					<p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$event->getUserId().">".$event->getUserId()."</a></p>
+				<!-- Modal body --> 
+				<div class='modal-body' style='background-color: #2D283E; padding: 25px 70px'>
+						<a href='#' class='tag' style='padding: 8px'>
+						".$event->getCategory()."
+						</a>
+						<br>
 					<p><strong>Address: </strong>".$event->getAddress()."</p>
-					<p><strong>Category: </strong>".$event->getCategory()."</p>
+					
 					<p><strong>Description: </strong>".$event->getDescription()."</p>
 					<p><strong>Price: </strong> 
 					
@@ -64,52 +69,43 @@ function printEvent($event, $row) {
 					$olddate = $event->getDateEvent();
 					$dateTime = new DateTime($olddate);
 					$newdate = $dateTime->format('l F jS Y \a\t g:i a');
-					echo "$newdate</p>
-					<p><strong>Rating: </strong>".$event->getRating()."/5 stars </p>
+					echo "$newdate</p>";
+					if ($event->getRating() != 0) {
+						echo "<p><strong>Rating: </strong><span id='stars".$event->getPostId()."".$row."'>".$event->getRating()."/5 stars</span></p>";
+					 }
+					 else {
+						echo "<p><strong>Rating: </strong><span id='stars".$event->getPostId()."".$row."'>Not Yet Rated!</span></p>";
+					 }
+					
 
-					<fieldset class='rating' style='position: relative; top: -25px;'>
+					echo "<fieldset class='rating' style='position: relative; top: -25px;' disabled>
 						<input type='radio' id='star5".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='5'";
 						if ($event->getRating() == 5) {
-							echo " checked";
-						}
-						else {
-							echo " disabled";
+							echo " checked='true'";
 						}
 						echo ">
 						<label for='star5".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star4".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='4'";
 						if ($event->getRating() >= 4 && $event->getRating() < 5) {
-							echo " checked";
-						}
-						else {
-							echo " disabled";
+							echo " checked='true'";
 						}
 						echo ">
 						<label for='star4".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star3".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='3'";
 						if ($event->getRating() >= 3 && $event->getRating() < 4) {
-							echo " checked";
-						}
-						else {
-							echo " disabled";
+							echo " checked='true'";
 						}
 						echo ">
 						<label for='star3".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star2".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='2'";
 						if ($event->getRating() >= 2 && $event->getRating() < 3) {
-							echo " checked";
-						}
-						else {
-							echo " disabled";
+							echo " checked='true'";
 						}
 						echo ">
 						<label for='star2".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star1".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='1'";
 						if ($event->getRating() == 1 && $event->getRating() < 2) {
-							echo " checked";
-						}
-						else {
-							echo " disabled";
+							echo " checked='true'";
 						}
 						echo ">
 						<label for='star1".$event->getPostId()."".$row."'></label>
@@ -119,17 +115,17 @@ function printEvent($event, $row) {
 					<br><br>
 
 					<!-- User Rating -->
-					<p><strong>Rate this event: </strong></p>
+					<p><strong>Review this Wagwan: </strong></p>
 					<fieldset class='rating' style='padding: 0px; margin: 0px;'>
-						<input type='radio' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 5, ".$row.")' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
 						<label for='userstar5".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 4, ".$row.")' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>
 						<label for='userstar4".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar3".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='3'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 3, ".$row.")' id='userstar3".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='3'>
 						<label for='userstar3".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar2".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='2'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 2, ".$row.")' id='userstar2".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='2'>
 						<label for='userstar2".$event->getPostId()."".$row."'></label>
-						<input type='radio' id='userstar1".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='1'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 1, ".$row.")' id='userstar1".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='1'>
 						<label for='userstar1".$event->getPostId()."".$row."'></label>
 				  	</fieldset>
 
