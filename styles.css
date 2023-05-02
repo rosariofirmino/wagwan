@@ -234,7 +234,7 @@
   .rating label:before {
     content: '\2605';
   }
-  
+
   .rating label:hover {
     cursor:pointer;
   }
@@ -301,7 +301,7 @@
     border-radius: 2px;
     padding: 5px 10px;
     background: transparent;
-    font-size: 25px;
+    font-size: 50px;
     transition: all 0.2s;
   }
 
