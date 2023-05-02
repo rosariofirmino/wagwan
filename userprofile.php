@@ -1,10 +1,11 @@
 #!/usr/local/bin/php
 <?php
 session_start();
-
+$isLoggedIn = true;
 // Check if the user is already logged in
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 	header("location: ./php/login.php");
+	$isLoggedIn = false;
 	exit;
 }
 $UserId = $_SESSION["id"];
@@ -78,7 +79,7 @@ require_once("postprinter.php");
 <body style="background-color: black; color: white;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="#"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -94,7 +95,9 @@ require_once("postprinter.php");
 						<a style="color: #D1D7E0;" class="nav-link" href="userliked.php">Likes</a>
 					</li>
 					<li class="nav-item">
-						<a style="color: #D1D7E0;" class="nav-link" href="userprofile.php?UserId=admin">Account</a>
+						<a style="color: #D1D7E0;" class="nav-link"
+							href="userprofile.php?UserId=<?php echo ($isLoggedIn == true) ? $UserId : "" ?>"><?php echo
+									 	($isLoggedIn == true) ? $UserId : "Log In" ?></a>
 					</li>
 				</ul>
 			</div>

@@ -1,5 +1,14 @@
 #!/usr/local/bin/php
 
+<?php
+session_start();
+$isLoggedIn = false;
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+	$isLoggedIn = true;
+	$id = $_SESSION["id"];
+}
+?>
+
 <style>
 	* {
 		font-family: 'Montserrat', sans-serif;
@@ -181,7 +190,7 @@
 <body style="background-color: #2D283E ; color:#D1D7E0 ;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="#"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -197,7 +206,9 @@
 						<a style="color: #D1D7E0;" class="nav-link" href="userliked.php">Likes</a>
 					</li>
 					<li class="nav-item">
-						<a style="color: #D1D7E0;" class="nav-link" href="userprofile.php?UserId=admin">Account</a>
+						<a style="color: #D1D7E0;" class="nav-link"
+							href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><?php echo
+									 	($isLoggedIn === true) ? $id : "Log In" ?></a>
 					</li>
 				</ul>
 			</div>
