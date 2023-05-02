@@ -139,14 +139,11 @@ img{
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
-	<script src="js/functions.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-	</script> 
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js">
-	</script> 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js">
-	</script>
+	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script><script src="js/functions.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+	<script src="./js/search_ajax.js"></script>
 	<?php
 		// Include Event class with php
 		require_once('Event.php');
@@ -195,7 +192,7 @@ img{
 			</div>
       <div class="centered"><h5 class="titletext">Wagwan Near Me</h5>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Enter Location" aria-describedby="basic-addon2">
+        <input type="text" onkeyup="suggestNear(this.value)" class="form-control" placeholder="Enter Location" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button">Search</button>
         </div>
@@ -247,6 +244,10 @@ img{
 			printEvent($topPostsArray[$i], $row);
 		}
 		?>
+	</div>
+	<br>
+	<h2 id="NearYouHeader"></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="NearYou">
 	</div>
 	<br>
 	<h2><strong>Wagwan Tonight</strong></h2>
