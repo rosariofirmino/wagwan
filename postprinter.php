@@ -28,19 +28,24 @@ function printEvent($event, $row) {
 
   	<!-- Modal for ".$event->getTitle()." -->
   	<div class='modal fade' id='modalpost".$event->getPostId()."row".$row."'>
-		<div class='modal-dialog modal-dialog-centered'>
+		<div class='modal-dialog modal-dialog-centered' style='width:100%; max-width:750px;'>
 			<div class='modal-content' style='border-radius:1.25rem'>
 				
 				<!-- Modal Header -->
-				<div class='modal-header' style='justify-content: center; border-top-left-radius: 1rem; border-top-right-radius: 1rem; background-color: #4C495D;'>
-					<h4 class='modal-title'>". $event->getTitle() ."</h4>
+				<div class='modal-header' style='display: inline; border-top-left-radius: 1rem; border-top-right-radius: 1rem; background-color: #4C495D;'>
+					<h4 class='modal-title' style='padding: 5px'>". $event->getTitle() ."</h4>
+					<span style='background:#2D283E; border-radius: 10px; padding:5px;'><strong >Posted By: &nbsp; </strong><a href=userprofile.php?UserId=".$event->getUserId().">".$event->getUserId()."</a></span>
+					
 				</div>
 				
-				<!-- Modal body -->
-				<div class='modal-body' style='background-color: #2D283E;'>
-					<p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$event->getUserId().">".$event->getUserId()."</a></p>
+				<!-- Modal body --> 
+				<div class='modal-body' style='background-color: #2D283E; padding: 25px 70px'>
+						<a href='http://www.html5canvastutorials.com/blog' class='tag' style='padding: 8px'>
+						".$event->getCategory()."
+						</a>
+						<br>
 					<p><strong>Address: </strong>".$event->getAddress()."</p>
-					<p><strong>Category: </strong>".$event->getCategory()."</p>
+					
 					<p><strong>Description: </strong>".$event->getDescription()."</p>
 					<p><strong>Price: </strong> 
 					
