@@ -42,7 +42,20 @@ function printEvent($event, $row) {
 					<p><strong>Address: </strong>".$event->getAddress()."</p>
 					<p><strong>Category: </strong>".$event->getCategory()."</p>
 					<p><strong>Description: </strong>".$event->getDescription()."</p>
-					<p><strong>Price: </strong>".$event->getPrice()."</p>
+					<p><strong>Price: </strong> 
+					
+					<span class='price-container'>";
+					if ($event->getPrice() == 1) {
+						echo "<span><span style='font-size:40px;'>💲 </span><span style='font-size:25px; filter:grayscale(100%)'> 💸 💰</span></span>";
+					}
+					if ($event->getPrice() == 2) {
+						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>💲 </span><span style='font-size:40px;'>💸</span><span style='font-size:25px; filter:grayscale(100%)'> 💰</span></span>";
+					}
+					if ($event->getPrice() == 3) {
+						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>💲 💸 </span><span style='font-size:40px;'>💰</span></span>";
+					}
+
+					echo "</p></span>
 					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
 					<p><strong>Date: </strong>".$event->getDateEvent()."</p>
 					<p><strong>Rating: </strong>".$event->getRating()."/5 stars </p>
