@@ -57,10 +57,14 @@ function printEvent($event, $row) {
 
 					echo "</p></span>
 					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
-					<p><strong>Date: </strong>".$event->getDateEvent()."</p>
+					<p><strong>Date: </strong>";
+					$olddate = $event->getDateEvent();
+					$dateTime = new DateTime($olddate);
+					$newdate = $dateTime->format('l F jS Y \a\t g:i a');
+					echo "$newdate</p>
 					<p><strong>Rating: </strong>".$event->getRating()."/5 stars </p>
 
-					<fieldset class='rating'>
+					<fieldset class='rating' style='position: relative; top: -25px;'>
 						<input type='radio' id='star5".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='5'";
 						if ($event->getRating() == 5) {
 							echo " checked";
@@ -113,7 +117,7 @@ function printEvent($event, $row) {
 
 					<!-- User Rating -->
 					<p><strong>Rate this event: </strong></p>
-					<fieldset class='rating'>
+					<fieldset class='rating' style='padding: 0px; margin: 0px;'>
 						<input type='radio' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
 						<label for='userstar5".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>
