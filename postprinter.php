@@ -40,7 +40,7 @@ function printEvent($event, $row) {
 				
 				<!-- Modal body --> 
 				<div class='modal-body' style='background-color: #2D283E; padding: 25px 70px'>
-						<a href='http://www.html5canvastutorials.com/blog' class='tag' style='padding: 8px'>
+						<a href='#' class='tag' style='padding: 8px'>
 						".$event->getCategory()."
 						</a>
 						<br>
