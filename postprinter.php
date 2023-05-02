@@ -69,10 +69,16 @@ function printEvent($event, $row) {
 					$olddate = $event->getDateEvent();
 					$dateTime = new DateTime($olddate);
 					$newdate = $dateTime->format('l F jS Y \a\t g:i a');
-					echo "$newdate</p>
-					<p><strong>Rating: </strong><span id='stars".$event->getPostId()."".$row."'>".$event->getRating()."/5 stars</span></p>
+					echo "$newdate</p>";
+					if ($event->getRating() != 0) {
+						echo "<p><strong>Rating: </strong><span id='stars".$event->getPostId()."".$row."'>".$event->getRating()."/5 stars</span></p>";
+					 }
+					 else {
+						echo "<p><strong>Rating: </strong><span id='stars".$event->getPostId()."".$row."'>Not Yet Rated!</span></p>";
+					 }
+					
 
-					<fieldset class='rating' style='position: relative; top: -25px;' disabled>
+					echo "<fieldset class='rating' style='position: relative; top: -25px;' disabled>
 						<input type='radio' id='star5".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='5'";
 						if ($event->getRating() == 5) {
 							echo " checked='true'";

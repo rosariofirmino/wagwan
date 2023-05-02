@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insert the form data into the database
     $sql = "INSERT INTO $table_name(UserId, Address, Title, Description, Price, AgeRestrictions, CategoryId, DateEvent, Rating, ImageId) 
-          VALUES ('$userId', '$loc', '$what', '$details', $price, '$age', '$category','$when', 5, '$image')";
+          VALUES ('$userId', '$loc', '$what', '$details', $price, '$age', '$category','$when', 0, '$image')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Record added successfully";
