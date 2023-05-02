@@ -202,7 +202,7 @@ img{
 	<br>
 	<h2 class="app-header"><strong>Top Wagwans</strong></h2>
 	<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
+	<div class="d-flex flex-row" id="Top Posts" style="flex-wrap: nowrap; overflow-x:auto; overflow-y: hidden;">
 		<?php
 		// reads from database
 		$topPostsArray = array();
@@ -246,7 +246,7 @@ img{
 		?>
 	</div>
 	<br>
-	<h2><strong>Wagwan Tonight</strong></h2>
+	<h2 class="app-header"><strong>Wagwan Tonight</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
 		<?php
 
@@ -258,7 +258,7 @@ img{
 		?>
 	</div>
 	<br>
-	<h2><strong>Wagwan this Weekend</strong></h2>
+	<h2 class="app-header"><strong>Wagwan this Weekend</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
 		<?php
 
@@ -270,7 +270,7 @@ img{
 		?>
 	</div>
 	<br>
-	<h2><strong>Your liked Wagwans</strong></h2>
+	<h2 class="app-header"><strong>Your liked Wagwans</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
 		<?php
 
