@@ -14,8 +14,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 	<?php
-	// Include Event class with php
+		// Include Event class with php
 		require_once('Event.php');
+		
+		// Include Event Object printer with php
+		require_once("postprinter.php");
 	?>
 </head>
 
@@ -109,65 +112,15 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
 			$row = 0; // keeps track of row we are on
 			
 			for ($i = 0; $i < count($likedPostsArray); $i++) {
-				echo "<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-            <img class='card-img-body' src='" . $likedPostsArray[$i]->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+				printEventMadeByUser($likedPostsArray[$i], $row);
 
-            <div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
-			
-              <button id='button".$row."".$likedPostsArray[$i]->getPostId()."' onClick='likeButtonPress(".$row.", ".$likedPostsArray[$i]->getPostId().", ".$likedPostsArray[$i]->getLikes().", true)' type='button' class='align-self-end btn btn-dark'>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-                        <path id='".$row."path".$likedPostsArray[$i]->getPostId()."' d='" . $likedPostsArray[$i]->getLikedIcon() . "'}/>
-                      </svg>
-              </button>
-			  <h3 style='color: white' id='".$row."likes".$likedPostsArray[$i]->getPostId()."'>&nbsp; " . $likedPostsArray[$i]->getLikes() . "</h3>
-            </div>
+				//layout for cards: 3 cards per row
+				if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
+					echo "</div><br>";
+					echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts".$i."'>";
 
-			<div class='card-img-overlay' style='height: 335px' data-toggle='modal' data-target='#modalpost".$likedPostsArray[$i]->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
-    
-			<h3 style='color: white'>" . $likedPostsArray[$i]->getTitle() . "</h3>
-  
-			<p style='color: white'>" . $likedPostsArray[$i]->getDescription() . "</p>
-
-		  </div>
-          </div>
-		  <div class='modal fade' id='modalpost".$likedPostsArray[$i]->getPostId()."row".$row."'>
-		  <div class='modal-dialog modal-dialog-centered'>
-			<div class='modal-content'>
-			
-			  <!-- Modal Header -->
-			  <div class='modal-header'>
-				<h4 class='modal-title'>". $likedPostsArray[$i]->getTitle() ."</h4>
-			  </div>
-			  
-			  <!-- Modal body -->
-			  <div class='modal-body'>
-			    <p><strong>Posted By: </strong>".$likedPostsArray[$i]->getUserId()."</p>
-			    <p><strong>Address: </strong>".$likedPostsArray[$i]->getAddress()."</p>
-				<p><strong>Category: </strong>".$likedPostsArray[$i]->getCategory()."</p>
-				<p><strong>Description: </strong>".$likedPostsArray[$i]->getDescription()."</p>
-				<p><strong>Price: </strong>".$likedPostsArray[$i]->getPrice()."</p>
-				<p><strong>Age: </strong>".$likedPostsArray[$i]->getAgeRestrictions()."</p>
-				<p><strong>Date: </strong>".$likedPostsArray[$i]->getDateEvent()."</p>
-				<p><strong>Rating: </strong>".$likedPostsArray[$i]->getRating()."/5 stars</p>
-
-			  </div>
-			  
-			  <!-- Modal footer -->
-			  <div class='modal-footer'>
-				<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-			  </div>
-			  
-			</div>
-		  </div>
-		</div>";
-
-			//layout for cards: 3 cards per row
-			if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
-				echo "</div><br>";
-				echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts".$i."'>";
-
+				}
 			}
-		}
 			?>
 		</div>
 		<br>
