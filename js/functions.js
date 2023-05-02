@@ -55,10 +55,10 @@ function deletePost(PostId) {
 	}, 500);
 }
 
-function rating(PostId, Rating) {
+function rating(PostId, Rating, Row) {
     // AJAX for rating update / update rating in database
     var UserId = "admin"; // TODO: get UserId from session
-
+    console.log(Rating);
     // add rating entry
     const xhttp = new XMLHttpRequest();
     xhttp.open("GET", "actions/addUserRating.php?PostId=" + PostId + "&UserId=" + UserId + "&Rating=" + Rating, true);
@@ -67,7 +67,31 @@ function rating(PostId, Rating) {
     // update total rating of post
     setTimeout(function(){ // waits 0.5 seconds to prevent executing before entry was added
         const xhttp2 = new XMLHttpRequest();
-        xhttp2.open("GET", "actions/calculateRating.php?PostId=" + PostId, true);
+		xhttp2.onload = function() {
+            obj = JSON.parse(this.responseText);
+            console.log(obj.rating);
+
+            for (var i = 1; i <= 5; i++) {
+                var radio = document.querySelector('#star'+ i + PostId + obj.row);
+                if (radio.checked) {
+                    radio.removeAttribute('checked');
+                    radio.focus();
+                }
+            }
+
+            for (var i = 1; i <= 5; i++) {
+                radio = document.querySelector('#star'+ i + PostId + obj.row);
+                if (i == obj.rating || (i + 1 > obj.rating) && (i < obj.rating)) {
+                    radio.setAttribute('checked', true);
+                    radio.focus();
+                    var label = document.querySelector('#stars' + PostId + obj.row);
+                    label.textContent = "" + obj.rating + "/ 5 stars";
+                }
+            }
+
+          }
+       
+        xhttp2.open("GET", "actions/calculateRating.php?PostId=" + PostId + "&Row=" + Row, true);
         xhttp2.send();
 	}, 500);
 

@@ -8,6 +8,7 @@
 	}
 
 	$PostId = $_GET["PostId"];
+	$Row = $_GET["Row"];
 
 	// get ratings from ratings table matching postid
 	$sql = "SELECT * FROM dev_ratings WHERE PostId = $PostId";
@@ -25,16 +26,27 @@
 	$rating = $total/$ratings;
 
 	if ($ratings == 0) {
-		echo "Not Yet Rated";
+		//echo "Not Yet Rated";
 		$rating = 0;
 	}
 	else {
-		echo "Rating: ".$rating;
+		//echo "Rating: ".$rating;
 	}
 
 	// update ratings in posts table
 	$sql = "UPDATE dev_posts SET Rating = $rating WHERE PostId = $PostId";
 	$result = $conn->query($sql);
+
+	$data = array(
+		'rating' => $rating,
+		'row' => $Row
+	);
+
+	$json = json_encode($data);
+
+	echo $json;
+
+	
 
 	$conn->close();
 ?>
