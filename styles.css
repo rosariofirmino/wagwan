@@ -1,5 +1,5 @@
 .card-block {
-    min-height: 400px;
+  min-height: 400px;
 }
 
 
@@ -7,311 +7,313 @@
 #card {
   color: transparent;
   background-color: transparent;
-  border:0px;
+  border: 0px;
 }
 
 .welcome-header {
-    font-size: 5rem;
-    text-align: center;
-    margin-top: 4rem;
+  font-size: 5rem;
+  text-align: center;
+  margin-top: 4rem;
 }
 
 .guide-desc {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .app-header {
-    padding: 1rem;
+  padding: 1rem;
+  margin-top: 2rem;
 }
 
 .post-card {
-    position: fixed;
-    bottom: 0;
-    left: 10%;
-    right: 10%;
-    max-width: 80%;
-    height: 70%;
-    margin: 0 auto;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
-    background-color: #343a40;
-    border-radius: 30px 30px 0px 0px;
-    color: #fff;
-    overflow-y: auto;
-    z-index: 1;
-    transform: translateY(100%);
-    transition: transform 0.3s ease-out;
+  position: fixed;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  max-width: 80%;
+  height: 70%;
+  margin: 0 auto;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+  background-color: #343a40;
+  border-radius: 30px 30px 0px 0px;
+  color: #fff;
+  overflow-y: auto;
+  z-index: 1;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
 }
 
 .post-card.show {
-    transform: translateY(0%);
+  transform: translateY(0%);
 }
 
 .close {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    font-size: 50px;
-    background: none;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 50px;
+  background: none;
 
 }
 
 .post-card.form-group {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 1rem;
 }
 
 .post-card input[type=text] {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .post-card .card-header {
-    padding: 10px 20px;
-    background-color: #212529;
-    color: #fff;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+  padding: 10px 20px;
+  background-color: #212529;
+  color: #fff;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .post-card .card-title {
-    margin-top: 0;
-    padding: 0.75rem;
-    font-size: 50px;
+  margin-top: 0;
+  padding: 0.75rem;
+  font-size: 50px;
 }
 
 .post-card .form-group label {
-    margin-top: 10px;
-    font-size: 24px;
-    display: block;
-    color: #fff;
+  margin-top: 10px;
+  font-size: 24px;
+  display: block;
+  color: #fff;
 }
 
 .post-card .form-control {
-    margin-bottom: 20px;
-    background-color: #f2f2f2;
-    color: #495057;
+  margin-bottom: 20px;
+  background-color: #f2f2f2;
+  color: #495057;
 }
 
 .post-card textarea.form-control {
-    font-size: 20px;
-    resize: vertical;
-    background-color: #f2f2f2;
-    color: #495057;
+  font-size: 20px;
+  resize: vertical;
+  background-color: #f2f2f2;
+  color: #495057;
 }
 
 .post-card .card-footer {
-    background-color: #343a40;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    padding: 10px 20px;
+  background-color: #343a40;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 10px 20px;
 }
 
 .post-card .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .post-card .btn-primary:hover {
-    background-color: #0069d9;
-    border-color: #0062cc;
+  background-color: #0069d9;
+  border-color: #0062cc;
 }
 
 .post-card .btn-primary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
 
 .post-card .text-light {
-    color: #f8f9fa;
+  color: #f8f9fa;
 }
 
 .add-button {
-    display: inline-block;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #4C495D;
-    color: #D1D7E0;
-    font-size: 24px;
-    width: 100px;
-    height: 60px;
-    border-radius: 20%;
-    text-align: center;
-    line-height: 48px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+  display: inline-block;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #4C495D;
+  color: #D1D7E0;
+  font-size: 24px;
+  width: 100px;
+  height: 60px;
+  border-radius: 20%;
+  text-align: center;
+  line-height: 48px;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .add-button:hover {
-    background-color:#D1D7E0;
-    color: #802BB1;
+  background-color: #D1D7E0;
+  color: #802BB1;
 }
 
 .add-button:active {
-    background-color: #007bff;
-    color: #802BB1;
+  background-color: #007bff;
+  color: #802BB1;
 
 }
 
 .add-button:focus {
-    outline: none;
-    color: #802BB1;
+  outline: none;
+  color: #802BB1;
 
 }
 
 .add-button:hover,
 .add-button:active,
 .add-button:focus {
-    text-decoration: none;
-    color: #802BB1;
+  text-decoration: none;
+  color: #802BB1;
 }
 
 
 
 .add-button:before {
-    content: "+";
-    display: block;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 40px;
-    line-height: 1;
+  content: "+";
+  display: block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  line-height: 1;
 }
 
 .add-button:hover:after {
-    display: block;
-    position: absolute;
-    content: "";
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background-color: #6c757d;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: all 0.2s ease;
+  display: block;
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: #6c757d;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.2s ease;
 }
 
 .add-button:active:after {
-    width: 120%;
-    height: 120%;
-    opacity: 0.2;
+  width: 120%;
+  height: 120%;
+  opacity: 0.2;
 }
 
 .modal-content {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .rating {
-    border: none;
-    float: left;
-  }
-  
-  .rating input {
-    display: none;
-  }
-  
-  .rating label {
-    float: right;
-    color: grey;
-    font-size: 30px;
-  }
-  
-  .rating label:before {
-    content: '\2605';
-  }
+  border: none;
+  float: left;
+}
 
-  .rating label:hover {
-    cursor:pointer;
-  }
-  
-  .rating input:checked ~ label {
-    color: rgb(255, 102, 0);
-  }
+.rating input {
+  display: none;
+}
 
-  .rating input:checked ~ label {
-    color: rgb(255, 102, 0);
-    transition: all 0.2s;
-    transform: scale(1.1);
-  }
+.rating label {
+  float: right;
+  color: grey;
+  font-size: 30px;
+}
 
-  .image-container input[type="radio"] {
-    display: none;
-  }
-  
-  .image-container img {
-    border: 5px solid transparent;
-    border-radius: 12px;
-    width: 100px;
-    height: 100px;
-    z-index: 1;
-  }
-  
-  .image-container input[type="radio"]:checked + label img {
-    border-color: darkviolet;
-    transform: scale(1.0);
-    transition: all 0.2s;
-    transform: scale(1.1);
-    z-index: 100;
-  }
+.rating label:before {
+  content: '\2605';
+}
 
-  .image-container:hover {
-    transition: all 0.2s;
-    transform: scale(1.3);
-  }
+.rating label:hover {
+  cursor: pointer;
+}
 
-  .image-container:not(:hover) {
-    transition: all 0.2s;
-    transform: scale(1.0);
-  }
-  
-  .image-container {
-    display: inline-block;
-    margin-right: 12px;
-    
-  }
+.rating input:checked~label {
+  color: rgb(255, 102, 0);
+}
+
+.rating input:checked~label {
+  color: rgb(255, 102, 0);
+  transition: all 0.2s;
+  transform: scale(1.1);
+}
+
+.image-container input[type="radio"] {
+  display: none;
+}
+
+.image-container img {
+  border: 5px solid transparent;
+  border-radius: 12px;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+
+.image-container input[type="radio"]:checked+label img {
+  border-color: darkviolet;
+  transform: scale(1.0);
+  transition: all 0.2s;
+  transform: scale(1.1);
+  z-index: 100;
+}
+
+.image-container:hover {
+  transition: all 0.2s;
+  transform: scale(1.3);
+}
+
+.image-container:not(:hover) {
+  transition: all 0.2s;
+  transform: scale(1.0);
+}
+
+.image-container {
+  display: inline-block;
+  margin-right: 12px;
+
+}
 
 
 
-  .price-container {
-    background: transparent;
-    padding: 4px;
-    position: relative;
-    width: fit-content;
-  }
+.price-container {
+  background: transparent;
+  padding: 4px;
+  position: relative;
+  width: fit-content;
+}
 
-  .price-container input {
-    appearance: none;
-    cursor: pointer;
-    border: none;
-    border-radius: 2px;
-    padding: 5px 10px;
-    background: transparent;
-    font-size: 50px;
-    transition: all 0.2s;
-  }
+.price-container input {
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+  background: transparent;
+  font-size: 50px;
+  transition: all 0.2s;
+}
 
-  .price-container input:checked {
-    transform: scale(1.7) !important;
-    filter: grayscale(0%);
-  }
-  .price-container input:not(:checked){
-    filter: grayscale(100%);
-    transform:scale(0.8)
-  }
+.price-container input:checked {
+  transform: scale(1.7) !important;
+  filter: grayscale(0%);
+}
 
-  .price-container input:hover {
-      filter: grayscale(0%);
-      transition: all 0.2s;
-      transform:scale(1.1)
-  }
+.price-container input:not(:checked) {
+  filter: grayscale(100%);
+  transform: scale(0.8)
+}
 
-  .price-container input::before {
-    content: attr(label);
-    text-align: center;
-  }
+.price-container input:hover {
+  filter: grayscale(0%);
+  transition: all 0.2s;
+  transform: scale(1.1)
+}
+
+.price-container input::before {
+  content: attr(label);
+  text-align: center;
+}

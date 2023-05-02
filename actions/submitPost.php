@@ -1,6 +1,14 @@
 #!/usr/local/bin/php
 <?php
 
+session_start();
+
+// Check if the user is already logged in
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: ./php/login.php");
+    exit;
+}
+
 $config = parse_ini_file("../db_config.ini");
 
 // Check if the form is submitted
@@ -17,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $table_name = "dev_posts";
 
     // Retrieve the form data
-    $userId = "admin"; // admin is temporary, need to get user ID from session?
+    $userId = $_SESSION["id"];
     $what = $_POST['what'];
     $loc = $_POST['where'];
     $when = $_POST['when'];
