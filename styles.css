@@ -2,24 +2,12 @@
     min-height: 400px;
 }
 
-::-webkit-scrollbar {
-    width: 12px;
-}
 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(200, 200, 200, 1);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #fff;
-    -webkit-box-shadow: inset 0 0 6px rgba(90, 90, 90, 0.7);
-}
 
 #card {
-    color: black;
-    background-color: black;
+  color: transparent;
+  background-color: transparent;
+  border:0px;
 }
 
 .welcome-header {
@@ -145,8 +133,8 @@
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: #212529;
-    color: #fff;
+    background-color: #4C495D;
+    color: #D1D7E0;
     font-size: 24px;
     width: 100px;
     height: 60px;
@@ -158,27 +146,30 @@
 }
 
 .add-button:hover {
-    background-color: #6c757d;
+    background-color:#D1D7E0;
+    color: #802BB1;
 }
 
 .add-button:active {
     background-color: #007bff;
+    color: #802BB1;
+
 }
 
 .add-button:focus {
     outline: none;
+    color: #802BB1;
+
 }
 
 .add-button:hover,
 .add-button:active,
 .add-button:focus {
     text-decoration: none;
-    color: #fff;
+    color: #802BB1;
 }
 
-.add-button:hover:before {
-    display: none;
-}
+
 
 .add-button:before {
     content: "+";

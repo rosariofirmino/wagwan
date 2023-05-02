@@ -3,8 +3,9 @@
 * {
 	font-family: 'Montserrat', sans-serif;
 }
-.bg-light {
-	background-color: transparent !important;
+
+.bg-dark {
+	background-color: #2D283E !important;
 }
 .carousel-item {
 	height: 100vh;
@@ -67,6 +68,7 @@
 	line-height: 0.3;
 	background: #fff;
 }
+
 .centered {
   position: absolute;
   top: 50%;
@@ -80,6 +82,8 @@ img{
 	object-fit: cover;
 }
 .modal-header {
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: calc(1.25rem - 1px);
   background-color: #212529;
   color: white;
 }
@@ -90,6 +94,9 @@ img{
 .modal-footer {
   background-color: #212529;
   color: white;
+}
+.modal-content{
+	border-radius: 1.25rem;
 }
 .titletext{
   font-size: 60px;
@@ -146,23 +153,23 @@ img{
 
 </head>
 
-<body style="background-color: black; color: white;">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<body style="background-color: #2D283E ; color:#D1D7E0 ;">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="#">Wagwan</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+			<a class="navbar-brand" href="#"><img src="Homepage/hp/wagwan.png" width=35px></a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link" href="index.php">Home</a>
+						<a style="color: #D1D7E0;" class="nav-link" href="index.php">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Search</a>
+						<a style="color: #D1D7E0;" class="nav-link" href="#">Search</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="userliked.php">Likes</a>
+						<a style="color: #D1D7E0;" class="nav-link" href="userliked.php">Likes</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="userprofile.php?UserId=admin">Account</a>
+						<a style="color: #D1D7E0;" class="nav-link" href="userprofile.php?UserId=admin">Account</a>
 					</li>
 				</ul>
 			</div>
@@ -174,10 +181,10 @@ img{
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img alt="..." class="d-block w-100" src="Homepage/hp/gv1.jpeg">
+				<img alt="..." class="d-block w-100" src="Homepage/hp/gv2.jpeg">
 			</div>
 			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="Homepage/hp/gv2.jpeg">
+				<img alt="..." class="d-block w-100" src="Homepage/hp/gv1.jpeg">
 			</div>
 			<div class="carousel-item">
 				<img alt="..." class="d-block w-100" src="Homepage/hp/gv3.jpeg">

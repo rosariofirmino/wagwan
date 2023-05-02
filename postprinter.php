@@ -7,10 +7,10 @@ function printEvent($event, $row) {
 	echo "
 	<!-- Card for ".$event->getTitle()." -->
 	<div id='card' class='card card-block mx-2' style='min-width: 400px'>
-		<img class='card-img-body' src='" . $event->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.3'></img>
+		<img class='card-img-body' src='" . $event->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.7; border-radius: 1.25rem;'></img>
 
 		<div class='card-img-overlay d-flex align-items-end' style='height: 400px'>
-			<button id='button".$row."".$event->getPostId()."' onClick='likeButtonPress(".$row.", ".$event->getPostId().", ".$event->getLikes().", ".$event->getLiked().")' type='button' class='align-self-end btn btn-dark'>
+			<button id='button".$row."".$event->getPostId()."' onClick='likeButtonPress(".$row.", ".$event->getPostId().", ".$event->getLikes().", ".$event->getLiked().")' type='button' class='align-self-end btn btn-dark' style='background-color: transparent; border-color: transparent;'>
 					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
 						<path id='".$row."path".$event->getPostId()."' d='" . $event->getLikedIcon() . "'}/>
 					</svg>
@@ -29,15 +29,15 @@ function printEvent($event, $row) {
   	<!-- Modal for ".$event->getTitle()." -->
   	<div class='modal fade' id='modalpost".$event->getPostId()."row".$row."'>
 		<div class='modal-dialog modal-dialog-centered'>
-			<div class='modal-content'>
+			<div class='modal-content' style='border-radius:1.25rem'>
 				
 				<!-- Modal Header -->
-				<div class='modal-header'>
+				<div class='modal-header' style='justify-content: center; border-top-left-radius: 1rem; border-top-right-radius: 1rem; background-color: #4C495D;'>
 					<h4 class='modal-title'>". $event->getTitle() ."</h4>
 				</div>
 				
 				<!-- Modal body -->
-				<div class='modal-body'>
+				<div class='modal-body' style='background-color: #2D283E;'>
 					<p><strong>Posted By: </strong><a href=userprofile.php?UserId=".$event->getUserId().">".$event->getUserId()."</a></p>
 					<p><strong>Address: </strong>".$event->getAddress()."</p>
 					<p><strong>Category: </strong>".$event->getCategory()."</p>
@@ -136,7 +136,7 @@ function printEvent($event, $row) {
 				</div>
 				
 				<!-- Modal footer -->
-				<div class='modal-footer' id='modalfooter".$event->getPostId()."row".$row."'>
+				<div class='modal-footer' style='background-color: #2D283E; border-bottom-left-radius: 1rem; border-bottom-right-radius: 1rem;' id='modalfooter".$event->getPostId()."row".$row."'>
 					<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
 				</div>
 		
