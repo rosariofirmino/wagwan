@@ -193,7 +193,7 @@ require_once("postprinter.php");
 							<h3 class="text-center">Account Management</h3>
 						</div>
 						<div class="card-body">
-							<form method="post" action="updateAccount.php" enctype="multipart/form-data">
+							<form method="post" action="actions/updateAccount.php" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="username">Username</label>
 									<input type="text" class="form-control" id="username" name="username"
