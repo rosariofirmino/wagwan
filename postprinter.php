@@ -45,14 +45,17 @@ function printEvent($event, $row) {
 					<p><strong>Price: </strong> 
 					
 					<span class='price-container'>";
+					if ($event->getPrice() == 0) {
+						echo "<span><span style='font-size:40px; background:green; border-radius: 30px;'>🆓</span><span style='font-size:25px; filter:grayscale(100%)'> 💸 💰 💎</span></span>";
+					}
 					if ($event->getPrice() == 1) {
-						echo "<span><span style='font-size:40px;'>💲 </span><span style='font-size:25px; filter:grayscale(100%)'> 💸 💰</span></span>";
+						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>🆓 </span><span style='font-size:40px; background:green; border-radius: 30px;'>💸</span><span style='font-size:25px; filter:grayscale(100%)'> 💰 💎</span></span>";
 					}
 					if ($event->getPrice() == 2) {
-						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>💲 </span><span style='font-size:40px;'>💸</span><span style='font-size:25px; filter:grayscale(100%)'> 💰</span></span>";
+						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>🆓 💸 </span><span style='font-size:40px; background:green; border-radius: 30px;'>💰</span><span style='font-size:25px; filter:grayscale(100%)'> 💎</span></span>";
 					}
 					if ($event->getPrice() == 3) {
-						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>💲 💸 </span><span style='font-size:40px;'>💰</span></span>";
+						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>🆓 💸 💰 </span><span style='font-size:40px; background:green; border-radius: 30px;'>💎</span></span>";
 					}
 
 					echo "</p></span>
