@@ -18,6 +18,7 @@ class Event
 	private $Address;
 	private $UserId;
 	private $PostId;
+	private $DateCreated;
 
 
 	public function __construct($title, $description, $category, $rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId)
@@ -87,6 +88,14 @@ class Event
 	public function setImg($ImageId) {
 		// set image based on ImageId
 		$this->img = "posts_images/".$ImageId.".jpeg";
+	}
+	public function setDateCreated($DateCreated)
+	{
+		$this->DateCreated = $DateCreated;
+	}
+	public function getDateCreated()
+	{
+		return $this->DateCreated;
 	}
 	public function getTitle()
 	{
@@ -161,6 +170,88 @@ function compareLikes($a, $b) {
 		return 0;
 	}
 	return ($a->getLikes() > $b->getLikes()) ? -1 : 1;
+}
+
+function compareRating($a, $b) {
+	// compares ratings of two posts, used to sort array of posts by rating
+	// use: usort($postsArr, 'compareRating');
+	if ($a->getRating() == $b->getRating()) {
+		return 0;
+	}
+	return ($a->getRating() > $b->getRating()) ? -1 : 1;
+}
+
+function compareDateEvent($a, $b) {
+	// compares dates of two posts, used to sort array of posts by date event
+	// use: usort($postsArr, 'compareDateEvent');
+	$dateA = strtotime($a->getDateEvent());
+	$dateB = strtotime($b->getDateEvent());
+	if ($dateA == $dateB) {
+		return 0;
+	}
+	return ($dateA < $dateB) ? -1 : 1;
+}
+
+function compareDateCreated($a, $b) {
+	// compares dates of two posts, used to sort array of posts by date created
+	// use: usort($postsArr, 'compareDateCreated');
+	$dateA = strtotime($a->getDateCreated());
+	$dateB = strtotime($b->getDateCreated());
+	if ($dateA == $dateB) {
+		return 0;
+	}
+	return ($dateA > $dateB) ? -1 : 1;
+}
+
+function removeIfDatePassed($arr) {
+	// removes posts from array if the event's date has passed
+	// use: $postsArr = removeIfDatePassed($postsArr);
+	$today = date('Y-m-d H:i:s');
+	foreach($arr as $key => $value) {
+        if($value->getDateEvent() < $today) {
+            unset($arr[$key]);
+        }
+    }
+
+	return $arr;
+}
+
+function removeIfDateFar($arr, $days) {
+	// removes posts from array if the event's date is more than $days away
+	// use: $postsArr = removeIfDateFar($postsArr, 7);
+	$date = date('Y-m-d H:i:s', strtotime('+'.$days.' days'));
+
+	foreach($arr as $key => $value) {
+        if($value->getDateEvent() > $date) {
+            unset($arr[$key]);
+        }
+	}
+
+	return $arr;
+}
+
+function removeIfRatingLow($arr, $rating) {
+	// removes posts from array if the rating is less than $rating
+	// use: $postsArr = removeIfRatingLow($postsArr, 4);
+	foreach($arr as $key => $value) {
+		if($value->getRating() < $rating) {
+			unset($arr[$key]);
+		}
+	}
+
+	return $arr;
+}
+
+function keepXPriceOnly($arr, $x) {
+	// keeps only posts from array with $x price (0, 1, 2, 3)
+	// use: $postsArr = keepXPriceOnly($postsArr, 0) to get free events;
+	foreach($arr as $key => $value) {
+		if($value->getPrice() != $x) {
+			unset($arr[$key]);
+		}
+	}
+	
+	return $arr;
 }
 
 ?>

@@ -276,8 +276,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 			$Rating = $row["Rating"];
 			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
 			$ImageId = htmlspecialchars($row["ImageId"]);
+			$DateCreated = htmlspecialchars($row["DateCreated"], ENT_QUOTES);
 
 			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+			$Event->setDateCreated($DateCreated);
 			array_push($topPostsArray, $Event);
 		}
 
@@ -292,31 +294,102 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 		?>
 	</div>
 	<br>
-	<h2 class="app-header"><strong>Wagwan Tonight</strong></h2>
+	<h2 class="app-header"><strong>Wagwans Happening Soon</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
 		<?php
+		
+		$postsArr = $topPostsArray;
+		
+		usort($postsArr, 'compareDateEvent');
+		$postsArr = removeIfDatePassed($topPostsArray);
+		$postsArr = removeIfDateFar($postsArr, 7); // remove if date is more than 7 days away
 
 		$row = $row + 1;
+		
+		foreach($postsArr as $key => $value) {
+			printEvent($value, $row);
+		}
 
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			printEvent($topPostsArray[$i], $row);
+		// if empty, print no events happening soon
+		if (empty($postsArr)) {
+			echo "</div><h2 class='app-header' style='text-align: center;'>No wagwans happening soon</h2><div>";
 		}
 		?>
 	</div>
 	<br>
-	<h2 class="app-header"><strong>Wagwan this Weekend</strong></h2>
+	<h2 class="app-header"><strong>Highest Rated Wagwans (all time)</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
 		<?php
+		$postsArr = $topPostsArray;
+		usort($postsArr, 'compareRating');
+		$postsArr = removeIfRatingLow($postsArr, 4); // remove if rating is less than 4
 
 		$row = $row + 1;
 
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			printEvent($topPostsArray[$i], $row);
+		foreach($postsArr as $key => $value) {
+			printEvent($value, $row);
+		}
+		if (empty($postsArr)) {
+			echo "</div><h2 class='app-header' style='text-align: center;'>No wagwans rated 4 or 5 stars</h2><div>";
 		}
 		?>
 	</div>
 	<br>
-	<h2 class="app-header"><strong>Your liked Wagwans</strong></h2>
+	<h2 class="app-header"><strong>Top Free Wagwans</strong></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+		<?php
+		$postsArr = $topPostsArray;
+		$postsArr = removeIfDatePassed($topPostsArray);
+		$postsArr = keepXPriceOnly($postsArr, 0); // keep if price is 0
+
+		$row = $row + 1;
+
+		foreach($postsArr as $key => $value) {
+			printEvent($value, $row);
+		}
+		if (empty($postsArr)) {
+			echo "</div><h2 class='app-header' style='text-align: center;'>No free wagwans in the future!</h2><div>";
+		}
+		?>
+	</div>
+	<br>
+	<h2 class="app-header"><strong>Top Expensive Wagwans</strong></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+		<?php
+		$postsArr = $topPostsArray;
+		$postsArr = removeIfDatePassed($topPostsArray);
+		$postsArr = keepXPriceOnly($postsArr, 3); // keep if price is 3
+
+		$row = $row + 1;
+
+		foreach($postsArr as $key => $value) {
+			printEvent($value, $row);
+		}
+		if (empty($postsArr)) {
+			echo "</div><h2 class='app-header' style='text-align: center;'>No expensive wagwans in the future!</h2><div>";
+		}
+		?>
+	</div>
+	<br>
+	<h2 class="app-header"><strong>Newest Posted Wagwans</strong></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+		<?php
+		$postsArr = $topPostsArray;
+		$postsArr = removeIfDatePassed($topPostsArray);
+		usort($postsArr, 'compareDateCreated');
+
+		$row = $row + 1;
+
+		foreach($postsArr as $key => $value) {
+			printEvent($value, $row);
+		}
+		if (empty($postsArr)) {
+			echo "</div><h2 class='app-header' style='text-align: center;'>No wagwans have been posted recently...</h2><div>";
+		}
+		?>
+	</div>
+	<br>
+	<h2 class="app-header"><strong>Your liked Wagwans (NOT DONE)</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
 		<?php
 
