@@ -44,7 +44,7 @@ function printEvent($event, $row) {
 					<a href='#' class='tag' style='padding: 8px'>
 					".$event->getCategory()."
 					</a>
-					<p><strong>Address: </strong>".$event->getAddress()."</p>
+					<p><strong>Address: </strong><a href='https://maps.google.com/?q=".$event->getAddress()."' target='_blank' rel='noopener noreferrer'>".$event->getAddress()."</a></p>
 					<p><strong>Description: </strong>".$event->getDescription()."</p>
 					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
 					<p><strong>Date: </strong>";
@@ -223,7 +223,7 @@ function printEventMadeByUser($event, $row) {
 					<a href='#' class='tag' style='padding: 8px'>
 					".$event->getCategory()."
 					</a>
-					<p><strong>Address: </strong>".$event->getAddress()."</p>
+					<p><strong>Address: </strong><a href='https://maps.google.com/?q=".$event->getAddress()."' target='_blank' rel='noopener noreferrer'>".$event->getAddress()."</a></p>
 					<p><strong>Description: </strong>".$event->getDescription()."</p>
 					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
 					<p><strong>Date: </strong>";
