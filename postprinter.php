@@ -40,14 +40,22 @@ function printEvent($event, $row) {
 				
 				<!-- Modal body --> 
 				<div class='modal-body' style='background-color: #2D283E; padding: 25px 70px'>
-						<a href='#' class='tag' style='padding: 8px'>
-						".$event->getCategory()."
-						</a>
-						<br>
+				<div class='column'>
+					<a href='#' class='tag' style='padding: 8px'>
+					".$event->getCategory()."
+					</a>
 					<p><strong>Address: </strong>".$event->getAddress()."</p>
-					
 					<p><strong>Description: </strong>".$event->getDescription()."</p>
-					<p><strong>Price: </strong> 
+					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
+					<p><strong>Date: </strong>";
+					$olddate = $event->getDateEvent();
+					$dateTime = new DateTime($olddate);
+					$newdate = $dateTime->format('l F jS Y \a\t g:i a');
+					echo "$newdate</p>
+					
+				</div>
+
+				<p><strong>Price: </strong> 
 					
 					<span class='price-container'>";
 					if ($event->getPrice() == 0) {
@@ -64,12 +72,17 @@ function printEvent($event, $row) {
 					}
 
 					echo "</p></span>
-					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
-					<p><strong>Date: </strong>";
-					$olddate = $event->getDateEvent();
-					$dateTime = new DateTime($olddate);
-					$newdate = $dateTime->format('l F jS Y \a\t g:i a');
-					echo "$newdate</p>";
+
+
+						<br>
+					
+					
+					
+					
+					";
+					
+					
+
 					if ($event->getRating() != 0) {
 						echo "<p><strong>Rating: </strong><span id='stars".$event->getPostId()."".$row."'>".$event->getRating()."/5 stars</span></p>";
 					 }
@@ -115,7 +128,7 @@ function printEvent($event, $row) {
 					<br><br>
 
 					<!-- User Rating -->
-					<p><strong>Review this Wagwan: </strong></p>
+					<p ><strong>Review this Wagwan: </strong></p>
 					<fieldset class='rating' style='padding: 0px; margin: 0px;'>
 						<input type='radio' onClick='rating(".$event->getPostId().", 5, ".$row.")' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
 						<label for='userstar5".$event->getPostId()."".$row."'></label>
