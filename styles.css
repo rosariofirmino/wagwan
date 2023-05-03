@@ -33,13 +33,6 @@
   background-color: #4c495d;
 }
 
-
-#card {
-  color: transparent;
-  background-color: transparent;
-  border: 0px;
-}
-
 .welcome-header {
   font-size: 5rem;
   text-align: center;
@@ -67,7 +60,7 @@
   margin: 0 auto;
   border: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
-  background-color: #4C495D;
+  background-color: #343a40;
   border-radius: 30px 30px 0px 0px;
   color: #fff;
   overflow-y: auto;

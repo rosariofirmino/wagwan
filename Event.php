@@ -19,7 +19,7 @@ class Event
 	private $UserId;
 	private $PostId;
 	private $DateCreated;
-	private $UserRating;
+	private $UserRating = 0;
 	private $sessionId;
 
 
