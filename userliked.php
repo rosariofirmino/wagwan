@@ -6,29 +6,30 @@ $isLoggedIn = false;
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
-	echo "<script>var id = '$id';</script>";
-	echo "<script>var isLoggedIn = true;</script>";
+	echo "<!DOCTYPE html>\n";
+	echo "<html lang='en'>\n";
+	echo "<head>\n";
+	echo "<script>var id = '$id';</script>\n";
+	echo "<script>var isLoggedIn = true;</script>\n";
 }
 else {
-	echo "<script>var id = '';</script>";
-	echo "<script>var isLoggedIn = false;</script>";
+	echo "<!DOCTYPE html>\n";
+	echo "<html lang='en'>\n";
+	echo "<head>\n";
+	echo "<script>var id = '';</script>\n";
+	echo "<script>var isLoggedIn = false;</script>\n";
 }
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
 ?>
-
-<html>
-
-<head>
 	<title>Your Liked Wagwans</title>
-	<link rel="icon" href="homepage/hp/icon.png">
-
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 	<script src="js/functions.js"></script>
 	<?php
 	// Include Event class with php
@@ -39,10 +40,10 @@ $UserId = $_SESSION["id"];
 	?>
 </head>
 
-<body style="background-color:#211d2d; color:#D1D7E0;">
+<body style="background-color: black; color: white;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" style='width: 35px;' alt=""></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -69,7 +70,7 @@ $UserId = $_SESSION["id"];
 	<br>
 	<h2 class="app-header"><strong>Your Liked Wagwans</strong></h2>
 	<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="LikedWagwans">
 		<?php
 		// reads from database
 		$likedPostsArray = array();
@@ -85,11 +86,17 @@ $UserId = $_SESSION["id"];
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-		// get liked posts
-		$sql = "SELECT * FROM dev_posts INNER JOIN dev_likes ON dev_posts.PostId = dev_likes.PostId WHERE dev_likes.UserId = '$UserId'";
+		// get liked posts from likes table
+		$sql = "SELECT * FROM dev_likes WHERE UserId = '$UserId'";
 		$result = $conn->query($sql);
 
+
 		while ($row = $result->fetch_assoc()) {
+			$PostId = $row["PostId"];
+			$sql = "SELECT * FROM dev_posts WHERE PostId = '$PostId'";
+			$resultPosts = $conn->query($sql);
+
+			$row = $resultPosts->fetch_assoc();
 
 			$PostId = $row["PostId"];
 			$UserId = htmlspecialchars($row["UserId"]);
