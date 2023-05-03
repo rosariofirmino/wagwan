@@ -11,8 +11,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 ?>
-
-<html>
+<!DOCTYPE html>
+<html lang='en'>
 
 <head>
     <title>Wagwan Home Page</title>
@@ -59,6 +59,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <div class="form-group">
                         <label for="category">Category?</label>
                         <select class="form-control" id="category" name="category" required>
+                            <option value="">Choose a Category</option>
                             <option value="nightlife">Nightlife</option>
                             <option value="shop">Shop</option>
                             <option value="performances">Performances</option>
@@ -71,25 +72,27 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
                     </div>
 
-                    <label for="age">Age?</label>
-                    <select class="form-control" id="age" name="age" required>
-                        <option value="All Ages">All Ages</option>
-                        <option value="18+">18+</option>
-                        <option value="21+">21+</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="age">Age?</label>
+                        <select class="form-control" id="age" name="age" required>
+                            <option value="">Choose an Age Group</option>
+                            <option value="All Ages">All Ages</option>
+                            <option value="18+">18+</option>
+                            <option value="21+">21+</option>
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <label for="age">Price?</label>
                         <div class="price-container">
-                            <input label="🆓" type="radio" name="price" value="0" style="margin-right: 90px">
-                            <input label="💸" type="radio" name="price" value="1" style="margin-right: 90px" checked
-                                required>
-                            <input label="💰" type="radio" name="price" value="2" style="margin-right: 90px">
-                            <input label="💎" type="radio" name="price" value="3" style="margin-right: 90px">
+                            <input id="free" type="radio" name="price" value="0" style="margin-right: 90px">
+                            <input id="cheap" type="radio" name="price" value="1" style="margin-right: 90px" checked required>
+                            <input id="affordable" type="radio" name="price" value="2" style="margin-right: 90px">
+                            <input id="expensive" type="radio" name="price" value="3" style="margin-right: 90px">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="image">Image</label>
+                        <label>Image?</label>
                         <div class="image-container">
                             <input type="radio" id="club1" name="image" value="club1" onclick="test()" checked>
                             <label for="club1">
@@ -279,12 +282,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                     </div>
                     
-                        <button style="background-color: #802BB1; border:0px;"type="submit" class="btn btn-primary float-right">Submit</button>
-                   
-            </form>
+                        <button style="background-color: #802BB1; border:0px;" type="submit" class="btn btn-primary float-right">Submit</button>
+                 
+                </div>
+        </form>
+       
+
         </div>
-
-
     </div>
 
 
