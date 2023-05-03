@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["email"] = $param_email;
                 $_SESSION["id"] = $param_username;
                 $_SESSION["ProfilePic"] = $param_prof_pic; // ProfilePic is a directory to image
-                header("location: ../actions/send_email.php?email=" . $param_email);
+                header("location: ../actions/sendEmailSignup.php?email=" . $param_email);
 
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
