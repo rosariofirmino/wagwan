@@ -1,4 +1,5 @@
 #!/usr/local/bin/php
+
 <?php
 session_start();
 $isLoggedIn = true;
@@ -11,7 +12,113 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
 
+// CHANGE TABLE NAME HERE
+$table_name = "dev_users";
+
+
+$link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+if ($link->connect_error) {
+	die("Connection failed: " . $link->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$userid = $_SESSION["id"];
+	$email = trim($_POST["email"]);
+	$password = trim($_POST["password"]);
+	$confirm_password = trim($_POST["confirm_password"]);
+
+	$password_err = $confirm_password_err = "";
+	$success_msg = "dab";
+
+	// Code to support changing profile pictures
+
+	// $profile_picture = $_FILES["profile_picture"]["name"];
+	// $target_dir = "uploads/";
+	// $target_file = $target_dir . basename($_FILES["profile_picture"]["name"]);
+	// $uploadOk = 1;
+	// $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+	// // Check if image file is a actual image or fake image
+	// if (isset($_POST["submit"])) {
+	//     $check = getimagesize($_FILES["profile_picture"]["tmp_name"]);
+	//     if ($check !== false) {
+	//         $uploadOk = 1;
+	//     } else {
+	//         echo "File is not an image.";
+	//         $uploadOk = 0;
+	//     }
+	// }
+
+	// // Check if file already exists
+	// if (file_exists($target_file)) {
+	//     echo "Sorry, file already exists.";
+	//     $uploadOk = 0;
+	// }
+
+	// // Check file size
+	// if ($_FILES["profile_picture"]["size"] > 5000000) {
+	//     echo "Sorry, your file is too large.";
+	//     $uploadOk = 0;
+	// }
+
+	// // Allow certain file formats
+	// if (
+	//     $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	//     && $imageFileType != "gif"
+	// ) {
+	//     echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	//     $uploadOk = 0;
+	// }
+
+	// // Check if $uploadOk is set to 0 by an error
+	// if ($uploadOk == 0) {
+	//     echo "Sorry, your file was not uploaded.";
+	//     // if everything is ok, try to upload file
+	// } else {
+	//     if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
+	//         echo "The file " . htmlspecialchars(basename($_FILES["profile_picture"]["name"])) . " has been uploaded.";
+	//     } else {
+	//         echo "Sorry, there was an error uploading your file.";
+	//     }
+	// }
+
+	if (!empty($email)) {
+		$sql = `UPDATE $table_name SET Email = ? WHERE UserId = ?`;
+		if ($stmt = mysqli_prepare($link, $sql)) {
+			mysqli_stmt_bind_param($stmt, "ss", $email, $userid);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_close($stmt);
+		}
+	}
+	if ($password != $confirm_password) {
+		$confirm_password_err = "Passwords do not match.";
+	}
+	if (!empty($password) && !empty($confirm_password) && ($password == $confirm_password)) {
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+		$sql = `UPDATE $table_name SET Password = ? WHERE UserId = ?`;
+		if ($stmt = mysqli_prepare($link, $sql)) {
+			mysqli_stmt_bind_param($stmt, "ss", $hashed_password, $userid);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_close($stmt);
+		}
+	}
+
+	//   if (!empty($profile_picture)) {
+	//     $sql = "UPDATE dev_users SET ProfilePicture = ? WHERE UserId = ?";
+	//     if($stmt = mysqli_prepare($link,
+
+}
+mysqli_close($link);
+
+
+// Include Event class with php
+require_once('Event.php');
+
+// Include Event Object printer with php
+require_once("postprinter.php");
 ?>
+<html>
+
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -36,15 +143,6 @@ $UserId = $_SESSION["id"];
 	}
 
 </script>
-
-<?php
-// Include Event class with php
-require_once('Event.php');
-
-// Include Event Object printer with php
-require_once("postprinter.php");
-?>
-<html>
 
 
 
@@ -99,6 +197,48 @@ require_once("postprinter.php");
 		.user-profile input[disabled] {
 			color: #aaa;
 			font-style: italic;
+		}
+
+		.user-profile .card-body .tooltip {
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			transform: translateY(-50%);
+			font-size: 20px;
+			cursor: help;
+		}
+
+		.user-profile .card-body .tooltip:before {
+			content: "";
+			position: absolute;
+			top: -8px;
+			left: 50%;
+			transform: translateX(-50%);
+			border-width: 8px 8px 0 8px;
+			border-style: solid;
+			border-color: #f5f5f5 transparent transparent transparent;
+		}
+
+		.user-profile .card-body .tooltip:after {
+			content: attr(title);
+			position: absolute;
+			top: -35px;
+			right: 50%;
+			transform: translateX(50%);
+			padding: 10px;
+			background-color: #28a745;
+			color: #f5f5f5;
+			font-size: 14px;
+			border-radius: 5px;
+			white-space: nowrap;
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity 0.3s ease, visibility 0.3s ease;
+		}
+
+		.user-profile .card-body .tooltip:hover:after {
+			opacity: 1;
+			visibility: visible;
 		}
 	</style>
 
@@ -199,7 +339,9 @@ require_once("postprinter.php");
 							<h3 class="text-center">Account Management</h3>
 						</div>
 						<div class="card-body">
-							<form method="post" action="actions/updateAccount.php" enctype="multipart/form-data">
+							<span class="tooltip" title="Update successful">?</span>
+							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
+								enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="username">Username</label>
 									<input type="text" class="form-control" id="username" name="username"
@@ -211,13 +353,19 @@ require_once("postprinter.php");
 										value="<?php echo $_SESSION['email']; ?>" required>
 								</div>
 								<div class="form-group">
-									<label for="password">Password</label>
+									<label for="password">New Password</label>
 									<input type="password" class="form-control" id="password" name="password" required>
+									<p class="text-danger" id="password_err">
+										<?php echo $password_err; ?>
+									</p>
 								</div>
 								<div class="form-group">
-									<label for="confirm_password">Confirm Password</label>
+									<label for="confirm_password">Confirm New Password</label>
 									<input type="password" class="form-control" id="confirm_password"
 										name="confirm_password" required>
+									<p class="text-danger" id="confirm_password_err">
+										<?php echo $confirm_password_err; ?>
+									</p>
 								</div>
 								<!-- <div class="form-group">
 									<label for="profile_picture">Profile Picture</label>
