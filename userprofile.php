@@ -168,7 +168,7 @@ require_once("postprinter.php");
 		.user-profile {
 			background-color: #1c1c1c;
 			color: #f5f5f5;
-			
+
 		}
 
 		.user-profile .card-header {
@@ -264,6 +264,11 @@ require_once("postprinter.php");
 						onclick="openTab('account-management')">Account Management</a>
 					<a href="#" class="list-group-item list-group-item-action " id="manage-wagwans-link"
 						onclick="openTab('manage-wagwans')">Manage Wagwans</a>
+				</div>
+				<div class="text-center mt-3">
+					<form action="actions/logout.php">
+						<button type="submit" class="btn btn-danger">Log Out</button>
+					</form>
 				</div>
 			</div>
 			<div class="col-lg-9">
