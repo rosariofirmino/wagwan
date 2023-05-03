@@ -102,8 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row justify-content-center">
                 <div class="col-sm-4">
                     <br>
-                    <img src="./WagwanLogo.png" class="rounded mx-auto d-block" alt="WagwanLogo" width="70"
-                        height="70"></img>
+                    <img src="./WagwanLogo.png" class="rounded mx-auto d-block" alt="WagwanLogo" width="70" height="70">
                     <br>
                     <h1 style="text-align:center">Wagwan</h1>
                 </div>
@@ -134,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </p>
                 </div>
                 <div class="col text-center">
-                    <p class="text-danger" id="password_err">
+                    <p class="text-danger" id="login_err">
                         <?php echo $login_err; ?>
                     </p>
                     <br>
