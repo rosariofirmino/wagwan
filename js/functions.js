@@ -52,9 +52,12 @@ function deletePost(PostId) {
 	// AJAX for deletion in database
 
 	// get UserId
-	var UserId = "admin"; // TODO: get UserId from session
+	var UserId = id; // get UserId from session
 
 	const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        id = id; // preserve across AJAX
+    }
 	xhttp.open("GET", "actions/deletePost.php?PostId=" + PostId + "&UserId=" + UserId, true);
 	xhttp.send();
 
@@ -77,7 +80,7 @@ function rating(PostId, Rating, Row) {
     audio.play();
 
     // AJAX for rating update / update rating in database
-    var UserId = id; // TODO: get UserId from session
+    var UserId = id; // get UserId from session
     console.log(id);
     // add rating entry
     const xhttp = new XMLHttpRequest();
