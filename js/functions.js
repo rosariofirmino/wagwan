@@ -46,7 +46,7 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
         xhttp.open("GET", "actions/dislike.php?PostId=" + PostId + "&UserId=" + id, true);
     }
     if (UserLiked == false) { // like
-        xhttp.open("GET", "actions/like.php?PostId=" + PostId + "&UserId=" + id, true);
+        xhttp.open("GET", "actions/like.php?PostId=" + PostId + "&UserId=" + id + "&Likes=" + Likes, true);
     }
     
     xhttp.send();
