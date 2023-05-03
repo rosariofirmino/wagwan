@@ -117,7 +117,7 @@ function printEvent($event, $row)
 	echo ">
 						<label for='star2" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' id='star1" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='1'";
-	if ($event->getRating() == 1 && $event->getRating() < 2) {
+	if ($event->getRating() >= 1 && $event->getRating() < 2) {
 		echo " checked";
 	}
 	echo ">
@@ -295,7 +295,7 @@ function printEventMadeByUser($event, $row)
 	echo ">
 						<label for='star2" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' id='star1" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='1'";
-	if ($event->getRating() == 1 && $event->getRating() < 2) {
+	if ($event->getRating() >= 1 && $event->getRating() < 2) {
 		echo " checked";
 	}
 	echo ">
