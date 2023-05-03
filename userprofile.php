@@ -32,60 +32,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$password = trim($_POST["password"]);
 	$confirm_password = trim($_POST["confirm_password"]);
 
-	$password_err = $confirm_password_err = "";
+	$password_err = $confirm_password_err = $profile_pic_err = "";
 	$success_msg = "";
 
-	// Code to support changing profile pictures
+	$profile_picture = $_FILES["profile_picture"]["name"];
+	$target_dir = "profile_pictures/";
+	$filename = $userid . "_" . basename($_FILES["profile_picture"]["name"]);
+	$target_file = $target_dir . $filename;
+	$uploadOk = 1;
+	$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-	// $profile_picture = $_FILES["profile_picture"]["name"];
-	// $target_dir = "uploads/";
-	// $target_file = $target_dir . basename($_FILES["profile_picture"]["name"]);
-	// $uploadOk = 1;
-	// $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+	// Check if image file is a actual image or fake image
+	if (isset($_POST["submit"])) {
+		$check = getimagesize($_FILES["profile_picture"]["tmp_name"]);
+		if ($check !== false) {
+			$uploadOk = 1;
+		} else {
+			$profile_pic_err = "File is not an image.";
+			$uploadOk = 0;
+		}
+	}
 
-	// // Check if image file is a actual image or fake image
-	// if (isset($_POST["submit"])) {
-	//     $check = getimagesize($_FILES["profile_picture"]["tmp_name"]);
-	//     if ($check !== false) {
-	//         $uploadOk = 1;
-	//     } else {
-	//         echo "File is not an image.";
-	//         $uploadOk = 0;
-	//     }
-	// }
+	// Check if file already exists
+	if (file_exists($target_file)) {
+		$profile_pic_err = "Sorry, file already exists.";
+		$uploadOk = 0;
+	}
 
-	// // Check if file already exists
-	// if (file_exists($target_file)) {
-	//     echo "Sorry, file already exists.";
-	//     $uploadOk = 0;
-	// }
+	// Check file size
+	if ($_FILES["profile_picture"]["size"] > 5000000) {
+		$profile_pic_err = "Sorry, your file is too large.";
+		$uploadOk = 0;
+	}
 
-	// // Check file size
-	// if ($_FILES["profile_picture"]["size"] > 5000000) {
-	//     echo "Sorry, your file is too large.";
-	//     $uploadOk = 0;
-	// }
+	// Allow certain file formats
+	if (
+		$imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif"
+	) {
+		$profile_pic_err = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		$uploadOk = 0;
+	}
 
-	// // Allow certain file formats
-	// if (
-	//     $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	//     && $imageFileType != "gif"
-	// ) {
-	//     echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	//     $uploadOk = 0;
-	// }
-
-	// // Check if $uploadOk is set to 0 by an error
-	// if ($uploadOk == 0) {
-	//     echo "Sorry, your file was not uploaded.";
-	//     // if everything is ok, try to upload file
-	// } else {
-	//     if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
-	//         echo "The file " . htmlspecialchars(basename($_FILES["profile_picture"]["name"])) . " has been uploaded.";
-	//     } else {
-	//         echo "Sorry, there was an error uploading your file.";
-	//     }
-	// }
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+		$profile_pic_err = "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+	} else {
+		if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
+			$sql = "UPDATE $table_name SET ProfPic = ? WHERE UserId = ?";
+			if ($stmt = mysqli_prepare($link, $sql)) {
+				mysqli_stmt_bind_param($stmt, "ss", $filename, $userid);
+				mysqli_stmt_execute($stmt);
+				mysqli_stmt_close($stmt);
+				$success_msg = "Profile Photo Successfully Updated";
+				$_SESSION["ProfilePic"] = $filename;
+			} else {
+				die;
+			}
+		} else {
+			$profile_pic_err = "Sorry, there was an error uploading your file.";
+		}
+	}
 
 	if (!empty($email)) {
 
@@ -96,7 +104,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			mysqli_stmt_close($stmt);
 			$success_msg = "Email Successfully Updated";
 		} else {
-			echo "bru";
 			die;
 		}
 	}
@@ -248,6 +255,15 @@ require_once("postprinter.php");
 							href="userprofile.php?UserId=<?php echo ($isLoggedIn == true) ? $UserId : "" ?>"><?php echo
 									 	($isLoggedIn == true) ? $UserId : "Log In" ?></a>
 					</li>
+					<li class="nav-item">
+						<?php if ($isLoggedIn === true) { ?>
+							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><img
+									src="./profile_pictures/<?php echo ($_SESSION["ProfilePic"] != null) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
+									width="40" alt="profile picture" class="rounded-circle ms-2"
+									style="width: 40px; height: 40px; margin-left: 10px;">
+							</a>
+						<?php } ?>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -308,11 +324,14 @@ require_once("postprinter.php");
 										<?php echo $confirm_password_err; ?>
 									</p>
 								</div>
-								<!-- <div class="form-group">
+								<div class="form-group">
 									<label for="profile_picture">Profile Picture</label>
 									<input type="file" class="form-control-file" id="profile_picture"
 										name="profile_picture">
-								</div> -->
+									<p class="text-danger" id="profile_pic_err">
+										<?php echo $profile_pic_err; ?>
+									</p>
+								</div>
 								<div class="text-center">
 									<button type="submit" class="btn btn-primary">Update</button>
 								</div>
