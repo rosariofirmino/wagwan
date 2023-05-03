@@ -83,17 +83,11 @@ $UserId = $_SESSION["id"];
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-		// get liked posts from likes table
-		$sql = "SELECT * FROM dev_likes WHERE UserId = '$UserId'";
+		// get liked posts
+		$sql = "SELECT * FROM dev_posts INNER JOIN dev_likes ON dev_posts.PostId = dev_likes.PostId WHERE dev_likes.UserId = '$UserId'";
 		$result = $conn->query($sql);
 
-
 		while ($row = $result->fetch_assoc()) {
-			$PostId = $row["PostId"];
-			$sql = "SELECT * FROM dev_posts WHERE PostId = '$PostId'";
-			$resultPosts = $conn->query($sql);
-
-			$row = $resultPosts->fetch_assoc();
 
 			$PostId = $row["PostId"];
 			$UserId = htmlspecialchars($row["UserId"]);
