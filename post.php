@@ -59,7 +59,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <select class="form-control" id="category" name="category" required>
                         <option value="nightlife">Nightlife</option>
                             <option value="shop">Shop</option>
-                            <option value="performances">Performances</option>
+                            <option value="performances">Performance</option>
                             <option value="food">Food</option>
                             <option value="activity">Activity</option>
                         </select>
@@ -69,12 +69,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
                     </div>
 
-                    <label for="age">Age?</label>
-                    <select class="form-control" id="age" name="age" required>
-                        <option value="All Ages">All Ages</option>
-                        <option value="18+">18+</option>
-                        <option value="21+">21+</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="age">Age?</label>
+                        <select class="form-control" id="age" name="age" required>
+                            <option value="All Ages">All Ages</option>
+                            <option value="18+">18+</option>
+                            <option value="21+">21+</option>
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <label for="age">Price?</label>

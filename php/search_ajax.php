@@ -45,8 +45,9 @@ function suggest_near() {
         $AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
         $Rating = $row["Rating"];
         $DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
-    
-        $Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId);
+        $ImageId = htmlspecialchars($row["ImageId"]);
+
+        $Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
         printEvent($Event, 1);
     }
 

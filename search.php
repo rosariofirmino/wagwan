@@ -2,11 +2,23 @@
 
 <?php
 session_start();
-$isLoggedIn = false;
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+ 
+// Check if the user is already logged in
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ./index.php");
+    exit;
+}
+else {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
 }
+
+// Include Event class with php
+require_once('Event.php');
+
+// Include Event Object printer with php
+require_once("postprinter.php");
+	?>
 ?>
 
 <style>
@@ -212,123 +224,125 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 			</div>
 		</div>
 	</nav>
-	<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
-		<div class="carousel-indicators">
-			<button aria-label="Slide 1" class="active" data-bs-slide-to="0" data-bs-target="#carouselExampleIndicators"
-				type="button"></button> <button aria-label="Slide 2" data-bs-slide-to="1"
-				data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 3"
-				data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators" type="button"></button>
-		</div>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img alt="..." class="d-block w-100" src="homepage/hp/gv2.jpeg">
-			</div>
-			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="homepage/hp/gv1.jpeg">
-			</div>
-			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="homepage/hp/gv3.jpeg">
-			</div>
-			<div class="centered">
-				<h5 class="titletext">Wagwan Near Me</h5>
-				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Enter Location for Quick Search" onkeyup="suggestNear(this.value)"
-						aria-describedby="basic-addon2">
-					<div class="input-group-append">
-						<button class="btn btn-outline-secondary" type="button">Search</button>
+	<br><br><br><br>
+	<div class="row justify-content-center">
+		<div class="col-11">
+			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
+				<div class="row">
+					<div class="form-group mb-3">
+						<input type="text" class="form-control" name="text" placeholder="Enter name or location" aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<input type="submit" class="btn btn-outline-dark" value="Search">
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators"
-			type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> </button> <button
-			class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"
-			type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> </button>
+				<div class="row justify-content-center">
+					<div class="col">
+						<div class="input-group mb-3">
+							<div class="form-group">
+								<label for="Category">Category</label>
+								<select class="form-control" id="category" name="category">
+								<option value="any">Any</option>
+								<option value="nightlife">Nightlife</option>
+								<option value="shop">Shop</option>
+								<option value="performance">Performance</option>
+								<option value="food">Food</option>
+								<option value="activity">Activity</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-group mb-3">
+							<div class="form-group">
+								<label for="price">Price</label>
+								<select class="form-control" id="price" name="price">
+								<option value="any">Any</option>
+								<option value="0">🆓</option>
+								<option value="1">💸</option>
+								<option value="2">💰</option>
+								<option value="3">💎</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-group mb-3">
+							<div class="form-group">
+								<label for="age">Age</label>
+								<select class="form-control" id="age" name="age">
+								<option value="any">All Ages</option>
+								<option value="18+">18+</option>
+								<option value="21+">21+</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 	<br>
-	<h2 class="app-header"><strong>Top Wagwans</strong></h2>
-	<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
-	<div class="d-flex flex-row" id="Top Posts" style="flex-wrap: nowrap; overflow-x:auto; overflow-y: hidden;">
-		<?php
-		// reads from database
-		$topPostsArray = array();
-
-		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
-
-		$sql = "SELECT * FROM dev_posts";
-		$result = $conn->query($sql);
-
-
-		while ($row = $result->fetch_assoc()) {
-			$PostId = $row["PostId"];
-			$UserId = htmlspecialchars($row["UserId"]);
-			$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
-			$Title = htmlspecialchars($row["Title"], ENT_QUOTES);
-			$Description = htmlspecialchars($row["Description"], ENT_QUOTES);
-			$Price = $row["Price"];
-			$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
-			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
-			$Rating = $row["Rating"];
-			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
-			$ImageId = htmlspecialchars($row["ImageId"]);
-
-			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
-			array_push($topPostsArray, $Event);
-		}
-
-		// Sort based on liked count
-		usort($topPostsArray, 'compareLikes');
-
-		$row = 0; // keeps track of row we are on
-		
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			printEvent($topPostsArray[$i], $row);
-		}
-		?>
-	</div>
-	<br>
-	<h2 id="NearYouHeader"></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="NearYou">
-	</div>
-	<br>
-	<h2><strong>Wagwan Tonight</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
-		<?php
-
-		$row = $row + 1;
-
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			printEvent($topPostsArray[$i], $row);
-		}
-		?>
-	</div>
-	<br>
-	<h2 class="app-header"><strong>Wagwan this Weekend</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
-		<?php
-
-		$row = $row + 1;
-
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			printEvent($topPostsArray[$i], $row);
-		}
-		?>
-	</div>
-	<br>
-	<h2 class="app-header"><strong>Your liked Wagwans</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
-		<?php
-
-		$row = $row + 1;
-
-		for ($i = 0; $i < count($topPostsArray); $i++) {
-			printEvent($topPostsArray[$i], $row);
-		}
-		?>
-	</div>
 </body>
 
 </html>
+
+<?php
+
+$config = parse_ini_file("./db_config.ini");
+
+$link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+if ($link->linkect_error) {
+  die("linkection failed: " . $link->linkect_error);
+}
+
+if($_SERVER["REQUEST_METHOD"] == "GET"){
+	$text = $_GET['text'];
+	$category = $_GET['category'];
+	$price = $_GET['price'];
+	$age = $_GET['age'];
+
+	$sql = "SELECT * from dev_posts where (Address like '%" . $text . "%' OR Description like '%" . $text . "%' OR Title like '%" . $text . "%')";
+
+	if($category != "any" && !empty($category) && $category !== "") {
+		$sql = $sql . " AND CategoryId = '" . $category . "'";
+	}
+	if($price != "any" && !empty($price) && $price !== "") {
+		$sql = $sql . " AND Price = '" . $price . "'";
+	}
+	if($age != "any" && !empty($age) && $age !== "") {
+		$sql = $sql . " AND AgeRestrictions = '" . $age . "'";
+	}
+
+	echo "<h1>" . $sql . "</h1>";
+
+	if ($result = $link->query($sql)) {
+        echo "Query success";
+    } else {
+        echo "Error adding record: " . mysqli_error($link);
+    }
+
+	while($row = $result->fetch_assoc())
+    {	
+        $PostId = $row["PostId"];
+        $UserId = htmlspecialchars($row["UserId"]);
+        $Address = htmlspecialchars($row["Address"], ENT_QUOTES);
+        $Title = htmlspecialchars($row["Title"], ENT_QUOTES);
+        $Description = htmlspecialchars($row["Description"], ENT_QUOTES);
+        $Price = $row["Price"];
+        $CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
+        $AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+        $Rating = $row["Rating"];
+        $DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+        $ImageId = htmlspecialchars($row["ImageId"]);
+
+        $Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+        printEvent($Event, 0);
+    }
+
+
+    // Close the database linkection
+    mysqli_close($link);
+
+}
+?>
