@@ -1,7 +1,8 @@
 #!/usr/local/bin/php
 <?php
-	//Database connection
-	$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+//Database connection
+$config = parse_ini_file("../db_config.ini"); // get credentials
+$conn = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
 	// Check connection
 	if ($conn->connect_error) {
 	  die("Connection failed: " . $conn->connect_error);
