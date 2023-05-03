@@ -37,10 +37,10 @@ $UserId = $_SESSION["id"];
 	?>
 </head>
 
-<body style="background-color: black; color: white;">
+<body style="background-color:#211d2d; color:#D1D7E0;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>

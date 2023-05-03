@@ -168,6 +168,7 @@ require_once("postprinter.php");
 		.user-profile {
 			background-color: #1c1c1c;
 			color: #f5f5f5;
+			
 		}
 
 		.user-profile .card-header {
@@ -222,7 +223,7 @@ require_once("postprinter.php");
 </head>
 
 
-<body style="background-color: black; color: white;"
+<body style="background-color:#211d2d; color:#D1D7E0;"
 	onload=" openTab('manage-wagwans'); openTab('account-management');">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
