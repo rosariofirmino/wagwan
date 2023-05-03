@@ -26,21 +26,21 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 </head>
 
 
-<body style="background-color: black; color: white;">
+<body style="background-color: #2D283E ; color:#D1D7E0 ;">
 
     <h1 class="welcome-header">Welcome to Wagwan</h1>
     <p class="guide-desc">Your guide for local things to do</p>
 
     <div class="container">
         <div class="card post-card">
-            <div class="card-header text-center">
+            <div class="card-header text-center" style="background-color: #393748;">
                 <h4 class="card-title">Wagwan?</h4>
                 <button type="button" class="close" aria-label="Close" onclick="window.location.href='./'">
                     <span aria-hidden="true" class="text-light">&times;</span>
                 </button>
             </div>
-            <form action="actions/submitPost.php" method="POST">
-                <div class="card-body">
+            <form action="actions/submitPost.php" style="background-color: #4C495D;" method="POST">
+                <div class="card-body" style="background-color: #4C495D;">
                     <div class="form-group">
                         <label for="what">What?</label>
                         <input type="text" class="form-control" id="what" name="what" required>
@@ -276,9 +276,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         </div>
 
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary float-right">Submit</button>
-                    </div>
+                    
+                        <button style="background-color: #802BB1; border:0px;"type="submit" class="btn btn-primary float-right">Submit</button>
+                   
             </form>
         </div>
 
