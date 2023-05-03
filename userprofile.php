@@ -257,13 +257,14 @@ require_once("postprinter.php");
 					</li>
 					<li class="nav-item">
 						<?php if ($isLoggedIn === true) { ?>
-							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><img
-									src="./profile_pictures/<?php echo ($_SESSION["ProfilePic"] != null) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
+							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>">
+								<img src="./profile_pictures/<?php echo (isset($_SESSION["ProfilePic"])) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
 									width="40" alt="profile picture" class="rounded-circle ms-2"
 									style="width: 40px; height: 40px; margin-left: 10px;">
 							</a>
 						<?php } ?>
 					</li>
+
 				</ul>
 			</div>
 		</div>
