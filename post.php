@@ -16,6 +16,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <head>
     <title>Wagwan Home Page</title>
+    <link rel="icon" href="homepage/hp/icon.png">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -32,7 +34,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <p class="guide-desc">Your guide for local things to do</p>
 
     <div class="container">
-        <div class="card post-card">
+        <div class="card post-card" style="background-color: #4C495D;">
             <div class="card-header text-center" style="background-color: #393748;">
                 <h4 class="card-title">Wagwan?</h4>
                 <button type="button" class="close" aria-label="Close" onclick="window.location.href='./'">
