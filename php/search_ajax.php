@@ -20,35 +20,40 @@ function suggest_near() {
     }
     
     $q = $_GET["loc"];
-    $sql = "SELECT * FROM dev_posts WHERE Address LIKE ?";
-        
-    if($stmt = mysqli_prepare($link, $sql)){
-        mysqli_stmt_bind_param($stmt, "s", $param_location);
-        $param_location = '%' . $q . '%';
-        
-        if(mysqli_stmt_execute($stmt)){
-            $result = $stmt->get_result();
-        } else{
-            echo "Oops! Something went wrong. Please try again later.";
-        }
+    $sql = "SELECT * FROM dev_posts WHERE Address LIKE ? OR Description LIKE ?";
+    if(empty($q) || $q == "") {
+        echo "";
     }
-
-    while($row = $result->fetch_assoc())
-    {	
-        $PostId = $row["PostId"];
-        $UserId = htmlspecialchars($row["UserId"]);
-        $Address = htmlspecialchars($row["Address"], ENT_QUOTES);
-        $Title = htmlspecialchars($row["Title"], ENT_QUOTES);
-        $Description = htmlspecialchars($row["Description"], ENT_QUOTES);
-        $Price = $row["Price"];
-        $CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
-        $AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
-        $Rating = $row["Rating"];
-        $DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
-        $ImageId = htmlspecialchars($row["ImageId"]);
-
-        $Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
-        printEvent($Event, 1);
+    else {
+        if($stmt = mysqli_prepare($link, $sql)){
+            mysqli_stmt_bind_param($stmt, "ss", $param_location, $param_description);
+            $param_location = '%' . $q . '%';
+            $param_description = '%' . $q . '%';
+            
+            if(mysqli_stmt_execute($stmt)){
+                $result = $stmt->get_result();
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+    
+        while($row = $result->fetch_assoc())
+        {	
+            $PostId = $row["PostId"];
+            $UserId = htmlspecialchars($row["UserId"]);
+            $Address = htmlspecialchars($row["Address"], ENT_QUOTES);
+            $Title = htmlspecialchars($row["Title"], ENT_QUOTES);
+            $Description = htmlspecialchars($row["Description"], ENT_QUOTES);
+            $Price = $row["Price"];
+            $CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
+            $AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+            $Rating = $row["Rating"];
+            $DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+            $ImageId = htmlspecialchars($row["ImageId"]);
+    
+            $Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+            printEvent($Event, 1);
+        }
     }
 
     mysqli_stmt_close($stmt);

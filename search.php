@@ -231,9 +231,6 @@ require_once("postprinter.php");
 				<div class="row">
 					<div class="form-group mb-3">
 						<input type="text" class="form-control" name="text" placeholder="Enter name or location" aria-describedby="basic-addon2">
-						<div class="input-group-append">
-							<input type="submit" class="btn btn-outline-dark" value="Search">
-						</div>
 					</div>
 				</div>
 				<div class="row justify-content-center">
@@ -278,6 +275,13 @@ require_once("postprinter.php");
 							</div>
 						</div>
 					</div>
+					<div class="col">
+						<div class="input-group mb-3">
+							<div class="form-group">
+								<input type="submit" class="btn btn-dark" value="Search">
+							</div>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -302,7 +306,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 	$price = $_GET['price'];
 	$age = $_GET['age'];
 
-	$sql = "SELECT * from dev_posts where (Address like '%" . $text . "%' OR Description like '%" . $text . "%' OR Title like '%" . $text . "%')";
+	$sql = "SELECT * from dev_posts where (Address like ? OR Description like ? OR Title like ?)";
 
 	if($category != "any" && !empty($category) && $category !== "") {
 		$sql = $sql . " AND CategoryId = '" . $category . "'";
@@ -314,32 +318,42 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		$sql = $sql . " AND AgeRestrictions = '" . $age . "'";
 	}
 
-	echo "<h1>" . $sql . "</h1>";
+	if ($stmt = mysqli_prepare($link, $sql)) {
+		mysqli_stmt_bind_param($stmt, "sss", $text_param, $text_param, $text_param);
+		$text_param = '%' . $text . '%';
 
-	if ($result = $link->query($sql)) {
-        echo "Query success";
+        if(mysqli_stmt_execute($stmt)){
+			mysqli_stmt_store_result($stmt);
+            $result = $stmt->get_result();
+			echo "Query success";
+        } else{
+            echo "Error execute";
+        }
     } else {
-        echo "Error adding record: " . mysqli_error($link);
+        echo "Error prepare";
     }
 
-	while($row = $result->fetch_assoc())
-    {	
-        $PostId = $row["PostId"];
-        $UserId = htmlspecialchars($row["UserId"]);
-        $Address = htmlspecialchars($row["Address"], ENT_QUOTES);
-        $Title = htmlspecialchars($row["Title"], ENT_QUOTES);
-        $Description = htmlspecialchars($row["Description"], ENT_QUOTES);
-        $Price = $row["Price"];
-        $CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
-        $AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
-        $Rating = $row["Rating"];
-        $DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
-        $ImageId = htmlspecialchars($row["ImageId"]);
-
-        $Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
-        printEvent($Event, 0);
-    }
-
+	if(mysqli_stmt_num_rows($stmt) == 0) {
+		echo "<";
+	}
+	{
+		while($row = $result->fetch_assoc()) {	
+			$PostId = $row["PostId"];
+			$UserId = htmlspecialchars($row["UserId"]);
+			$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
+			$Title = htmlspecialchars($row["Title"], ENT_QUOTES);
+			$Description = htmlspecialchars($row["Description"], ENT_QUOTES);
+			$Price = $row["Price"];
+			$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
+			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+			$Rating = $row["Rating"];
+			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+			$ImageId = htmlspecialchars($row["ImageId"]);
+	
+			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+			printEvent($Event, 0);
+		}
+	}
 
     // Close the database linkection
     mysqli_close($link);

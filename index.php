@@ -89,10 +89,9 @@ else {
 			<div class="centered">
 				<h5 class="titletext">Wagwan Near Me</h5>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Enter Location for Quick Search" onkeyup="suggestNear(this.value)"
+					<input type="text" class="form-control" placeholder="Quick Search" onkeyup="suggestNear(this.value)"
 						aria-describedby="basic-addon2">
 					<div class="input-group-append">
-						<button class="btn btn-outline-secondary" type="button">Search</button>
 					</div>
 				</div>
 			</div>
@@ -100,6 +99,9 @@ else {
 			type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> </button> <button
 			class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"
 			type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> </button>
+	</div>
+	<div id="Results"></div>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="NearYou" style="flex-wrap: nowrap; overflow-x:auto; overflow-y: hidden;">
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Top Wagwans</strong></h2>
@@ -148,10 +150,6 @@ else {
 			printEvent($topPostsArray[$i], $row);
 		}
 		?>
-	</div>
-	<br>
-	<h2 id="NearYouHeader"></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="NearYou">
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Wagwans Happening Soon</strong></h2>
