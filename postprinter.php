@@ -7,18 +7,18 @@ function printEvent($event, $row) {
 	echo "
 	<!-- Card for ".$event->getTitle()." -->
 	<div class='card card-block mx-2' style='min-width: 400px; color: transparent; background-color: transparent; border: 0px;'>
-		<img class='card-img-body' src='" . $event->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.6; border-radius: 1.25rem;'></img>
+		<img class='card-img-body' src='" . $event->getImg() . "' alt='' width='400' height='400' style='opacity: 0.6; border-radius: 1.25rem;'>
 
 		<div class='card-img-overlay d-flex align-items-end' style='height: 400px; padding:2rem'>
 			<button id='button".$row."".$event->getPostId()."' onClick='likeButtonPress(".$row.", ".$event->getPostId().", ".$event->getLikes().", ".$event->getLiked().")' type='button' class='align-self-end btn btn-dark' style='background-color: transparent; border-color: transparent;'>
 					<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='white' class='bi bi-heart' viewBox='0 0 16 16'>
-						<path id='".$row."path".$event->getPostId()."' d='" . $event->getLikedIcon() . "'}/>
+						<path id='path$row".$event->getPostId()."' d='" . $event->getLikedIcon() . "'/>
 					</svg>
 			</button>
 			<h3 style='color: white' id='".$row."likes".$event->getPostId()."'>&nbsp; " . $event->getLikes() . "</h3>
 		</div>
 
-		<div class='card-img-overlay' style='height: 335px; padding:2rem' data-toggle='modal' data-target='#modalpost".$event->getPostId()."row".$row."'  style='cursor: default;' onmouseover=\"this.style.cursor='pointer'\">
+		<div class='card-img-overlay' style='height: 335px; padding:2rem; cursor: default;' data-toggle='modal' data-target='#modalpost".$event->getPostId()."row".$row."' onmouseover=\"this.style.cursor='pointer'\">
 
 			<h3 style='color: white'>" . $event->getTitle() . "</h3>
 			<p style='color: white'>" . $event->getDescription() . "</p>
@@ -34,7 +34,7 @@ function printEvent($event, $row) {
 				<!-- Modal Header -->
 				<div class='modal-header' style='display: inline; border-top-left-radius: 1rem; border-top-right-radius: 1rem; background-color: #4C495D;'>
 					<h4 class='modal-title' style='padding: 5px'>". $event->getTitle() ."</h4>
-					<span style='background:#2D283E; border-radius: 10px; padding:5px;'><strong >Posted By: &nbsp; </strong><a href=userprofile.php?UserId=".$event->getUserId().">".$event->getUserId()."</a></span>
+					<span style='background:#2D283E; border-radius: 10px; padding:5px;'><strong >Posted By: &nbsp; </strong><a href='userprofile.php?UserId=".$event->getUserId()."'>".$event->getUserId()."</a></span>
 					
 				</div>
 				
@@ -44,7 +44,7 @@ function printEvent($event, $row) {
 					<a href='#' class='tag' style='padding: 8px'>
 					".$event->getCategory()."
 					</a>
-					<p><strong>Address: </strong><a href='https://maps.google.com/?q=".$event->getAddress()."' target='_blank' rel='noopener noreferrer'>".$event->getAddress()."</a></p>
+					<p><strong>Address: </strong><a href='https://maps.google.com/?q=".str_replace(' ', '+', $event->getAddress())."' target='_blank' rel='noopener noreferrer'>".$event->getAddress()."</a></p>
 					<p><strong>Description: </strong>".$event->getDescription()."</p>
 					<p><strong>Age: </strong>".$event->getAgeRestrictions()."</p>
 					<p><strong>Date: </strong>";
@@ -71,7 +71,7 @@ function printEvent($event, $row) {
 						echo "<span><span style='font-size:25px; filter:grayscale(100%)'>🆓 💸 💰 </span><span style='font-size:40px; background:green; border-radius: 30px;'>💎</span></span>";
 					}
 
-					echo "</p></span>
+					echo "</span></p>
 
 
 						<br>
@@ -94,31 +94,31 @@ function printEvent($event, $row) {
 					echo "<fieldset class='rating' style='position: relative; top: -25px;' disabled>
 						<input type='radio' id='star5".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='5'";
 						if ($event->getRating() == 5) {
-							echo " checked='true'";
+							echo " checked";
 						}
 						echo ">
 						<label for='star5".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star4".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='4'";
 						if ($event->getRating() >= 4 && $event->getRating() < 5) {
-							echo " checked='true'";
+							echo " checked";
 						}
 						echo ">
 						<label for='star4".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star3".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='3'";
 						if ($event->getRating() >= 3 && $event->getRating() < 4) {
-							echo " checked='true'";
+							echo " checked";
 						}
 						echo ">
 						<label for='star3".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star2".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='2'";
 						if ($event->getRating() >= 2 && $event->getRating() < 3) {
-							echo " checked='true'";
+							echo " checked";
 						}
 						echo ">
 						<label for='star2".$event->getPostId()."".$row."'></label>
 						<input type='radio' id='star1".$event->getPostId()."".$row."' name='rating".$event->getPostId()."".$row."' value='1'";
 						if ($event->getRating() == 1 && $event->getRating() < 2) {
-							echo " checked='true'";
+							echo " checked";
 						}
 						echo ">
 						<label for='star1".$event->getPostId()."".$row."'></label>
@@ -186,7 +186,7 @@ function printEventMadeByUser($event, $row) {
 	echo "
 	<!-- Card for ".$event->getTitle()." -->
 	<div class='card card-block mx-2' style='min-width: 400px; color: transparent; background-color: transparent; border: 0px;'>
-		<img class='card-img-body' src='" . $event->getImg() . "' alt='Card image' width='400px' height='400px' style='opacity: 0.6; border-radius: 1.25rem;'></img>
+		<img class='card-img-body' src='" . $event->getImg() . "' alt='Card image' width='400' height='400' style='opacity: 0.6; border-radius: 1.25rem;'>
 
 		<div class='card-img-overlay d-flex align-items-end' style='height: 400px; padding:2rem'>
 			<button id='button".$row."".$event->getPostId()."' onClick='likeButtonPress(".$row.", ".$event->getPostId().", ".$event->getLikes().", ".$event->getLiked().")' type='button' class='align-self-end btn btn-dark' style='background-color: transparent; border-color: transparent;'>
