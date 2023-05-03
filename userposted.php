@@ -18,9 +18,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	echo "<script>var isLoggedIn = false;</script>\n";
 }
 ?>
-<html>
-
-<head>
 	<title>Your Posted Wagwans</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
@@ -85,7 +82,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 			<?php echo $userId; ?>'s Wagwans
 		</strong></h2>
 	<a href="post.php" class="add-button"><i class="fas fa-plus"></i></a>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="UserPosts0">
 		<?php
 		// reads from database
 		$userPostsArray = array();
@@ -131,7 +128,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 			//layout for cards: 3 cards per row
 			if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
 				echo "</div><br>";
-				echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts" . $i . "'>";
+				echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='UserPosts" . $i . "'>";
 				$row++;
 			}
 		}
