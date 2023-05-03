@@ -6,6 +6,12 @@ $isLoggedIn = false;
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
+	echo "<script>var id = '$id';</script>";
+	echo "<script>var isLoggedIn = true;</script>";
+}
+else {
+	echo "<script>var id = '';</script>";
+	echo "<script>var isLoggedIn = false;</script>";
 }
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
@@ -102,6 +108,9 @@ $UserId = $_SESSION["id"];
 			$ImageId = htmlspecialchars($row["ImageId"]);
 
 			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+			$Event->setDateCreated($DateCreated);
+			$Event->setSessionId($id);
+			$Event->checkIfLiked($PostId);
 			array_push($likedPostsArray, $Event);
 		}
 

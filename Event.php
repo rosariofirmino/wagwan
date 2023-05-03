@@ -19,6 +19,8 @@ class Event
 	private $UserId;
 	private $PostId;
 	private $DateCreated;
+	private $UserRating = 0;
+	private $sessionId;
 
 
 	public function __construct($title, $description, $category, $rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId)
@@ -42,6 +44,12 @@ class Event
 		$this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image
 		$this->setImg($ImageId);
 	}
+
+	public function setSessionId($id){
+		$this->sessionid = $id;
+		$this->setUserRating();
+	}
+
 	public function checkIfLiked($PostId)
 	{
 		// checks if post is liked and updates likedIcon.
@@ -51,7 +59,7 @@ class Event
 		die("Connection failed: " . $conn->connect_error);
 		}
 
-		$UserId = "admin"; // get from session, admin is temporary...
+		$UserId = $this->sessionid; // get from session
 
 		// get liked posts from likes table matching userid and postid
 		$sql = "SELECT LikeId FROM dev_likes WHERE UserId = '$UserId' AND PostId = $PostId";
@@ -85,6 +93,29 @@ class Event
 		$this->likes = $likes;
 
 	}
+
+	function setUserRating() {
+		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		// Check connection
+		if ($conn->connect_error) {
+		  die("Connection failed: " . $conn->connect_error);
+		}
+		$PostId = $this->PostId;
+		$UserId = $this->sessionid;
+		$sql = "SELECT * FROM dev_ratings WHERE PostId = $PostId AND UserId = '$UserId'";
+		$result = $conn->query($sql);
+
+		$this->UserRating = 0;
+		while ($row = $result->fetch_assoc()) {
+			$this->UserRating = $row['Rating'];
+		}
+
+	}
+
+	function getUserRating() {
+		return $this->UserRating;
+	}
+
 	public function setImg($ImageId) {
 		// set image based on ImageId
 		$this->img = "posts_images/".$ImageId.".jpeg";
@@ -247,6 +278,31 @@ function keepXPriceOnly($arr, $x) {
 	// use: $postsArr = keepXPriceOnly($postsArr, 0) to get free events;
 	foreach($arr as $key => $value) {
 		if($value->getPrice() != $x) {
+			unset($arr[$key]);
+		}
+	}
+	
+	return $arr;
+}
+
+function keepAgeGroupOnly($arr, $age) {
+	// keeps only posts from array with $age age group ("All Ages", "18+", "21+")
+	// use: $postsArr = keepAgeGroupOnly($postsArr, "All Ages") to get all age groups;
+
+	foreach($arr as $key => $value) {
+		if($value->getAgeRestrictions() != $age) {
+			unset($arr[$key]);
+		}
+	}
+	
+	return $arr;
+}
+
+function keepLiked($arr) {
+	// keeps only posts from array that are liked by user
+	// use: $postsArr = keepLiked($postsArr);
+	foreach($arr as $key => $value) {
+		if($value->getLiked() == 'false') {
 			unset($arr[$key]);
 		}
 	}
