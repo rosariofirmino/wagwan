@@ -132,7 +132,7 @@ function printEvent($event, $row) {
 						echo "<p><strong>Review this Wagwan:</strong></p>";
 					}
 					else {
-						echo "<p><strong>Revise your rating:</strong></p>";
+						echo "<p><strong>Revise your review:</strong></p>";
 					}
 					echo "
 					<fieldset class='rating' style='padding: 0px; margin: 0px; position: relative; top: -25px;'>
@@ -311,7 +311,7 @@ function printEventMadeByUser($event, $row) {
 						echo "<p><strong>Review this Wagwan:</strong></p>";
 					}
 					else {
-						echo "<p><strong>Revise your rating:</strong></p>";
+						echo "<p><strong>Revise your review:</strong></p>";
 					}
 					echo "
 					<fieldset class='rating' style='padding: 0px; margin: 0px; position: relative; top: -25px;'>
