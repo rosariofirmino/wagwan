@@ -14,7 +14,7 @@ $UserId = $_SESSION["id"];
 echo "<!DOCTYPE html>\n";
 echo "<html lang='en'>\n";
 echo "<head>\n";
-echo "<script>var id = '$id';</script>\n";
+echo "<script>var id = '$UserId';</script>\n";
 echo "<script>var isLoggedIn = true;</script>\n";
 
 // CHANGE TABLE NAME HERE
