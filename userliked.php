@@ -87,6 +87,7 @@ $UserId = $_SESSION["id"];
 
 		// get liked posts
 		$sql = "SELECT * FROM dev_posts INNER JOIN dev_likes ON dev_posts.PostId = dev_likes.PostId WHERE dev_likes.UserId = '$UserId'";
+		$result = $conn->query($sql);
 
 		while ($row = $result->fetch_assoc()) {
 
