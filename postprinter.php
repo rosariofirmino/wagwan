@@ -94,31 +94,31 @@ function printEvent($event, $row)
 	echo "<fieldset class='rating' style='position: relative; top: -25px;' disabled>
 						<input type='radio' id='star5" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='5'";
 	if ($event->getRating() == 5) {
-		echo " checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='star5" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' id='star4" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='4'";
 	if ($event->getRating() >= 4 && $event->getRating() < 5) {
-		echo " checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='star4" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' id='star3" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='3'";
 	if ($event->getRating() >= 3 && $event->getRating() < 4) {
-		echo " checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='star3" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' id='star2" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='2'";
 	if ($event->getRating() >= 2 && $event->getRating() < 3) {
-		echo " checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='star2" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' id='star1" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='1'";
 	if ($event->getRating() >= 1 && $event->getRating() < 2) {
-		echo " checked";
+		echo "\x20hecked";
 	}
 	echo ">
 						<label for='star1" . $event->getPostId() . "" . $row . "'></label>
@@ -137,31 +137,31 @@ function printEvent($event, $row)
 					<fieldset class='rating' style='padding: 0px; margin: 0px; position: relative; top: -25px;'>
 						<input type='radio' onClick='rating(" . $event->getPostId() . ", 5, " . $row . ")' id='userstar5" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='5'";
 	if ($event->getUserRating() == 5) {
-		echo "checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='userstar5" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' onClick='rating(" . $event->getPostId() . ", 4, " . $row . ")' id='userstar4" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='4'";
 	if ($event->getUserRating() == 4) {
-		echo "checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='userstar4" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' onClick='rating(" . $event->getPostId() . ", 3, " . $row . ")' id='userstar3" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='3'";
 	if ($event->getUserRating() == 3) {
-		echo "checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='userstar3" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' onClick='rating(" . $event->getPostId() . ", 2, " . $row . ")' id='userstar2" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='2'";
 	if ($event->getUserRating() == 2) {
-		echo "checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='userstar2" . $event->getPostId() . "" . $row . "'></label>
 						<input type='radio' onClick='rating(" . $event->getPostId() . ", 1, " . $row . ")' id='userstar1" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='1'";
 	if ($event->getUserRating() == 1) {
-		echo "checked";
+		echo "\x20checked";
 	}
 	echo ">
 						<label for='userstar1" . $event->getPostId() . "" . $row . "'></label>
@@ -171,7 +171,11 @@ function printEvent($event, $row)
 				
 				<!-- Modal footer -->
 				<div class='modal-footer' style='background-color: #2D283E; border-bottom-left-radius: 1rem; border-bottom-right-radius: 1rem;' id='modalfooter" . $event->getPostId() . "row" . $row . "'>
-					<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+					<button type='button' class='btn btn-outline-success'";
+
+
+					echo ">📅</button>
+					<button type='button' class='btn btn-outline-danger' data-dismiss='modal'>Close</button>
 				</div>
 		
 			</div>
@@ -270,31 +274,31 @@ function printEventMadeByUser($event, $row)
 
 
 	echo "<fieldset class='rating' style='position: relative; top: -25px;' disabled>
-						<input type='radio' id='star5" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='5'";
+						<input type='radio' id='star5" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='5' \x20";
 	if ($event->getRating() == 5) {
 		echo " checked";
 	}
 	echo ">
 						<label for='star5" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' id='star4" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='4'";
+						<input type='radio' id='star4" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='4' \x20";
 	if ($event->getRating() >= 4 && $event->getRating() < 5) {
 		echo " checked";
 	}
 	echo ">
 						<label for='star4" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' id='star3" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='3'";
+						<input type='radio' id='star3" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='3' \x20";
 	if ($event->getRating() >= 3 && $event->getRating() < 4) {
 		echo " checked";
 	}
 	echo ">
 						<label for='star3" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' id='star2" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='2'";
+						<input type='radio' id='star2" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='2' \x20";
 	if ($event->getRating() >= 2 && $event->getRating() < 3) {
 		echo " checked";
 	}
 	echo ">
 						<label for='star2" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' id='star1" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='1'";
+						<input type='radio' id='star1" . $event->getPostId() . "" . $row . "' name='rating" . $event->getPostId() . "" . $row . "' value='1' \x20";
 	if ($event->getRating() >= 1 && $event->getRating() < 2) {
 		echo " checked";
 	}
@@ -313,33 +317,33 @@ function printEventMadeByUser($event, $row)
 	}
 	echo "
 					<fieldset class='rating' style='padding: 0px; margin: 0px; position: relative; top: -25px;'>
-						<input type='radio' onClick='rating(" . $event->getPostId() . ", 5, " . $row . ")' id='userstar5" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='5'";
+						<input type='radio' onClick='rating(" . $event->getPostId() . ", 5, " . $row . ")' id='userstar5" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='5'\x20 ";
 	if ($event->getUserRating() == 5) {
-		echo "checked";
+		echo " checked";
 	}
 	echo ">
 						<label for='userstar5" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' onClick='rating(" . $event->getPostId() . ", 4, " . $row . ")' id='userstar4" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='4'";
+						<input type='radio' onClick='rating(" . $event->getPostId() . ", 4, " . $row . ")' id='userstar4" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='4'\x20 ";
 	if ($event->getUserRating() == 4) {
-		echo "checked";
+		echo " checked";
 	}
 	echo ">
 						<label for='userstar4" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' onClick='rating(" . $event->getPostId() . ", 3, " . $row . ")' id='userstar3" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='3'";
+						<input type='radio' onClick='rating(" . $event->getPostId() . ", 3, " . $row . ")' id='userstar3" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='3'\x20 ";
 	if ($event->getUserRating() == 3) {
-		echo "checked";
+		echo " checked";
 	}
 	echo ">
 						<label for='userstar3" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' onClick='rating(" . $event->getPostId() . ", 2, " . $row . ")' id='userstar2" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='2'";
+						<input type='radio' onClick='rating(" . $event->getPostId() . ", 2, " . $row . ")' id='userstar2" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='2' \x20";
 	if ($event->getUserRating() == 2) {
-		echo "checked";
+		echo " checked";
 	}
 	echo ">
 						<label for='userstar2" . $event->getPostId() . "" . $row . "'></label>
-						<input type='radio' onClick='rating(" . $event->getPostId() . ", 1, " . $row . ")' id='userstar1" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='1'";
+						<input type='radio' onClick='rating(" . $event->getPostId() . ", 1, " . $row . ")' id='userstar1" . $event->getPostId() . "" . $row . "' name='userrating" . $event->getPostId() . "" . $row . "' value='1'\x20";
 	if ($event->getUserRating() == 1) {
-		echo "checked";
+		echo " checked";
 	}
 	echo ">
 						<label for='userstar1" . $event->getPostId() . "" . $row . "'></label>
