@@ -79,16 +79,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt = mysqli_prepare($link, $sql)) {
 
-            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_email, $param_prof_pic, $param_date);
-
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
             $param_email = $email;
             $param_prof_pic = "default.jpg"; // Default profile picture for new users
             $param_date = date("Y-m-d");
 
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_email, $param_prof_pic, $param_date);
+
             if (mysqli_stmt_execute($stmt)) {
+                session_start();
+
+                $_SESSION["loggedin"] = true;
+                $_SESSION["email"] = $param_email;
+                $_SESSION["id"] = $param_username;
+                $_SESSION["ProfilePic"] = $param_prof_pic; // ProfilePic is a directory to image       
                 header("location: ../index.php");
+
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
                 die;
