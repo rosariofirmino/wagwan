@@ -282,7 +282,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                     </div>
                     
-                        <button style="background-color: #802BB1; border:0px;" type="submit" class="btn btn-primary float-right">Submit</button>
+                        <button style="background-color: #802BB1; border:0px;" type="submit" id="submitWagwan" onclick="this.disabled='true';this.form.submit();" class="btn btn-primary float-right">Submit</button>
                  
                 </div>
         </form>
