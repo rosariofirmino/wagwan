@@ -19,6 +19,7 @@ class Event
 	private $UserId;
 	private $PostId;
 	private $DateCreated;
+	private $sessionId;
 
 
 	public function __construct($title, $description, $category, $rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId)
@@ -42,6 +43,9 @@ class Event
 		$this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image
 		$this->setImg($ImageId);
 	}
+	public function setSessionId($id){
+		$this->sessionid = $id;
+	}
 	public function checkIfLiked($PostId)
 	{
 		// checks if post is liked and updates likedIcon.
@@ -51,7 +55,7 @@ class Event
 		die("Connection failed: " . $conn->connect_error);
 		}
 
-		$UserId = "admin"; // get from session, admin is temporary...
+		$UserId = $this->sessionid; // get from session
 
 		// get liked posts from likes table matching userid and postid
 		$sql = "SELECT LikeId FROM dev_likes WHERE UserId = '$UserId' AND PostId = $PostId";
@@ -247,6 +251,31 @@ function keepXPriceOnly($arr, $x) {
 	// use: $postsArr = keepXPriceOnly($postsArr, 0) to get free events;
 	foreach($arr as $key => $value) {
 		if($value->getPrice() != $x) {
+			unset($arr[$key]);
+		}
+	}
+	
+	return $arr;
+}
+
+function keepAgeGroupOnly($arr, $age) {
+	// keeps only posts from array with $age age group ("All Ages", "18+", "21+")
+	// use: $postsArr = keepAgeGroupOnly($postsArr, "All Ages") to get all age groups;
+
+	foreach($arr as $key => $value) {
+		if($value->getAgeRestrictions() != $age) {
+			unset($arr[$key]);
+		}
+	}
+	
+	return $arr;
+}
+
+function keepLiked($arr) {
+	// keeps only posts from array that are liked by user
+	// use: $postsArr = keepLiked($postsArr);
+	foreach($arr as $key => $value) {
+		if($value->getLiked() == 'false') {
 			unset($arr[$key]);
 		}
 	}
