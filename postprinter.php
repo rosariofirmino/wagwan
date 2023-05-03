@@ -127,18 +127,44 @@ function printEvent($event, $row) {
 
 					<br><br>
 
-					<!-- User Rating -->
-					<p ><strong>Review this Wagwan: </strong></p>
+					<!-- User Rating -->";
+					if ($event->getUserRating() == 0) {
+						echo "<p><strong>Review this Wagwan:</strong></p>";
+					}
+					else {
+						echo "<p><strong>Revise your rating:</strong></p>";
+					}
+					echo "
 					<fieldset class='rating' style='padding: 0px; margin: 0px; position: relative; top: -25px;'>
-						<input type='radio' onClick='rating(".$event->getPostId().", 5, ".$row.")' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 5, ".$row.")' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'";
+						if ($event->getUserRating() == 5) {
+							echo "checked";
+						}
+						echo ">
 						<label for='userstar5".$event->getPostId()."".$row."'></label>
-						<input type='radio' onClick='rating(".$event->getPostId().", 4, ".$row.")' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 4, ".$row.")' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'";
+						if ($event->getUserRating() == 4) {
+							echo "checked";
+						}
+						echo ">
 						<label for='userstar4".$event->getPostId()."".$row."'></label>
-						<input type='radio' onClick='rating(".$event->getPostId().", 3, ".$row.")' id='userstar3".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='3'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 3, ".$row.")' id='userstar3".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='3'";
+						if ($event->getUserRating() == 3) {
+							echo "checked";
+						}
+						echo ">
 						<label for='userstar3".$event->getPostId()."".$row."'></label>
-						<input type='radio' onClick='rating(".$event->getPostId().", 2, ".$row.")' id='userstar2".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='2'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 2, ".$row.")' id='userstar2".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='2'";
+						if ($event->getUserRating() == 2) {
+							echo "checked";
+						}
+						echo ">
 						<label for='userstar2".$event->getPostId()."".$row."'></label>
-						<input type='radio' onClick='rating(".$event->getPostId().", 1, ".$row.")' id='userstar1".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='1'>
+						<input type='radio' onClick='rating(".$event->getPostId().", 1, ".$row.")' id='userstar1".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='1'";
+						if ($event->getUserRating() == 1) {
+							echo "checked";
+						}
+						echo ">
 						<label for='userstar1".$event->getPostId()."".$row."'></label>
 				  	</fieldset>
 

@@ -19,6 +19,7 @@ class Event
 	private $UserId;
 	private $PostId;
 	private $DateCreated;
+	private $UserRating;
 	private $sessionId;
 
 
@@ -43,9 +44,12 @@ class Event
 		$this->img = "https://www.squareclub.si/images/hero/2.jpg"; //default image
 		$this->setImg($ImageId);
 	}
+
 	public function setSessionId($id){
 		$this->sessionid = $id;
+		$this->setUserRating();
 	}
+
 	public function checkIfLiked($PostId)
 	{
 		// checks if post is liked and updates likedIcon.
@@ -89,6 +93,29 @@ class Event
 		$this->likes = $likes;
 
 	}
+
+	function setUserRating() {
+		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		// Check connection
+		if ($conn->connect_error) {
+		  die("Connection failed: " . $conn->connect_error);
+		}
+		$PostId = $this->PostId;
+		$UserId = $this->sessionid;
+		$sql = "SELECT * FROM dev_ratings WHERE PostId = $PostId AND UserId = '$UserId'";
+		$result = $conn->query($sql);
+
+		$this->UserRating = 0;
+		while ($row = $result->fetch_assoc()) {
+			$this->UserRating = $row['Rating'];
+		}
+
+	}
+
+	function getUserRating() {
+		return $this->UserRating;
+	}
+
 	public function setImg($ImageId) {
 		// set image based on ImageId
 		$this->img = "posts_images/".$ImageId.".jpeg";
