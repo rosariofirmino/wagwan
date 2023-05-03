@@ -2,7 +2,7 @@
 
 <?php
 session_start();
- 
+echo "<!DOCTYPE html>\n<html lang='en'>\n<head>\n";
 // Check if the user is already logged in
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ./index.php");
@@ -11,6 +11,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 else {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
+	
 }
 
 // Include Event class with php
@@ -19,7 +20,6 @@ require_once('Event.php');
 // Include Event Object printer with php
 require_once("postprinter.php");
 	?>
-?>
 
 <style>
 	* {
@@ -169,9 +169,7 @@ require_once("postprinter.php");
 		}
 	}
 </style>
-<html>
 
-<head>
 	<title>Wagwan Home Page</title>
 	<link rel="stylesheet" href="./styles.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -200,7 +198,7 @@ require_once("postprinter.php");
 <body style="background-color: #2D283E ; color:#D1D7E0 ;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" alt="" width='35'></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -230,14 +228,14 @@ require_once("postprinter.php");
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
 				<div class="row">
 					<div class="form-group mb-3">
-						<input type="text" class="form-control" name="text" placeholder="Enter name or location" aria-describedby="basic-addon2">
+						<input type="text" class="form-control" name="text" placeholder="Enter name or location">
 					</div>
 				</div>
 				<div class="row justify-content-center">
 					<div class="col">
 						<div class="input-group mb-3">
 							<div class="form-group">
-								<label for="Category">Category</label>
+								<label>Category</label>
 								<select class="form-control" id="category" name="category">
 								<option value="any">Any</option>
 								<option value="nightlife">Nightlife</option>
@@ -287,9 +285,9 @@ require_once("postprinter.php");
 		</div>
 	</div>
 	<br>
-</body>
 
-</html>
+
+
 
 <?php
 
@@ -311,7 +309,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 	if($category != "any" && !empty($category) && $category !== "") {
 		$sql = $sql . " AND CategoryId = '" . $category . "'";
 	}
-	if($price != "any" && !empty($price) && $price !== "") {
+	if($price != "any" && (!empty($price) || $price == 0) && $price !== "") {
 		$sql = $sql . " AND Price = '" . $price . "'";
 	}
 	if($age != "any" && !empty($age) && $age !== "") {
@@ -323,40 +321,66 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		$text_param = '%' . $text . '%';
 
         if(mysqli_stmt_execute($stmt)){
-			mysqli_stmt_store_result($stmt);
+			//mysqli_stmt_store_result($stmt);
             $result = $stmt->get_result();
 			echo "Query success";
         } else{
             echo "Error execute";
         }
-    } else {
+	}
+	else {
         echo "Error prepare";
     }
 
 	if(mysqli_stmt_num_rows($stmt) == 0) {
-		echo "<";
+		echo "";
 	}
-	{
-		while($row = $result->fetch_assoc()) {	
-			$PostId = $row["PostId"];
-			$UserId = htmlspecialchars($row["UserId"]);
-			$Address = htmlspecialchars($row["Address"], ENT_QUOTES);
-			$Title = htmlspecialchars($row["Title"], ENT_QUOTES);
-			$Description = htmlspecialchars($row["Description"], ENT_QUOTES);
-			$Price = $row["Price"];
-			$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
-			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
-			$Rating = $row["Rating"];
-			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
-			$ImageId = htmlspecialchars($row["ImageId"]);
 	
-			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
-			printEvent($Event, 0);
+	$searchArray = array();
+
+	while($row = $result->fetch_assoc())
+    {	
+        $PostId = $row["PostId"];
+        $UserId = htmlspecialchars($row["UserId"]);
+        $Address = htmlspecialchars($row["Address"], ENT_QUOTES);
+        $Title = htmlspecialchars($row["Title"], ENT_QUOTES);
+        $Description = htmlspecialchars($row["Description"], ENT_QUOTES);
+        $Price = $row["Price"];
+        $CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
+        $AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+        $Rating = $row["Rating"];
+        $DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
+        $ImageId = htmlspecialchars($row["ImageId"]);
+
+        $Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+		$Event->setSessionId($id);
+		$Event->checkIfLiked($PostId);
+		array_push($searchArray, $Event);
+    }
+
+	// Sort based on liked count
+	usort($searchArray, 'compareLikes');
+
+	$row = 0; // keeps track of row we are on
+	$i = 0; // keeps track of card we are on
+	echo "<div class='PostsContainer' style=''> <h1>Search Results</h1>";
+	echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='SearchPosts" . $row . "'>";
+	foreach ($searchArray as $key => $value) {
+		printEvent($value, $row);
+		if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
+			echo "</div><br>";
+			echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='SearchPosts" . $i . "'>";
+			$row++;
 		}
+		$i++;
 	}
+	echo "</div>";
+	echo "</div>";
 
     // Close the database linkection
     mysqli_close($link);
 
 }
 ?>
+</body>
+</html>
