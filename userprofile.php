@@ -95,6 +95,11 @@ require_once("postprinter.php");
 			background-color: #0069d9;
 			border-color: #0062cc;
 		}
+
+		.user-profile input[disabled] {
+			color: #aaa;
+			font-style: italic;
+		}
 	</style>
 
 	<?php
@@ -145,10 +150,11 @@ require_once("postprinter.php");
 	}
 </script>
 
-<body style="background-color: black; color: white;" onload="openTab('account-management')">
+<body style="background-color: black; color: white;"
+	onload=" openTab('manage-wagwans'); openTab('account-management');">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -213,11 +219,11 @@ require_once("postprinter.php");
 									<input type="password" class="form-control" id="confirm_password"
 										name="confirm_password" required>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label for="profile_picture">Profile Picture</label>
 									<input type="file" class="form-control-file" id="profile_picture"
 										name="profile_picture">
-								</div>
+								</div> -->
 								<div class="text-center">
 									<button type="submit" class="btn btn-primary">Update</button>
 								</div>
