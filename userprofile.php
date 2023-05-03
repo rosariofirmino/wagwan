@@ -216,6 +216,7 @@ require_once("postprinter.php");
 			text-align: center;
 		}
 	</style>
+	<link rel="icon" href="homepage/hp/icon.png">
 
 	<?php
 	echo "<title>$UserId's Profile</title>";

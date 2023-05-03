@@ -6,19 +6,13 @@ $isLoggedIn = false;
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
-	echo "<script>var id = '$id';</script>";
-	echo "<script>var isLoggedIn = true;</script>";
-}
-else {
-	echo "<script>var id = '';</script>";
-	echo "<script>var isLoggedIn = false;</script>";
 }
 ?>
-
 <html>
 
 <head>
 	<title>Wagwan Home Page</title>
+	<link rel="icon" href="homepage/hp/icon.png">
 	<link rel="stylesheet" href="./styles.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -27,6 +21,7 @@ else {
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 	<script src="js/functions.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 	</script>
@@ -60,7 +55,7 @@ else {
 						<a style="color: #D1D7E0;" class="nav-link" href="#">Search</a>
 					</li>
 					<li class="nav-item">
-						<a style="color: #D1D7E0;" class="nav-link" <?php echo ($isLoggedIn === true) ? "href='userliked.php'>Likes</a>" : "href='php/login.php'>Likes</a>" ?>
+						<a style="color: #D1D7E0;" class="nav-link" href="userliked.php">Likes</a>
 					</li>
 					<li class="nav-item">
 						<a style="color: #D1D7E0;" class="nav-link"
@@ -91,7 +86,7 @@ else {
 			<div class="centered">
 				<h5 class="titletext">Wagwan Near Me</h5>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Enter Location"
+					<input type="text" class="form-control" placeholder="Search Wagwans"
 						aria-describedby="basic-addon2">
 					<div class="input-group-append">
 						<button class="btn btn-outline-secondary" type="button">Search</button>
@@ -120,6 +115,7 @@ else {
 		$sql = "SELECT * FROM dev_posts";
 		$result = $conn->query($sql);
 
+
 		while ($row = $result->fetch_assoc()) {
 			$PostId = $row["PostId"];
 			$UserId = htmlspecialchars($row["UserId"]);
@@ -136,8 +132,6 @@ else {
 
 			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
 			$Event->setDateCreated($DateCreated);
-			$Event->setSessionId($id);
-			$Event->checkIfLiked($PostId);
 			array_push($topPostsArray, $Event);
 		}
 
@@ -193,7 +187,7 @@ else {
 		?>
 	</div>
 	<br>
-	<h2 class="app-header"><strong>Top Free Wagwans 🆓</strong></h2>
+	<h2 class="app-header"><strong>Top Free Wagwans</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
 		<?php
 		$postsArr = $topPostsArray;
@@ -206,48 +200,12 @@ else {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>No free wagwans are coming up soon...</h2><div>";
+			echo "</div><h2 class='app-header' style='text-align: center;'>No free wagwans in the future!</h2><div>";
 		}
 		?>
 	</div>
 	<br>
-	<h2 class="app-header"><strong>Top Cheap Wagwans 💸</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
-		<?php
-		$postsArr = $topPostsArray;
-		$postsArr = removeIfDatePassed($topPostsArray);
-		$postsArr = keepXPriceOnly($postsArr, 1); // keep if price is 1
-
-		$row = $row + 1;
-
-		foreach($postsArr as $key => $value) {
-			printEvent($value, $row);
-		}
-		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>No cheap wagwans are coming up soon...</h2><div>";
-		}
-		?>
-	</div>
-	<br>
-	<h2 class="app-header"><strong>Top Affordable Wagwans 💰</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
-		<?php
-		$postsArr = $topPostsArray;
-		$postsArr = removeIfDatePassed($topPostsArray);
-		$postsArr = keepXPriceOnly($postsArr, 2); // keep if price is 2
-
-		$row = $row + 1;
-
-		foreach($postsArr as $key => $value) {
-			printEvent($value, $row);
-		}
-		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>No affordable wagwans are coming up soon...</h2><div>";
-		}
-		?>
-	</div>
-	<br>
-	<h2 class="app-header"><strong>Top Expensive Wagwans 💎</strong></h2>
+	<h2 class="app-header"><strong>Top Expensive Wagwans</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
 		<?php
 		$postsArr = $topPostsArray;
@@ -260,7 +218,7 @@ else {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>No expensive wagwans are coming up soon...</h2><div>";
+			echo "</div><h2 class='app-header' style='text-align: center;'>No expensive wagwans in the future!</h2><div>";
 		}
 		?>
 	</div>
@@ -283,71 +241,14 @@ else {
 		?>
 	</div>
 	<br>
-	<h2 class="app-header"><strong>Wagwans for All Ages</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
-		<?php
-		$postsArr = $topPostsArray;
-		$postsArr = removeIfDatePassed($topPostsArray);
-		$postsArr = keepAgeGroupOnly($postsArr, 'All Ages');
-
-		$row = $row + 1;
-
-		foreach($postsArr as $key => $value) {
-			printEvent($value, $row);
-		}
-		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>No Wagwans for All Ages have been posted recently...</h2><div>";
-		}
-		?>
-	</div>
-	<br>
-	<h2 class="app-header"><strong>Wagwans 18 and Up</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
-		<?php
-		$postsArr = $topPostsArray;
-		$postsArr = removeIfDatePassed($topPostsArray);
-		$postsArr = keepAgeGroupOnly($postsArr, '18+');
-
-		$row = $row + 1;
-
-		foreach($postsArr as $key => $value) {
-			printEvent($value, $row);
-		}
-		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>No Wagwans for 18+ have been posted recently...</h2><div>";
-		}
-		?>
-	</div>
-	<br>
-	<h2 class="app-header"><strong>Wagwans 21 and Up</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
-		<?php
-		$postsArr = $topPostsArray;
-		$postsArr = removeIfDatePassed($topPostsArray);
-		$postsArr = keepAgeGroupOnly($postsArr, '21+');
-
-		$row = $row + 1;
-
-		foreach($postsArr as $key => $value) {
-			printEvent($value, $row);
-		}
-		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>No Wagwans for 21+ have been posted recently...</h2><div>";
-		}
-		?>
-	</div>
-	<br>
-	<h2 class="app-header"><strong>Your liked Wagwans</strong></h2>
+	<h2 class="app-header"><strong>Your liked Wagwans (NOT DONE)</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
 		<?php
-		$postsArr = keepLiked($topPostsArray);
+
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
-			printEvent($value, $row);
-		}
-		if (empty($postsArr)) {
-			echo "</div><h2 class='app-header' style='text-align: center;'>You haven't liked any Wagwans yet!</h2><div>";
+		for ($i = 0; $i < count($topPostsArray); $i++) {
+			printEvent($topPostsArray[$i], $row);
 		}
 		?>
 	</div>

@@ -21,6 +21,8 @@ $UserId = $_SESSION["id"];
 
 <head>
 	<title>Your Liked Wagwans</title>
+	<link rel="icon" href="homepage/hp/icon.png">
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -83,11 +85,17 @@ $UserId = $_SESSION["id"];
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-		// get liked posts
-		$sql = "SELECT * FROM dev_posts INNER JOIN dev_likes ON dev_posts.PostId = dev_likes.PostId WHERE dev_likes.UserId = '$UserId'";
+		// get liked posts from likes table
+		$sql = "SELECT * FROM dev_likes WHERE UserId = '$UserId'";
 		$result = $conn->query($sql);
 
+
 		while ($row = $result->fetch_assoc()) {
+			$PostId = $row["PostId"];
+			$sql = "SELECT * FROM dev_posts WHERE PostId = '$PostId'";
+			$resultPosts = $conn->query($sql);
+
+			$row = $resultPosts->fetch_assoc();
 
 			$PostId = $row["PostId"];
 			$UserId = htmlspecialchars($row["UserId"]);
