@@ -7,6 +7,11 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
 	echo "<script>var id = '$id';</script>";
+	echo "<script>var isLoggedIn = true;</script>";
+}
+else {
+	echo "<script>var id = '';</script>";
+	echo "<script>var isLoggedIn = false;</script>";
 }
 ?>
 
@@ -56,7 +61,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 						<a style="color: #D1D7E0;" class="nav-link" href="#">Search</a>
 					</li>
 					<li class="nav-item">
-						<a style="color: #D1D7E0;" class="nav-link" href="userliked.php">Likes</a>
+						<a style="color: #D1D7E0;" class="nav-link" <?php echo ($isLoggedIn === true) ? "href='userliked.php'>Likes</a>" : "href='php/login.php'>Likes</a>" ?>
 					</li>
 					<li class="nav-item">
 						<a style="color: #D1D7E0;" class="nav-link"

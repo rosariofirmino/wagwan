@@ -129,7 +129,7 @@ function printEvent($event, $row) {
 
 					<!-- User Rating -->
 					<p ><strong>Review this Wagwan: </strong></p>
-					<fieldset class='rating' style='padding: 0px; margin: 0px;'>
+					<fieldset class='rating' style='padding: 0px; margin: 0px; position: relative; top: -25px;'>
 						<input type='radio' onClick='rating(".$event->getPostId().", 5, ".$row.")' id='userstar5".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='5'>
 						<label for='userstar5".$event->getPostId()."".$row."'></label>
 						<input type='radio' onClick='rating(".$event->getPostId().", 4, ".$row.")' id='userstar4".$event->getPostId()."".$row."' name='userrating".$event->getPostId()."".$row."' value='4'>

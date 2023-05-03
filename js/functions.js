@@ -1,6 +1,9 @@
 function likeButtonPress(Row, PostId, Likes, UserLiked) {
-
-    if(UserLiked == true) { // unlike
+    if (isLoggedIn == false) { // check if logged in
+        window.location.href = "php/login.php"; //redirect to login page
+        return 0;
+    }
+    else if(UserLiked == true && isLoggedIn == true) { // unlike
         // set icon to unlike
         $("#" + Row + "path" + PostId).attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
         
@@ -10,7 +13,7 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
         // change button onclick
         $("#button"+ Row + "" + PostId).attr("onClick","likeButtonPress(" + Row + ", " + PostId + ", " + (Likes - 1) + ", " + !UserLiked + ")");
     }
-    else { // like
+    else if (isLoggedIn == true){ // like
         var audio = new Audio('sound/like.mp3');
         audio.volume = 0.5;
         audio.play();
@@ -32,7 +35,7 @@ function likeButtonPress(Row, PostId, Likes, UserLiked) {
     
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
-        id = id;
+        id = id; // preserve across AJAX
     }
     
     if (UserLiked == true) { // unlike
@@ -63,13 +66,19 @@ function deletePost(PostId) {
 
 function rating(PostId, Rating, Row) {
 
+    if (isLoggedIn == false) { // check if logged in
+        window.location.href = "php/login.php"; // redirect to login page
+        return 0;
+    }
+
+    // play sound
     var audio = new Audio('sound/rate.mp3');
     audio.volume = 0.5;
     audio.play();
 
     // AJAX for rating update / update rating in database
-    var UserId = "admin"; // TODO: get UserId from session
-    console.log(Rating);
+    var UserId = id; // TODO: get UserId from session
+    console.log(id);
     // add rating entry
     const xhttp = new XMLHttpRequest();
     xhttp.open("GET", "actions/addUserRating.php?PostId=" + PostId + "&UserId=" + UserId + "&Rating=" + Rating, true);
@@ -96,7 +105,7 @@ function rating(PostId, Rating, Row) {
                     radio.setAttribute('checked', true);
                     radio.focus();
                     var label = document.querySelector('#stars' + PostId + obj.row);
-                    label.textContent = "" + obj.rating + "/ 5 stars";
+                    label.textContent = "" + obj.rating + " / 5 stars";
                 }
             }
 
@@ -105,7 +114,4 @@ function rating(PostId, Rating, Row) {
         xhttp2.open("GET", "actions/calculateRating.php?PostId=" + PostId + "&Row=" + Row, true);
         xhttp2.send();
 	}, 500);
-
-
-
 }
