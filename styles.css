@@ -33,13 +33,6 @@
   background-color: #4c495d;
 }
 
-
-#card {
-  color: transparent;
-  background-color: transparent;
-  border: 0px;
-}
-
 .welcome-header {
   font-size: 5rem;
   text-align: center;
@@ -353,7 +346,6 @@
   color: #fff;
 }
 
-
 .user-profile {
   background-color: #1c1c1c;
   color: #f5f5f5;
@@ -395,6 +387,15 @@
   border-color: #0062cc;
 }
 
+.user-profile input[disabled] {
+  color: #aaa;
+  font-style: italic;
+}
+
+.text-primary {
+  text-align: center;
+}
+
 
 /*https://www.html5canvastutorials.com/blog/2012/02/css-tag-icons/*/
 .tag {
@@ -419,7 +420,7 @@
   content: "";
   display: inline-block;
   border-radius: 20px;
-  box-shadow: inset 0px 2px 5px rgba(0,0,0,0.2);
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.2);
   margin: 0 5px 0 0;
 }
 
@@ -429,7 +430,7 @@
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  box-shadow: inset 0px 5px 40px rgba(255,255,255,0.4), 0px 0px 10px rgba(0,0,0,0.3);
+  box-shadow: inset 0px 5px 40px rgba(255, 255, 255, 0.4), 0px 0px 10px rgba(0, 0, 0, 0.3);
   position: absolute;
   left: 0;
   top: 0;
@@ -437,9 +438,160 @@
 
 
 .tag:hover:after {
-  box-shadow: inset 0px -5px 30px rgba(255,255,255,0.4), 0px 0px 5px rgba(0,0,0,0.2);
+  box-shadow: inset 0px -5px 30px rgba(255, 255, 255, 0.4), 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 .tag:active:after {
-  box-shadow: inset 0px 0px 30px rgba(0,0,0,0.3), 0px 0px 5px rgba(0,0,0,0.2);
+  box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.3), 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.bg-dark {
+  background-color: #2D283E !important;
+}
+
+.carousel-item {
+  height: 100vh;
+  min-height: 300px;
+}
+
+.carousel-caption {
+  bottom: 220px;
+}
+
+.add-button {
+  z-index: 10;
+}
+
+.carousel-caption h5 {
+  font-size: 45px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 25px;
+}
+
+.carousel-caption p {
+  width: 60%;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.carousel-caption a {
+  text-transform: uppercase;
+  text-decoration: none;
+  background: darkorange;
+  padding: 10px 30px;
+  display: inline-block;
+  color: #000;
+  margin-top: 15px;
+}
+
+.navbar-nav a {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.navbar-light .navbar-brand {
+  color: #fff;
+  font-size: 25px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover {
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #fff;
+}
+
+.w-100 {
+  height: 100vh;
+}
+
+.navbar-toggler {
+  padding: 1px 5px;
+  font-size: 18px;
+  line-height: 0.3;
+  background: #fff;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  text-transform: uppercase;
+  color: #fff;
+}
+
+img {
+  object-fit: cover;
+}
+
+.modal-header {
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: calc(1.25rem - 1px);
+  background-color: #212529;
+  color: white;
+}
+
+.modal-body {
+  background-color: #212529;
+  color: white;
+}
+
+.modal-footer {
+  background-color: #212529;
+  color: white;
+}
+
+.modal-content {
+  border-radius: 1.25rem;
+}
+
+.titletext {
+  font-size: 60px;
+}
+
+.input-group-append {
+  border-radius: 50px;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+  .navbar-nav {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .carousel-caption {
+    bottom: 165px;
+  }
+
+  .carousel-caption h5 {
+    font-size: 17px;
+  }
+
+  .carousel-caption a {
+    padding: 10px 15px;
+    font-size: 15px;
+  }
 }

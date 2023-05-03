@@ -1,4 +1,5 @@
 #!/usr/local/bin/php
+
 <?php
 session_start();
 $isLoggedIn = true;
@@ -10,15 +11,133 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
+echo "<script>var id = '$UserId';</script>";
+echo "<script>var isLoggedIn = true;</script>";
 
+// CHANGE TABLE NAME HERE
+$table_name = "dev_users";
+
+
+$link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+
+if ($link->connect_error) {
+	die("Connection failed: " . $link->connect_error);
+}
+$link->set_charset('utf8mb4');
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$userid = $_SESSION["id"];
+	$email = trim($_POST["email"]);
+	$password = trim($_POST["password"]);
+	$confirm_password = trim($_POST["confirm_password"]);
+
+	$password_err = $confirm_password_err = "";
+	$success_msg = "";
+
+	// Code to support changing profile pictures
+
+	// $profile_picture = $_FILES["profile_picture"]["name"];
+	// $target_dir = "uploads/";
+	// $target_file = $target_dir . basename($_FILES["profile_picture"]["name"]);
+	// $uploadOk = 1;
+	// $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+	// // Check if image file is a actual image or fake image
+	// if (isset($_POST["submit"])) {
+	//     $check = getimagesize($_FILES["profile_picture"]["tmp_name"]);
+	//     if ($check !== false) {
+	//         $uploadOk = 1;
+	//     } else {
+	//         echo "File is not an image.";
+	//         $uploadOk = 0;
+	//     }
+	// }
+
+	// // Check if file already exists
+	// if (file_exists($target_file)) {
+	//     echo "Sorry, file already exists.";
+	//     $uploadOk = 0;
+	// }
+
+	// // Check file size
+	// if ($_FILES["profile_picture"]["size"] > 5000000) {
+	//     echo "Sorry, your file is too large.";
+	//     $uploadOk = 0;
+	// }
+
+	// // Allow certain file formats
+	// if (
+	//     $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	//     && $imageFileType != "gif"
+	// ) {
+	//     echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	//     $uploadOk = 0;
+	// }
+
+	// // Check if $uploadOk is set to 0 by an error
+	// if ($uploadOk == 0) {
+	//     echo "Sorry, your file was not uploaded.";
+	//     // if everything is ok, try to upload file
+	// } else {
+	//     if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
+	//         echo "The file " . htmlspecialchars(basename($_FILES["profile_picture"]["name"])) . " has been uploaded.";
+	//     } else {
+	//         echo "Sorry, there was an error uploading your file.";
+	//     }
+	// }
+
+	if (!empty($email)) {
+
+		$sql = "UPDATE $table_name SET Email = ? WHERE UserId = ?";
+		if ($stmt = mysqli_prepare($link, $sql)) {
+			mysqli_stmt_bind_param($stmt, "ss", $email, $userid);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_close($stmt);
+			$success_msg = "Email Successfully Updated";
+		} else {
+			echo "bru";
+			die;
+		}
+	}
+	if (!empty($password) && strlen($password) < 6) {
+		$password_err = "Password must contain at least 6 characters.";
+	} else if ($password != $confirm_password) {
+		$confirm_password_err = "Passwords do not match.";
+	} else if (!empty($password) && !empty($confirm_password) && ($password == $confirm_password)) {
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+		$sql = "UPDATE $table_name SET Password = ? WHERE UserId = ?";
+		if ($stmt = mysqli_prepare($link, $sql)) {
+			mysqli_stmt_bind_param($stmt, "ss", $hashed_password, $userid);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_close($stmt);
+			$success_msg = "Password Successfully Updated";
+		}
+	}
+
+	//   if (!empty($profile_picture)) {
+	//     $sql = "UPDATE dev_users SET ProfilePicture = ? WHERE UserId = ?";
+	//     if($stmt = mysqli_prepare($link,
+
+}
+mysqli_close($link);
+
+
+// Include Event class with php
+require_once('Event.php');
+
+// Include Event Object printer with php
+require_once("postprinter.php");
 ?>
+<html>
+
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
+<script src="js/functions.js"></script>
 
 <script>
 	var activeTab = "account-management";
@@ -36,15 +155,6 @@ $UserId = $_SESSION["id"];
 	}
 
 </script>
-
-<?php
-// Include Event class with php
-require_once('Event.php');
-
-// Include Event Object printer with php
-require_once("postprinter.php");
-?>
-<html>
 
 
 
@@ -95,6 +205,15 @@ require_once("postprinter.php");
 			background-color: #0069d9;
 			border-color: #0062cc;
 		}
+
+		.user-profile input[disabled] {
+			color: #aaa;
+			font-style: italic;
+		}
+
+		.text-primary {
+			text-align: center;
+		}
 	</style>
 
 	<?php
@@ -102,53 +221,12 @@ require_once("postprinter.php");
 	?>
 </head>
 
-<script>
-	function likeButtonPress(Row, PostId, Likes, UserLiked) {
 
-		if (UserLiked == true) { // unlike
-			// set icon to unlike
-			$("#" + Row + "path" + PostId).attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
-
-			// set like count to likes - 1
-			$("#" + Row + "likes" + PostId).html("&nbsp; " + (Likes - 1) + "");
-
-			// change button onclick
-			$("#button" + Row + "" + PostId).attr("onClick", "likeButtonPress(" + Row + ", " + PostId + ", " + (Likes - 1) + ", " + !UserLiked + ")");
-		}
-		else { // like
-			// set icon to like4
-			$("#" + Row + "path" + PostId).attr("d", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z");
-
-			// set like count to likes - 1
-			$("#" + Row + "likes" + PostId).html("&nbsp; " + (Likes + 1) + "");
-
-			// change button onclick
-			$("#button" + Row + "" + PostId).attr("onClick", "likeButtonPress(" + Row + ", " + PostId + ", " + (Likes + 1) + ", " + !UserLiked + ")");
-		}
-
-
-		// AJAX for like update / update like in database
-
-		// get UserId
-		var UserId = "admin"; // TODO: get UserId from session
-
-		const xhttp = new XMLHttpRequest();
-
-		if (UserLiked == true) { // unlike
-			xhttp.open("GET", "actions/dislike.php?PostId=" + PostId + "&UserId=" + UserId, true);
-		}
-		if (UserLiked == false) { // like
-			xhttp.open("GET", "actions/like.php?PostId=" + PostId + "&UserId=" + UserId, true);
-		}
-
-		xhttp.send();
-	}
-</script>
-
-<body style="background-color: black; color: white;" onload="openTab('account-management')">
+<body style="background-color: black; color: white;"
+	onload=" openTab('manage-wagwans'); openTab('account-management');">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -193,31 +271,41 @@ require_once("postprinter.php");
 							<h3 class="text-center">Account Management</h3>
 						</div>
 						<div class="card-body">
-							<form method="post" action="actions/updateAccount.php" enctype="multipart/form-data">
+							<p class="text-primary">
+								<?php echo $success_msg; ?>
+							</p>
+							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
+								enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="username">Username</label>
 									<input type="text" class="form-control" id="username" name="username"
 										value="<?php echo $_SESSION['id']; ?>" required disabled>
 								</div>
 								<div class="form-group">
-									<label for="email">Email</label>
+									<label for="email">New Email</label>
 									<input type="email" class="form-control" id="email" name="email"
-										value="<?php echo $_SESSION['email']; ?>" required>
+										value="<?php echo $_SESSION['email']; ?>">
 								</div>
 								<div class="form-group">
-									<label for="password">Password</label>
-									<input type="password" class="form-control" id="password" name="password" required>
+									<label for="password">New Password</label>
+									<input type="password" class="form-control" id="password" name="password">
+									<p class="text-danger" id="password_err">
+										<?php echo $password_err; ?>
+									</p>
 								</div>
 								<div class="form-group">
-									<label for="confirm_password">Confirm Password</label>
+									<label for="confirm_password">Confirm New Password</label>
 									<input type="password" class="form-control" id="confirm_password"
-										name="confirm_password" required>
+										name="confirm_password">
+									<p class="text-danger" id="confirm_password_err">
+										<?php echo $confirm_password_err; ?>
+									</p>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label for="profile_picture">Profile Picture</label>
 									<input type="file" class="form-control-file" id="profile_picture"
 										name="profile_picture">
-								</div>
+								</div> -->
 								<div class="text-center">
 									<button type="submit" class="btn btn-primary">Update</button>
 								</div>
@@ -247,6 +335,7 @@ require_once("postprinter.php");
 						$sql = "SELECT * FROM dev_posts WHERE UserId = '$UserId'";
 						$result = $conn->query($sql);
 
+						$id = $UserId;
 
 						while ($row = $result->fetch_assoc()) {
 							$PostId = $row["PostId"];
@@ -262,6 +351,9 @@ require_once("postprinter.php");
 							$ImageId = htmlspecialchars($row["ImageId"]);
 
 							$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+							$Event->setDateCreated($DateCreated);
+							$Event->setSessionId($id);
+							$Event->checkIfLiked($PostId);
 							array_push($likedPostsArray, $Event);
 						}
 

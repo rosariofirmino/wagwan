@@ -31,6 +31,7 @@
 	}
 	else {
 		//echo "Rating: ".$rating;
+		$rating = round($rating, 2);
 	}
 
 	// update ratings in posts table

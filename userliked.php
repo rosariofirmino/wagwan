@@ -6,6 +6,12 @@ $isLoggedIn = false;
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
+	echo "<script>var id = '$id';</script>";
+	echo "<script>var isLoggedIn = true;</script>";
+}
+else {
+	echo "<script>var id = '';</script>";
+	echo "<script>var isLoggedIn = false;</script>";
 }
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
@@ -21,7 +27,6 @@ $UserId = $_SESSION["id"];
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 	<script src="js/functions.js"></script>
 	<?php
 	// Include Event class with php
@@ -102,6 +107,9 @@ $UserId = $_SESSION["id"];
 			$ImageId = htmlspecialchars($row["ImageId"]);
 
 			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+			$Event->setDateCreated($DateCreated);
+			$Event->setSessionId($id);
+			$Event->checkIfLiked($PostId);
 			array_push($likedPostsArray, $Event);
 		}
 
