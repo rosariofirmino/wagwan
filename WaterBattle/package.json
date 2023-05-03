@@ -1,0 +1,23 @@
+{
+  "name": "water-battle",
+  "version": "1.0.0",
+  "description": "Location based water fountain game.\r https://www.cise.ufl.edu/~dpayne1/cis4930/WaterBattle/index.html",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/npgilman/water-battle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/npgilman/water-battle/issues"
+  },
+  "homepage": "https://github.com/npgilman/water-battle#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.9.0"
+  }
+}

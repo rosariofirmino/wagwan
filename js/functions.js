@@ -57,6 +57,7 @@ function deletePost(PostId) {
 
 	// get UserId
 	var UserId = id; // get UserId from session
+    console.log(id)
 
 	const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {

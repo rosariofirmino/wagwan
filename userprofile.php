@@ -11,6 +11,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
+echo "<script>var id = '$UserId';</script>";
+echo "<script>var isLoggedIn = true;</script>";
 
 // CHANGE TABLE NAME HERE
 $table_name = "dev_users";
@@ -136,6 +138,7 @@ require_once("postprinter.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
+<script src="js/functions.js"></script>
 
 <script>
 	var activeTab = "account-management";
@@ -219,48 +222,6 @@ require_once("postprinter.php");
 	?>
 </head>
 
-<script>
-	function likeButtonPress(Row, PostId, Likes, UserLiked) {
-
-		if (UserLiked == true) { // unlike
-			// set icon to unlike
-			$("#" + Row + "path" + PostId).attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
-
-			// set like count to likes - 1
-			$("#" + Row + "likes" + PostId).html("&nbsp; " + (Likes - 1) + "");
-
-			// change button onclick
-			$("#button" + Row + "" + PostId).attr("onClick", "likeButtonPress(" + Row + ", " + PostId + ", " + (Likes - 1) + ", " + !UserLiked + ")");
-		}
-		else { // like
-			// set icon to like4
-			$("#" + Row + "path" + PostId).attr("d", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z");
-
-			// set like count to likes - 1
-			$("#" + Row + "likes" + PostId).html("&nbsp; " + (Likes + 1) + "");
-
-			// change button onclick
-			$("#button" + Row + "" + PostId).attr("onClick", "likeButtonPress(" + Row + ", " + PostId + ", " + (Likes + 1) + ", " + !UserLiked + ")");
-		}
-
-
-		// AJAX for like update / update like in database
-
-		// get UserId
-		var UserId = "admin"; // TODO: get UserId from session
-
-		const xhttp = new XMLHttpRequest();
-
-		if (UserLiked == true) { // unlike
-			xhttp.open("GET", "actions/dislike.php?PostId=" + PostId + "&UserId=" + UserId, true);
-		}
-		if (UserLiked == false) { // like
-			xhttp.open("GET", "actions/like.php?PostId=" + PostId + "&UserId=" + UserId, true);
-		}
-
-		xhttp.send();
-	}
-</script>
 
 <body style="background-color: black; color: white;"
 	onload=" openTab('manage-wagwans'); openTab('account-management');">
@@ -375,6 +336,7 @@ require_once("postprinter.php");
 						$sql = "SELECT * FROM dev_posts WHERE UserId = '$UserId'";
 						$result = $conn->query($sql);
 
+						$id = $UserId;
 
 						while ($row = $result->fetch_assoc()) {
 							$PostId = $row["PostId"];
@@ -390,6 +352,9 @@ require_once("postprinter.php");
 							$ImageId = htmlspecialchars($row["ImageId"]);
 
 							$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+							$Event->setDateCreated($DateCreated);
+							$Event->setSessionId($id);
+							$Event->checkIfLiked($PostId);
 							array_push($likedPostsArray, $Event);
 						}
 
