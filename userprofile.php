@@ -17,9 +17,12 @@ $table_name = "dev_users";
 
 
 $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+
 if ($link->connect_error) {
 	die("Connection failed: " . $link->connect_error);
 }
+$link->set_charset('utf8mb4');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$userid = $_SESSION["id"];
@@ -28,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$confirm_password = trim($_POST["confirm_password"]);
 
 	$password_err = $confirm_password_err = "";
-	$success_msg = "dab";
+	$success_msg = "";
 
 	// Code to support changing profile pictures
 
@@ -83,23 +86,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// }
 
 	if (!empty($email)) {
-		$sql = `UPDATE $table_name SET Email = ? WHERE UserId = ?`;
+
+		$sql = "UPDATE $table_name SET Email = ? WHERE UserId = ?";
 		if ($stmt = mysqli_prepare($link, $sql)) {
 			mysqli_stmt_bind_param($stmt, "ss", $email, $userid);
 			mysqli_stmt_execute($stmt);
 			mysqli_stmt_close($stmt);
+			$success_msg = "Email Successfully Updated";
+		} else {
+			echo "bru";
+			die;
 		}
 	}
-	if ($password != $confirm_password) {
+	if (!empty($password) && strlen($password) < 6) {
+		$password_err = "Password must contain at least 6 characters.";
+	} else if ($password != $confirm_password) {
 		$confirm_password_err = "Passwords do not match.";
-	}
-	if (!empty($password) && !empty($confirm_password) && ($password == $confirm_password)) {
+	} else if (!empty($password) && !empty($confirm_password) && ($password == $confirm_password)) {
 		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-		$sql = `UPDATE $table_name SET Password = ? WHERE UserId = ?`;
+		$sql = "UPDATE $table_name SET Password = ? WHERE UserId = ?";
 		if ($stmt = mysqli_prepare($link, $sql)) {
 			mysqli_stmt_bind_param($stmt, "ss", $hashed_password, $userid);
 			mysqli_stmt_execute($stmt);
 			mysqli_stmt_close($stmt);
+			$success_msg = "Password Successfully Updated";
 		}
 	}
 
@@ -199,46 +209,8 @@ require_once("postprinter.php");
 			font-style: italic;
 		}
 
-		.user-profile .card-body .tooltip {
-			position: absolute;
-			top: 50%;
-			right: 10px;
-			transform: translateY(-50%);
-			font-size: 20px;
-			cursor: help;
-		}
-
-		.user-profile .card-body .tooltip:before {
-			content: "";
-			position: absolute;
-			top: -8px;
-			left: 50%;
-			transform: translateX(-50%);
-			border-width: 8px 8px 0 8px;
-			border-style: solid;
-			border-color: #f5f5f5 transparent transparent transparent;
-		}
-
-		.user-profile .card-body .tooltip:after {
-			content: attr(title);
-			position: absolute;
-			top: -35px;
-			right: 50%;
-			transform: translateX(50%);
-			padding: 10px;
-			background-color: #28a745;
-			color: #f5f5f5;
-			font-size: 14px;
-			border-radius: 5px;
-			white-space: nowrap;
-			opacity: 0;
-			visibility: hidden;
-			transition: opacity 0.3s ease, visibility 0.3s ease;
-		}
-
-		.user-profile .card-body .tooltip:hover:after {
-			opacity: 1;
-			visibility: visible;
+		.text-primary {
+			text-align: center;
 		}
 	</style>
 
@@ -339,7 +311,9 @@ require_once("postprinter.php");
 							<h3 class="text-center">Account Management</h3>
 						</div>
 						<div class="card-body">
-							<span class="tooltip" title="Update successful">?</span>
+							<p class="text-primary">
+								<?php echo $success_msg; ?>
+							</p>
 							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
 								enctype="multipart/form-data">
 								<div class="form-group">
@@ -348,13 +322,13 @@ require_once("postprinter.php");
 										value="<?php echo $_SESSION['id']; ?>" required disabled>
 								</div>
 								<div class="form-group">
-									<label for="email">Email</label>
+									<label for="email">New Email</label>
 									<input type="email" class="form-control" id="email" name="email"
-										value="<?php echo $_SESSION['email']; ?>" required>
+										value="<?php echo $_SESSION['email']; ?>">
 								</div>
 								<div class="form-group">
 									<label for="password">New Password</label>
-									<input type="password" class="form-control" id="password" name="password" required>
+									<input type="password" class="form-control" id="password" name="password">
 									<p class="text-danger" id="password_err">
 										<?php echo $password_err; ?>
 									</p>
@@ -362,7 +336,7 @@ require_once("postprinter.php");
 								<div class="form-group">
 									<label for="confirm_password">Confirm New Password</label>
 									<input type="password" class="form-control" id="confirm_password"
-										name="confirm_password" required>
+										name="confirm_password">
 									<p class="text-danger" id="confirm_password_err">
 										<?php echo $confirm_password_err; ?>
 									</p>

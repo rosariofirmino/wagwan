@@ -353,7 +353,6 @@
   color: #fff;
 }
 
-
 .user-profile {
   background-color: #1c1c1c;
   color: #f5f5f5;
@@ -393,6 +392,15 @@
 .user-profile button[type="submit"]:hover {
   background-color: #0069d9;
   border-color: #0062cc;
+}
+
+.user-profile input[disabled] {
+  color: #aaa;
+  font-style: italic;
+}
+
+.text-primary {
+  text-align: center;
 }
 
 
