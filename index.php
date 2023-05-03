@@ -10,8 +10,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	echo "<head>\n";
 	echo "<script>var id = '$id';</script>\n";
 	echo "<script>var isLoggedIn = true;</script>\n";
-}
-else {
+} else {
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
 	echo "<head>\n";
@@ -19,38 +18,38 @@ else {
 	echo "<script>var isLoggedIn = false;</script>\n";
 }
 ?>
-	<title>Wagwan Home Page</title>
-	<link rel="icon" href="homepage/hp/icon.png">
-	<link rel="stylesheet" href="./styles.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+<title>Wagwan Home Page</title>
+<link rel="icon" href="homepage/hp/icon.png">
+<link rel="stylesheet" href="./styles.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="js/functions.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-	</script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js">
-	</script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js">
-	</script>
-	<?php
-	// Include Event class with php
-	require_once('Event.php');
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="js/functions.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js">
+</script>
+<?php
+// Include Event class with php
+require_once('Event.php');
 
-	// Include Event Object printer with php
-	require_once("postprinter.php");
-	?>
+// Include Event Object printer with php
+require_once("postprinter.php");
+?>
 
 </head>
 
 <body style="background-color: #2D283E ; color:#D1D7E0 ;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width="35" alt="logo"></a> <button
-				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width="35" alt="logo"></a>
+			<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -62,12 +61,20 @@ else {
 						<a style="color: #D1D7E0;" class="nav-link" href="#">Search</a>
 					</li>
 					<li class="nav-item">
-						<a style="color: #D1D7E0;" class="nav-link" <?php echo ($isLoggedIn === true) ? "href='userliked.php'>Likes</a>" : "href='php/login.php'>Likes</a>" ?>
-					</li>
+						<a style="color: #D1D7E0;" class="nav-link" <?php echo ($isLoggedIn === true) ? "href='userliked.php'>Likes</a>" : "href='php/login.php'>Likes</a>" ?> </li>
 					<li class="nav-item">
 						<a style="color: #D1D7E0;" class="nav-link"
 							href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><?php echo
 									 	($isLoggedIn === true) ? $id : "Log In" ?></a>
+					</li>
+					<li class="nav-item">
+						<?php if ($isLoggedIn === true) { ?>
+							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><img
+									src="./profile_pictures/<?php echo ($_SESSION["ProfilePic"] != null) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
+									width="40" alt="profile picture" class="rounded-circle ms-2"
+									style="width: 40px; height: 40px; margin-left: 10px;">
+							</a>
+						<?php } ?>
 					</li>
 				</ul>
 			</div>
@@ -157,16 +164,16 @@ else {
 	<h2 class="app-header"><strong>Wagwans Happening Soon</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
 		<?php
-		
+
 		$postsArr = $topPostsArray;
-		
+
 		usort($postsArr, 'compareDateEvent');
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = removeIfDateFar($postsArr, 7); // remove if date is more than 7 days away
-
-		$row = $row + 1;
 		
-		foreach($postsArr as $key => $value) {
+		$row = $row + 1;
+
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 
@@ -183,10 +190,10 @@ else {
 		$postsArr = $topPostsArray;
 		usort($postsArr, 'compareRating');
 		$postsArr = removeIfRatingLow($postsArr, 4); // remove if rating is less than 4
-
+		
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -201,10 +208,10 @@ else {
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 0); // keep if price is 0
-
+		
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -219,10 +226,10 @@ else {
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 1); // keep if price is 1
-
+		
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -237,10 +244,10 @@ else {
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 2); // keep if price is 2
-
+		
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -255,10 +262,10 @@ else {
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 3); // keep if price is 3
-
+		
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -276,7 +283,7 @@ else {
 
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -294,7 +301,7 @@ else {
 
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -312,7 +319,7 @@ else {
 
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -330,7 +337,7 @@ else {
 
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
@@ -345,7 +352,7 @@ else {
 		$postsArr = keepLiked($topPostsArray);
 		$row = $row + 1;
 
-		foreach($postsArr as $key => $value) {
+		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
 		}
 		if (empty($postsArr)) {
