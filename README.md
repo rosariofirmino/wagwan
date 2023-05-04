@@ -65,6 +65,7 @@ Intuitive webapp to find whats happening in your area
         * Price
         * Age Restrictions
 * Quick search on homepage when a user is logged in
+* Email on new account creation, Email every 10 likes on your Wagwan
 
 ## How to use Wagwan:
 
