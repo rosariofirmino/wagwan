@@ -29,7 +29,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="js/functions.js"></script>
-<script src="js/search_ajax.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js">
@@ -102,9 +101,9 @@ require_once("postprinter.php");
 			<div class="centered">
 				<h2 style="font-size: 60px;">Wagwan Near Me</h2>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Quick Search" onkeyup="suggestNear(this.value)"
-						aria-describedby="basic-addon2">
+					<input type="text" class="form-control" placeholder="Enter Location">
 					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="button">Search</button>
 					</div>
 				</div>
 			</div>
@@ -112,9 +111,6 @@ require_once("postprinter.php");
 			type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> </button> <button
 			class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"
 			type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> </button>
-	</div>
-	<div id="Results"></div>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="NearYou" style="flex-wrap: nowrap; overflow-x:auto; overflow-y: hidden;">
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Top Wagwans</strong></h2>

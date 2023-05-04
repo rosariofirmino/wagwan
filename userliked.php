@@ -56,7 +56,7 @@ $UserId = $_SESSION["id"];
 						<a style="color: #D1D7E0;" class="nav-link" href="index.php">Home</a>
 					</li>
 					<li class="nav-item">
-						<a style="color: #D1D7E0;" class="nav-link" href="#">Search</a>
+						<a style="color: #D1D7E0;" class="nav-link" href="search.php">Search</a>
 					</li>
 					<li class="nav-item">
 						<a style="color: #D1D7E0;" class="nav-link" href="userliked.php">Likes</a>

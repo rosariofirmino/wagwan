@@ -218,6 +218,15 @@ require_once("postprinter.php");
 							href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><?php echo
 									 	($isLoggedIn === true) ? $id : "Log In" ?></a>
 					</li>
+					<li class="nav-item">
+						<?php if ($isLoggedIn === true) { ?>
+							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>">
+								<img src="./profile_pictures/<?php echo (isset($_SESSION["ProfilePic"])) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
+									width="40" alt="profile picture" class="rounded-circle ms-2"
+									style="width: 40px; height: 40px; margin-left: 10px;">
+							</a>
+						<?php } ?>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -231,12 +240,12 @@ require_once("postprinter.php");
 						<input type="text" class="form-control" name="text" placeholder="Enter name or location">
 					</div>
 				</div>
-				<div class="row justify-content-center">
-					<div class="col">
+				<div class="row justify-content-left">
+					<div class="col col-md-1">
 						<div class="input-group mb-3">
 							<div class="form-group">
 								<label>Category</label>
-								<select class="form-control" id="category" name="category">
+								<select class="form-control" id="category" name="category" style="background-color: transparent; color:#D1D7E0;">
 								<option value="any">Any</option>
 								<option value="nightlife">Nightlife</option>
 								<option value="shop">Shop</option>
@@ -247,12 +256,12 @@ require_once("postprinter.php");
 							</div>
 						</div>
 					</div>
-					<div class="col">
-						<div class="input-group mb-3">
+					<div class="col col-md-1">
+						<div class="input-group mb-3 justify-content-center">
 							<div class="form-group">
 								<label for="price">Price</label>
-								<select class="form-control" id="price" name="price">
-								<option value="any">Any</option>
+								<select class="form-control" id="price" name="price" style="background-color: transparent; color:#D1D7E0;">
+								<option value="any">  Any   </option>
 								<option value="0">🆓</option>
 								<option value="1">💸</option>
 								<option value="2">💰</option>
@@ -261,11 +270,11 @@ require_once("postprinter.php");
 							</div>
 						</div>
 					</div>
-					<div class="col">
+					<div class="col col-sm-0">
 						<div class="input-group mb-3">
 							<div class="form-group">
 								<label for="age">Age</label>
-								<select class="form-control" id="age" name="age">
+								<select class="form-control" id="age" name="age" style="background-color: transparent; color:#D1D7E0;">
 								<option value="any">All Ages</option>
 								<option value="18+">18+</option>
 								<option value="21+">21+</option>
@@ -273,10 +282,10 @@ require_once("postprinter.php");
 							</div>
 						</div>
 					</div>
-					<div class="col">
-						<div class="input-group mb-3">
+					<div class="col col-md-1  justify-content-between">
+						<div class="input-group mb-3" style="padding-top:25px;" >
 							<div class="form-group">
-								<input type="submit" class="btn btn-dark" value="Search">
+								<input type="submit" class="btn btn-dark" style="background-color: #802BB1 ; color:#D1D7E0 ; border:0px;" value="Search">
 							</div>
 						</div>
 					</div>
@@ -323,7 +332,6 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         if(mysqli_stmt_execute($stmt)){
 			//mysqli_stmt_store_result($stmt);
             $result = $stmt->get_result();
-			echo "Query success";
         } else{
             echo "Error execute";
         }
@@ -363,7 +371,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 
 	$row = 0; // keeps track of row we are on
 	$i = 0; // keeps track of card we are on
-	echo "<div class='PostsContainer' style=''> <h1>Search Results</h1>";
+	echo "<div class='PostsContainer' style='padding-left: 90px;'> <h1>Search Results</h1>";
 	echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='SearchPosts" . $row . "'>";
 	foreach ($searchArray as $key => $value) {
 		printEvent($value, $row);
