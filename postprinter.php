@@ -174,7 +174,8 @@ function printEvent($event, $row)
 					$olddate = $event->getDateEvent();
 					$dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $olddate);
 					$newDateString = $dateTime->format('Ymd\THis');
-					$link = "text=".str_replace(' ', '+', $event->getTitle())."&details=".str_replace(' ', '+', $event->getDescription())."&location=".str_replace(' ', '+', $event->getAddress())."&dates=".str_replace(' ', '+', $newDateString)."/".str_replace(' ', '+', $newDateString)."&ctz=America/New_York";
+					$link = "text=".htmlspecialchars(str_replace(' ', '+', $event->getTitle()))."&details=".htmlspecialchars(str_replace(' ', '+', $event->getDescription()))."&location=".htmlspecialchars(str_replace(' ', '+', $event->getAddress()))."&dates=".str_replace(' ', '+', $newDateString)."/".str_replace(' ', '+', $newDateString)."&ctz=America/New_York";
+					
 					$link = "&#039;https://calendar.google.com/calendar/r/eventedit?$link&#039;";
 					echo "<button type='button' onclick='window.open($link, &#039;_blank&#039;)' class='btn btn-outline-success'>Calendar 📅</button>";
 					echo "
