@@ -32,7 +32,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <body style="background-color: #2D283E ; color:#D1D7E0 ;">
 
-    <h1 class="welcome-header">Welcome to Wagwan</h1>
+    <h1 class="welcome-header">Post a Wagwan</h1>
     <p class="guide-desc">What's going on?</p>
 
     <div class="container">
