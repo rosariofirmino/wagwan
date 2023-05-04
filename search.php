@@ -380,7 +380,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
 			echo "</div><br>";
 			echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='SearchPosts" . $i . "'>";
-			$row++;
+			$row = $row + 151;
 		}
 		$i++;
 	}
