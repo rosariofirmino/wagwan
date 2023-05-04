@@ -23,6 +23,7 @@ $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
 ?>
 	<title>Your Liked Wagwans</title>
+	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -30,6 +31,8 @@ $UserId = $_SESSION["id"];
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+
 	<script src="js/functions.js"></script>
 	<?php
 	// Include Event class with php
@@ -40,10 +43,10 @@ $UserId = $_SESSION["id"];
 	?>
 </head>
 
-<body style="background-color: black; color: white;">
+<body style="background-color: #2D283E ; color:#D1D7E0 ;">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="Homepage/hp/wagwan.png" style='width: 35px;' alt=""></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" style='width: 35px;' alt=""></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>

@@ -99,7 +99,7 @@ require_once("postprinter.php");
 				<img alt="" class="d-block w-100" src="homepage/hp/gv3.jpeg">
 			</div>
 			<div class="centered">
-				<h5 class="titletext">Wagwan Near Me</h5>
+				<h2 style="font-size: 60px;">Wagwan Near Me</h2>
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" placeholder="Enter Location">
 					<div class="input-group-append">
