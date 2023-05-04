@@ -87,7 +87,9 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 		// reads from database
 		$userPostsArray = array();
 
-		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
+		$config = parse_ini_file("./db_config.ini"); // get credentials
+		$conn = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -113,6 +115,9 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 			$ImageId = htmlspecialchars($row["ImageId"]);
 
 			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
+			$Event->setDateCreated($DateCreated);
+			$Event->setSessionId($id);
+			$Event->checkIfLiked($PostId);
 			array_push($userPostsArray, $Event);
 		}
 

@@ -309,7 +309,7 @@
   width: fit-content;
 }
 
-.price-container input {
+.price-container input, .price-container label{
   appearance: none;
   cursor: pointer;
   border: none;
@@ -320,26 +320,39 @@
   transition: all 0.2s;
 }
 
-.price-container input:checked {
+.price-container input:checked, .price-container label:checked {
   transform: scale(1.7) !important;
   filter: grayscale(0%);
 }
 
-.price-container input:not(:checked) {
+.price-container input:not(:checked), .price-container label:not(:checked) {
   filter: grayscale(100%);
   transform: scale(0.8)
 }
 
-.price-container input:hover {
+.price-container input:hover, .price-container label:hover {
   filter: grayscale(0%);
   transition: all 0.2s;
   transform: scale(1.1)
 }
 
-.price-container input::before {
-  content: attr(label);
+#free::before {
+  content: "🆓";
   text-align: center;
 }
+#cheap::before {
+  content: "💸";
+  text-align: center;
+}
+#affordable::before {
+  content: "💰";
+  text-align: center;
+}
+#expensive::before {
+  content: "💎";
+  text-align: center;
+}
+
 
 .list-group-item.active {
   background-color: #007bff;

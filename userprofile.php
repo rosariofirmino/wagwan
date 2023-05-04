@@ -11,8 +11,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
-echo "<script>var id = '$UserId';</script>";
-echo "<script>var isLoggedIn = true;</script>";
+echo "<!DOCTYPE html>\n";
+echo "<html lang='en'>\n";
+echo "<head>\n";
+echo "<script>var id = '$UserId';</script>\n";
+echo "<script>var isLoggedIn = true;</script>\n";
 
 // CHANGE TABLE NAME HERE
 $table_name = "dev_users";
@@ -136,8 +139,6 @@ require_once('Event.php');
 // Include Event Object printer with php
 require_once("postprinter.php");
 ?>
-<html>
-
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -165,7 +166,6 @@ require_once("postprinter.php");
 
 
 
-<head>
 	<style>
 		.list-group-item.active {
 			background-color: #007bff;
@@ -235,7 +235,7 @@ require_once("postprinter.php");
 	onload=" openTab('manage-wagwans'); openTab('account-management');">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width="35" alt=""></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -341,7 +341,7 @@ require_once("postprinter.php");
 					</div>
 				</div>
 				<div id="manage-wagwans">
-					<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
+					<div class="d-flex flex-row flex-nowrap overflow-auto" id="UserPosts0">
 						<?php
 						// reads from database
 						$likedPostsArray = array();
@@ -395,7 +395,7 @@ require_once("postprinter.php");
 							//layout for cards: 3 cards per row
 							if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
 								echo "</div><br>";
-								echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts" . $i . "'>";
+								echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='UserPosts" . $i . "'>";
 
 							}
 						}
@@ -404,12 +404,11 @@ require_once("postprinter.php");
 				</div>
 			</div>
 		</div>
+	</div>
 		<!-- <a href="post.php" class="add-button"><i class="fas fa-plus"></i></a> -->
 
 		<br>
 </body>
 
-
-</head>
 
 </html>
