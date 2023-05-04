@@ -157,7 +157,7 @@ require_once("postprinter.php");
 
 		$row = 0; // keeps track of row we are on
 		
-		for ($i = 0; $i < count($topPostsArray); $i++) {
+		for ($i = 0; $i < 15; $i++) {
 			printEvent($topPostsArray[$i], $row);
 		}
 		?>
