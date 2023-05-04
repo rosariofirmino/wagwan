@@ -64,7 +64,6 @@ Intuitive webapp to find whats happening in your area
         * Category
         * Price
         * Age Restrictions
-* Quick search on homepage when a user is logged in
 * Email on new account creation, Email every 10 likes on your Wagwan
 
 ## How to use Wagwan:
@@ -114,7 +113,7 @@ Next time you want to use Wagwan, simply navigate to the login page and enter yo
 
 
 ## Stack
-PHP, MySQL, Bootstrap, CSS, HTML, JavaScript, jQuery
+LAMP Stack (PHP, MySQL, Bootstrap, CSS, HTML, JavaScript, jQuery)
 
 
 ## ER Diagram
