@@ -173,7 +173,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = removeIfDateFar($postsArr, 7); // remove if date is more than 7 days away
 		
-		$row = $row + 1;
+		$row = $row + 1452;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -193,7 +193,7 @@ require_once("postprinter.php");
 		usort($postsArr, 'compareRating');
 		$postsArr = removeIfRatingLow($postsArr, 4); // remove if rating is less than 4
 		
-		$row = $row + 1;
+		$row = $row + 1521;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -211,7 +211,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 0); // keep if price is 0
 		
-		$row = $row + 1;
+		$row = $row + 1164;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -229,7 +229,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 1); // keep if price is 1
 		
-		$row = $row + 1;
+		$row = $row + 1632;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -247,7 +247,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 2); // keep if price is 2
 		
-		$row = $row + 1;
+		$row = $row + 1512;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -265,7 +265,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepXPriceOnly($postsArr, 3); // keep if price is 3
 		
-		$row = $row + 1;
+		$row = $row + 1521;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -283,7 +283,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		usort($postsArr, 'compareDateCreated');
 
-		$row = $row + 1;
+		$row = $row + 1632;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -301,7 +301,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepAgeGroupOnly($postsArr, 'All Ages');
 
-		$row = $row + 1;
+		$row = $row + 1853;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -319,7 +319,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepAgeGroupOnly($postsArr, '18+');
 
-		$row = $row + 1;
+		$row = $row + 118;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -337,7 +337,7 @@ require_once("postprinter.php");
 		$postsArr = removeIfDatePassed($topPostsArray);
 		$postsArr = keepAgeGroupOnly($postsArr, '21+');
 
-		$row = $row + 1;
+		$row = $row + 152;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -353,7 +353,7 @@ require_once("postprinter.php");
 		<?php
 		$postsArr = $topPostsArray;
 
-		$row = $row + 1;
+		$row = $row + 135;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
@@ -368,7 +368,7 @@ require_once("postprinter.php");
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
 		<?php
 		$postsArr = keepLiked($topPostsArray);
-		$row = $row + 1;
+		$row = $row + 102;
 
 		foreach ($postsArr as $key => $value) {
 			printEvent($value, $row);
