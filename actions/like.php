@@ -12,6 +12,18 @@ $conn = new mysqli($config["servername"], $config["username"], $config["password
 	$UserId = $_GET["UserId"];
 	$Likes = $_GET["Likes"];
 
+	// Check if like exists 
+	$sql = "SELECT * FROM dev_likes WHERE PostId = '$PostId' AND UserId = '$UserId'";
+	// check how many values are returned
+	$result = $conn->query($sql);
+ 	// check rows in result
+	$rows = $result->num_rows;
+	if ($rows > 0) {
+		echo "Already Liked";
+		exit();
+	}
+
+
 	// UPDATE LIKES IN DATABASE
 	$sql = "INSERT INTO dev_likes (UserId, PostId) VALUES ('$UserId', '$PostId')";
 	if ($conn->query($sql) === TRUE) {
