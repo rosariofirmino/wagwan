@@ -141,6 +141,7 @@ require_once("postprinter.php");
 ?>
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -168,7 +169,7 @@ require_once("postprinter.php");
 
 	<style>
 		.list-group-item.active {
-			background-color: #007bff;
+			background-color: #802BB1;;
 			color: #fff;
 		}
 
@@ -290,8 +291,8 @@ require_once("postprinter.php");
 			</div>
 			<div class="col-lg-9">
 				<div id="account-management">
-					<div class="card user-profile">
-						<div class="card-header">
+					<div class="card user-profile" style="border-radius: 1.25rem; background-color: #2D283E">
+						<div class="card-header" style="border-radius: 1.15rem 1.15rem 0 0; background-color: #393748;">
 							<h3 class="text-center">Account Management</h3>
 						</div>
 						<div class="card-body">
@@ -302,24 +303,24 @@ require_once("postprinter.php");
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="username">Username</label>
-									<input type="text" class="form-control" id="username" name="username"
+									<input style="background-color: transparent ;" type="text" class="form-control" id="username" name="username"
 										value="<?php echo $_SESSION['id']; ?>" required disabled>
 								</div>
 								<div class="form-group">
 									<label for="email">New Email</label>
-									<input type="email" class="form-control" id="email" name="email"
+									<input style="background-color: transparent ;" type="email" class="form-control" id="email" name="email"
 										value="<?php echo $_SESSION['email']; ?>">
 								</div>
 								<div class="form-group">
 									<label for="password">New Password</label>
-									<input type="password" class="form-control" id="password" name="password">
+									<input style="background-color: transparent ;" type="password" class="form-control" id="password" name="password">
 									<p class="text-danger" id="password_err">
 										<?php echo $password_err; ?>
 									</p>
 								</div>
 								<div class="form-group">
 									<label for="confirm_password">Confirm New Password</label>
-									<input type="password" class="form-control" id="confirm_password"
+									<input style="background-color: transparent ;" type="password" class="form-control" id="confirm_password"
 										name="confirm_password">
 									<p class="text-danger" id="confirm_password_err">
 										<?php echo $confirm_password_err; ?>
@@ -327,14 +328,14 @@ require_once("postprinter.php");
 								</div>
 								<div class="form-group">
 									<label for="profile_picture">Profile Picture</label>
-									<input type="file" class="form-control-file" id="profile_picture"
+									<input style="background-color: transparent ;"type="file" class="form-control-file" id="profile_picture"
 										name="profile_picture">
 									<p class="text-danger" id="profile_pic_err">
 										<?php echo $profile_pic_err; ?>
 									</p>
 								</div>
 								<div class="text-center">
-									<button type="submit" class="btn btn-primary">Update</button>
+									<button style="background-color: #802BB1; border:0px;" type="submit" class="btn btn-primary">Update</button>
 								</div>
 							</form>
 						</div>
