@@ -15,7 +15,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <html lang='en'>
 
 <head>
-    <title>Wagwan Home Page</title>
+    <title>Post A Wagwan</title>
     <link rel="icon" href="homepage/hp/icon.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -33,7 +33,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <body style="background-color: #2D283E ; color:#D1D7E0 ;">
 
     <h1 class="welcome-header">Welcome to Wagwan</h1>
-    <p class="guide-desc">Your guide for local things to do</p>
+    <p class="guide-desc">What's going on?</p>
 
     <div class="container">
         <div class="card post-card" style="background-color: #4C495D;">
@@ -284,7 +284,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     </div>
                     
                         <button style="background-color: #802BB1; border:0px;" type="submit" id="submitWagwan" onclick="this.disabled='true';this.form.submit();" class="btn btn-primary float-right">Submit</button>
-                 
+                    <br>
+                    <br>
+                    <br>
                 </div>
         </form>
        

@@ -41,7 +41,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	?>
 </head>
 
-<body style="background-color:#211d2d; color:#D1D7E0;">
+<body style="background-color: black; color: white;">
 	<div id="root"></div>
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
@@ -129,7 +129,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 		
 		for ($i = 0; $i < count($userPostsArray); $i++) {
 			// print each event object
-			printEventMadeByUser($userPostsArray[$i], $row);
+			printEvent($userPostsArray[$i], $row);
 
 			//layout for cards: 3 cards per row
 			if (($i + 1) % 3 == 0) { // start a new div after every 3rd card

@@ -27,13 +27,13 @@ $UserId = $_SESSION["id"];
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
-
+	
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 
 	<script src="js/functions.js"></script>
 	<?php
@@ -111,8 +111,10 @@ $UserId = $_SESSION["id"];
 			$Price = $row["Price"];
 			$CategoryId = htmlspecialchars($row["CategoryId"], ENT_QUOTES);
 			$AgeRestrictions = htmlspecialchars($row["AgeRestrictions"], ENT_QUOTES);
+			$DateEvent = htmlspecialchars($row["DateEvent"], ENT_QUOTES);
 			$Rating = $row["Rating"];
 			$ImageId = htmlspecialchars($row["ImageId"]);
+			$DateCreated = htmlspecialchars($row["DateCreated"], ENT_QUOTES);
 
 			$Event = new Event($Title, $Description, $CategoryId, $Rating, $AgeRestrictions, $DateEvent, $Price, $Address, $UserId, $PostId, $ImageId);
 			$Event->setDateCreated($DateCreated);

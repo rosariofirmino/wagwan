@@ -11,6 +11,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 else {
 	$isLoggedIn = true;
 	$id = $_SESSION["id"];
+	echo "<script>var id = '$id';</script>\n";
+	echo "<script>var isLoggedIn = true;</script>\n";
 	
 }
 
@@ -170,10 +172,9 @@ require_once("postprinter.php");
 	}
 </style>
 
-	<title>Wagwan Home Page</title>
+	<title>Wagwan Search</title>
 	<link rel="stylesheet" href="./styles.css">
 	<link rel="icon" href="homepage/hp/icon.png">
-
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
 
@@ -181,7 +182,6 @@ require_once("postprinter.php");
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/your_code.js" crossorigin="anonymous"></script>
 	<script src="js/functions.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script> 
