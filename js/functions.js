@@ -123,3 +123,13 @@ function rating(PostId, Rating, Row) {
         xhttp2.send();
 	}, 500);
 }
+
+function quickSearch() { // redirect to search with search bar value
+
+    // get value of search bar (id = quick)
+
+    var search = document.getElementById("quick").value;
+    console.log(search);
+    window.location.href = "search.php?text="+search+"&category=any&price=any&age=any";
+}
+

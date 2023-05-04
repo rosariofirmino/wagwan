@@ -101,9 +101,9 @@ require_once("postprinter.php");
 			<div class="centered">
 				<h2 style="font-size: 60px;">Wagwan Near Me</h2>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Enter Location">
+					<input type="text" class="form-control" id="quick" placeholder="Search for a Wagwan">
 					<div class="input-group-append">
-						<button class="btn btn-outline-secondary" type="button">Search</button>
+						<button class="btn btn-outline-secondary" onclick="quickSearch()" type="button">Search</button>
 					</div>
 				</div>
 			</div>
@@ -362,6 +362,17 @@ require_once("postprinter.php");
 		}
 		?>
 	</div>
+
+	<script>
+		// quick search functionality
+		// redirect to search with search bar value
+		var quicksearch = document.getElementById("quick");
+		quicksearch.addEventListener("keydown", function (e) {
+			if (e.code === "Enter") {
+			quickSearch();
+			}
+		});
+	</script>
 </body>
 
 </html>

@@ -42,7 +42,7 @@ function printEvent($event, $row)
 				<!-- Modal body --> 
 				<div class='modal-body' style='background-color: #2D283E; padding: 25px 70px'>
 				<div class='column'>
-					<a href='#' class='tag' style='padding: 8px'>
+					<a href='search.php?text=&category=".$event->getCategory()."&price=any&age=any' class='tag' style='padding: 8px'>
 					" . $event->getCategory() . "
 					</a>
 					<p><strong>Address: </strong><a href='https://maps.google.com/?q=" . str_replace(' ', '+', $event->getAddress()) . "' target='_blank' rel='noopener noreferrer'>" . $event->getAddress() . "</a></p>
@@ -227,7 +227,7 @@ function printEventMadeByUser($event, $row)
 				<!-- Modal body --> 
 				<div class='modal-body' style='background-color: #2D283E; padding: 25px 70px'>
 				<div class='column'>
-					<a href='#' class='tag' style='padding: 8px'>
+					<a href='search.php?text=&category=".$event->getCategory()."&price=any&age=any' class='tag' style='padding: 8px'>
 					" . $event->getCategory() . "
 					</a>
 					<p><strong>Address: </strong><a href='https://maps.google.com/?q=" . str_replace(' ', '+', $event->getAddress()) . "' target='_blank' rel='noopener noreferrer'>" . $event->getAddress() . "</a></p>
