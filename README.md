@@ -1,9 +1,13 @@
-**Wagwan**
+## Wagwan
+
+
 Intuitive webapp to find whats happening in your area
 
 
-**Team**:
+[https://www.cise.ufl.edu/~dpayne1/wagwan/](https://www.cise.ufl.edu/~dpayne1/wagwan/)
 
+
+## Team:
 
 
 * David Payne - Project Lead
@@ -11,9 +15,9 @@ Intuitive webapp to find whats happening in your area
 * Edward Zhang - Developer
 * Sebastian Martinez - Developer
 
-**User Manual and Features**:
+## User Manual and Features:
 
-What’s Going On? This is **Wagwan**, a social media platform that allows users to find events in their area and post about upcoming events. Wagwan is a term borrowed from Jamaican Patois meaning, “What’s Going On?” Our interactive site aims to help users answer this question by showing them events that are happening in their area.
+   What’s Going On? This is **Wagwan**, a social media platform that allows users to find events in their area and post about upcoming events. Wagwan is a term borrowed from Jamaican Patois meaning, “What’s Going On?” Our interactive site aims to help users answer this question by showing them events that are happening in their area.
 
 **Wagwan’s features:**
 
@@ -62,7 +66,7 @@ What’s Going On? This is **Wagwan**, a social media platform that allows users
         * Age Restrictions
 * Quick search on homepage when a user is logged in
 
-**How to use Wagwan**:
+## How to use Wagwan:
 
 First, navigate to Wagwan’s home page, found at
 
@@ -73,50 +77,40 @@ From the Homepage, click “Login” on the navigation bar, and then click the �
 Once your account is created, you are ready to browse, post, and search for Wagwans!
 
 
-    <span style="text-decoration:underline;">Browse Wagwans</span>
+*Browse Wagwans*
 
 
-    On the homepage, you can browse through our many preset categories. If you see a Wagwan that looks interesting, press the heart icon to save the Wagwan to your likes. The Wagwans you save can then be accessed through the “Likes” page on the navigation bar. You can also see how many users liked these Wagwans with the number to the right of the heart icon.
+   On the homepage, you can browse through our many preset categories. If you see a Wagwan that looks interesting, press the heart icon to save the Wagwan to your likes. The Wagwans you save can then be accessed through the “Likes” page on the navigation bar. You can also see how many users liked these Wagwans with the number to the right of the heart icon.
 
 
-    Click a Wagwan to reveal more details about the event. A popup window will appear which gives the original user who posted the Wagwan, the description, the location, the date/time,  the rating, the price, the age restrictions, and the category.
+   Click a Wagwan to reveal more details about the event. A popup window will appear which gives the original user who posted the Wagwan, the description, the location, the date/time,  the rating, the price, the age restrictions, and the category.
 
 
-    In the popup window, you can click the category, which will take you to the search page with other Wagwans with the same category. You can also click the address field, which will open a new tab with the address location in Google Maps. Additionally, you can click the green “Calendar” button on the bottom right of the popup window, which will open a new tab in your Google Calendar with the Event information filled out. 
+   In the popup window, you can click the category, which will take you to the search page with other Wagwans with the same category. You can also click the address field, which will open a new tab with the address location in Google Maps. Additionally, you can click the green “Calendar” button on the bottom right of the popup window, which will open a new tab in your Google Calendar with the Event information filled out. 
 
 
-    You may also choose to review a Wagwan from this popup window out of five stars. The rating will change automatically after you leave your review
+   You may also choose to review a Wagwan from this popup window out of five stars. The rating will change automatically after you leave your review
 
 
-    Exit the Popup by pressing the red “close” button or clicking off the popup.
+   Exit the Popup by pressing the red “close” button or clicking off the popup.
 
 
-    <span style="text-decoration:underline;">Post Wagwans</span>
+*Post Wagwans*
 
 
-    To post a Wagwan click the purple plus button that appears on the bottom right side of the screen. You will be taken to a page where you can enter various details about the event, such as the title, description, date of the event, category, Age restrictions, price, and background image of the Wagwan. Click the purple submit button at the end of the page to submit your Wagwan to the Wagwan database.
+   To post a Wagwan click the purple plus button that appears on the bottom right side of the screen. You will be taken to a page where you can enter various details about the event, such as the title, description, date of the event, category, Age restrictions, price, and background image of the Wagwan. Click the purple submit button at the end of the page to submit your Wagwan to the Wagwan database.
 
 
-    You can manage your posts by clicking your username on the navbar. Here you can change your profile picture, password, and username. You can also manage your posted Wagwans by clicking on the “Manage Wagwans” tab. Here you can see how many likes and the ratings that your Wagwan has received. Clicking on one of your wagwans will give you the option to delete it, which is located next to the close button.
+   You can manage your posts by clicking your username on the navbar. Here you can change your profile picture, password, and username. You can also manage your posted Wagwans by clicking on the “Manage Wagwans” tab. Here you can see how many likes and the ratings that your Wagwan has received. Clicking on one of your wagwans will give you the option to delete it, which is located next to the close button.
 
 
-    <span style="text-decoration:underline;">Search Wagwans</span>
+*Search Wagwans*
 
 
-    To search for a Wagwan, navigate to the search page by clicking on “Search” on the navbar. On this page, you can filter by category, age restrictions, and price. You can also choose to type in a location, description, or title. You can search in any combination of these filters, or leave some filters blank. Search by clicking the search button, and the page will show you Wagwans that match your search terms.
+   To search for a Wagwan, navigate to the search page by clicking on “Search” on the navbar. On this page, you can filter by category, age restrictions, and price. You can also choose to type in a location, description, or title. You can search in any combination of these filters, or leave some filters blank. Search by clicking the search button, and the page will show you Wagwans that match your search terms.
 
 Next time you want to use Wagwan, simply navigate to the login page and enter your username and password.
 
-**ERD**:
-
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
-
-z
 
 ## ER Diagram
 [Link](https://lucid.app/lucidchart/b41a6c36-9f1c-4ac1-9e5b-11051187af23/edit?viewport_loc=-20%2C-370%2C1629%2C1936%2C0_0&invitationId=inv_19729f28-aea7-4048-b786-7e89c587f115)
