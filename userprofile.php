@@ -11,8 +11,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 $config = parse_ini_file("./db_config.ini");
 $UserId = $_SESSION["id"];
-echo "<script>var id = '$UserId';</script>";
-echo "<script>var isLoggedIn = true;</script>";
+echo "<!DOCTYPE html>\n";
+echo "<html lang='en'>\n";
+echo "<head>\n";
+echo "<script>var id = '$UserId';</script>\n";
+echo "<script>var isLoggedIn = true;</script>\n";
 
 // CHANGE TABLE NAME HERE
 $table_name = "dev_users";
@@ -136,10 +139,9 @@ require_once('Event.php');
 // Include Event Object printer with php
 require_once("postprinter.php");
 ?>
-<html>
-
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -165,10 +167,9 @@ require_once("postprinter.php");
 
 
 
-<head>
 	<style>
 		.list-group-item.active {
-			background-color: #007bff;
+			background-color: #802BB1;;
 			color: #fff;
 		}
 
@@ -235,7 +236,7 @@ require_once("postprinter.php");
 	onload=" openTab('manage-wagwans'); openTab('account-management');">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width=35px></a> <button
+			<a class="navbar-brand" href="index.php"><img src="homepage/hp/wagwan.png" width="35" alt=""></a> <button
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 				class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
 				type="button"><span class="navbar-toggler-icon"></span></button>
@@ -257,13 +258,14 @@ require_once("postprinter.php");
 					</li>
 					<li class="nav-item">
 						<?php if ($isLoggedIn === true) { ?>
-							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><img
-									src="./profile_pictures/<?php echo ($_SESSION["ProfilePic"] != null) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
+							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>">
+								<img src="./profile_pictures/<?php echo (isset($_SESSION["ProfilePic"])) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
 									width="40" alt="profile picture" class="rounded-circle ms-2"
 									style="width: 40px; height: 40px; margin-left: 10px;">
 							</a>
 						<?php } ?>
 					</li>
+
 				</ul>
 			</div>
 		</div>
@@ -289,8 +291,8 @@ require_once("postprinter.php");
 			</div>
 			<div class="col-lg-9">
 				<div id="account-management">
-					<div class="card user-profile">
-						<div class="card-header">
+					<div class="card user-profile" style="border-radius: 1.25rem; background-color: #2D283E">
+						<div class="card-header" style="border-radius: 1.15rem 1.15rem 0 0; background-color: #393748;">
 							<h3 class="text-center">Account Management</h3>
 						</div>
 						<div class="card-body">
@@ -301,24 +303,24 @@ require_once("postprinter.php");
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="username">Username</label>
-									<input type="text" class="form-control" id="username" name="username"
+									<input style="background-color: transparent ;" type="text" class="form-control" id="username" name="username"
 										value="<?php echo $_SESSION['id']; ?>" required disabled>
 								</div>
 								<div class="form-group">
 									<label for="email">New Email</label>
-									<input type="email" class="form-control" id="email" name="email"
+									<input style="background-color: transparent ;" type="email" class="form-control" id="email" name="email"
 										value="<?php echo $_SESSION['email']; ?>">
 								</div>
 								<div class="form-group">
 									<label for="password">New Password</label>
-									<input type="password" class="form-control" id="password" name="password">
+									<input style="background-color: transparent ;" type="password" class="form-control" id="password" name="password">
 									<p class="text-danger" id="password_err">
 										<?php echo $password_err; ?>
 									</p>
 								</div>
 								<div class="form-group">
 									<label for="confirm_password">Confirm New Password</label>
-									<input type="password" class="form-control" id="confirm_password"
+									<input style="background-color: transparent ;" type="password" class="form-control" id="confirm_password"
 										name="confirm_password">
 									<p class="text-danger" id="confirm_password_err">
 										<?php echo $confirm_password_err; ?>
@@ -326,21 +328,21 @@ require_once("postprinter.php");
 								</div>
 								<div class="form-group">
 									<label for="profile_picture">Profile Picture</label>
-									<input type="file" class="form-control-file" id="profile_picture"
+									<input style="background-color: transparent ;"type="file" class="form-control-file" id="profile_picture"
 										name="profile_picture">
 									<p class="text-danger" id="profile_pic_err">
 										<?php echo $profile_pic_err; ?>
 									</p>
 								</div>
 								<div class="text-center">
-									<button type="submit" class="btn btn-primary">Update</button>
+									<button style="background-color: #802BB1; border:0px;" type="submit" class="btn btn-primary">Update</button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 				<div id="manage-wagwans">
-					<div class="d-flex flex-row flex-nowrap overflow-auto" id="Top Posts">
+					<div class="d-flex flex-row flex-nowrap overflow-auto" id="UserPosts0">
 						<?php
 						// reads from database
 						$likedPostsArray = array();
@@ -394,7 +396,7 @@ require_once("postprinter.php");
 							//layout for cards: 3 cards per row
 							if (($i + 1) % 3 == 0) { // start a new div after every 3rd card
 								echo "</div><br>";
-								echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='Top Posts" . $i . "'>";
+								echo "<div class='d-flex flex-row flex-nowrap overflow-auto' id='UserPosts" . $i . "'>";
 
 							}
 						}
@@ -403,12 +405,11 @@ require_once("postprinter.php");
 				</div>
 			</div>
 		</div>
+	</div>
 		<!-- <a href="post.php" class="add-button"><i class="fas fa-plus"></i></a> -->
 
 		<br>
 </body>
 
-
-</head>
 
 </html>

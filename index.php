@@ -70,13 +70,14 @@ require_once("postprinter.php");
 					</li>
 					<li class="nav-item">
 						<?php if ($isLoggedIn === true) { ?>
-							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>"><img
-									src="./profile_pictures/<?php echo ($_SESSION["ProfilePic"] != null) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
+							<a href="userprofile.php?UserId=<?php echo ($isLoggedIn === true) ? $id : "" ?>">
+								<img src="./profile_pictures/<?php echo (isset($_SESSION["ProfilePic"])) ? $_SESSION["ProfilePic"] : "default.jpg"; ?>"
 									width="40" alt="profile picture" class="rounded-circle ms-2"
 									style="width: 40px; height: 40px; margin-left: 10px;">
 							</a>
 						<?php } ?>
 					</li>
+
 				</ul>
 			</div>
 		</div>
@@ -90,16 +91,16 @@ require_once("postprinter.php");
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img alt="..." class="d-block w-100" src="homepage/hp/gv2.jpeg">
+				<img alt="" class="d-block w-100" src="homepage/hp/gv2.jpeg">
 			</div>
 			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="homepage/hp/gv1.jpeg">
+				<img alt="" class="d-block w-100" src="homepage/hp/gv1.jpeg">
 			</div>
 			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="homepage/hp/gv3.jpeg">
+				<img alt="" class="d-block w-100" src="homepage/hp/gv3.jpeg">
 			</div>
 			<div class="centered">
-				<h5 class="titletext">Wagwan Near Me</h5>
+				<h2 style="font-size: 60px;">Wagwan Near Me</h2>
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" placeholder="Quick Search" onkeyup="suggestNear(this.value)"
 						aria-describedby="basic-addon2">
@@ -122,8 +123,10 @@ require_once("postprinter.php");
 		<?php
 		// reads from database
 		$topPostsArray = array();
+		
+		$config = parse_ini_file("./db_config.ini"); // get credentials
+		$conn = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
 
-		$conn = new mysqli("mysql.cise.ufl.edu", "dpayne1", "password", "Wagwan");
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -165,7 +168,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Wagwans Happening Soon</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Tonight">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Soon">
 		<?php
 
 		$postsArr = $topPostsArray;
@@ -188,7 +191,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Highest Rated Wagwans (all time)</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="HighestRated">
 		<?php
 		$postsArr = $topPostsArray;
 		usort($postsArr, 'compareRating');
@@ -206,7 +209,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Top Free Wagwans 🆓</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="TopFree">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
@@ -224,7 +227,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Top Cheap Wagwans 💸</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="TopCheap">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
@@ -242,7 +245,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Top Affordable Wagwans 💰</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="TopAffordable">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
@@ -260,7 +263,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Top Expensive Wagwans 💎</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="TopExpensive">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
@@ -278,7 +281,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Newest Posted Wagwans</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="NewestPosted">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
@@ -296,7 +299,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Wagwans for All Ages</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="AllAges">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
@@ -314,7 +317,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Wagwans 18 and Up</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Wagwans18+">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);
@@ -332,7 +335,7 @@ require_once("postprinter.php");
 	</div>
 	<br>
 	<h2 class="app-header"><strong>Wagwans 21 and Up</strong></h2>
-	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Weekend">
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Wagwans21+">
 		<?php
 		$postsArr = $topPostsArray;
 		$postsArr = removeIfDatePassed($topPostsArray);

@@ -79,16 +79,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt = mysqli_prepare($link, $sql)) {
 
-            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_email, $param_prof_pic, $param_date);
-
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
             $param_email = $email;
             $param_prof_pic = "default.jpg"; // Default profile picture for new users
             $param_date = date("Y-m-d");
 
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_email, $param_prof_pic, $param_date);
+
             if (mysqli_stmt_execute($stmt)) {
-                header("location: ../index.php");
+                session_start();
+
+                $_SESSION["loggedin"] = true;
+                $_SESSION["email"] = $param_email;
+                $_SESSION["id"] = $param_username;
+                $_SESSION["ProfilePic"] = $param_prof_pic; // ProfilePic is a directory to image
+                header("location: ../actions/sendEmailSignup.php?email=" . $param_email);
+
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
                 die;
@@ -108,6 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Sign Up for Wagwan</title>
+    <link rel="icon" href="../homepage/hp/icon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -125,8 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row justify-content-center">
                 <div class="col-sm-4">
                     <br>
-                    <img src="./WagwanLogo.png" class="rounded mx-auto d-block" alt="WagwanLogo" width="70"
-                        height="70"></img>
+                    <img src="./WagwanLogo.png" class="rounded mx-auto d-block" alt="WagwanLogo" width="70" height="70">
                     <br>
                     <h1 style="text-align:center">Wagwan</h1>
                 </div>

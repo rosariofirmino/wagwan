@@ -49,14 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    mysqli_stmt_bind_result($stmt, $id, $userid, $hashed_password, $profile_pic);
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $profile_pic);
                     if (mysqli_stmt_fetch($stmt)) {
                         if (password_verify($password, $hashed_password)) {
                             session_start();
 
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["UserId"] = $userid;
+                            $_SESSION["email"] = $email;
                             $_SESSION["ProfilePic"] = $profile_pic; // ProfilePic is a directory to image                     
 
                             header("location: ../index.php");
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Log in to Wagwan</title>
-    <link rel="icon" href="homepage/hp/icon.png">
+    <link rel="icon" href="../homepage/hp/icon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -101,8 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row justify-content-center">
                 <div class="col-sm-4">
                     <br>
-                    <img src="./WagwanLogo.png" class="rounded mx-auto d-block" alt="WagwanLogo" width="70"
-                        height="70"></img>
+                    <img src="./WagwanLogo.png" class="rounded mx-auto d-block" alt="WagwanLogo" width="70" height="70">
                     <br>
                     <h1 style="text-align:center">Wagwan</h1>
                 </div>
@@ -133,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </p>
                 </div>
                 <div class="col text-center">
-                    <p class="text-danger" id="password_err">
+                    <p class="text-danger" id="login_err">
                         <?php echo $login_err; ?>
                     </p>
                     <br>

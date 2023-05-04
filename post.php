@@ -11,14 +11,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 ?>
-
-<html>
+<!DOCTYPE html>
+<html lang='en'>
 
 <head>
     <title>Wagwan Home Page</title>
     <link rel="icon" href="homepage/hp/icon.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./styles.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -59,6 +61,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <div class="form-group">
                         <label for="category">Category?</label>
                         <select class="form-control" id="category" name="category" required>
+                            <option value="">Choose a Category</option>
                             <option value="nightlife">Nightlife</option>
                             <option value="shop">Shop</option>
                             <option value="performances">Performance</option>
@@ -83,15 +86,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <div class="form-group">
                         <label for="age">Price?</label>
                         <div class="price-container">
-                            <input label="🆓" type="radio" name="price" value="0" style="margin-right: 90px">
-                            <input label="💸" type="radio" name="price" value="1" style="margin-right: 90px" checked
-                                required>
-                            <input label="💰" type="radio" name="price" value="2" style="margin-right: 90px">
-                            <input label="💎" type="radio" name="price" value="3" style="margin-right: 90px">
+                            <input id="free" type="radio" name="price" value="0" style="margin-right: 90px">
+                            <input id="cheap" type="radio" name="price" value="1" style="margin-right: 90px" checked required>
+                            <input id="affordable" type="radio" name="price" value="2" style="margin-right: 90px">
+                            <input id="expensive" type="radio" name="price" value="3" style="margin-right: 90px">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="image">Image</label>
+                        <label>Image?</label>
                         <div class="image-container">
                             <input type="radio" id="club1" name="image" value="club1" onclick="test()" checked>
                             <label for="club1">
@@ -281,12 +283,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                     </div>
                     
-                        <button style="background-color: #802BB1; border:0px;"type="submit" class="btn btn-primary float-right">Submit</button>
-                   
-            </form>
+                        <button style="background-color: #802BB1; border:0px;" type="submit" id="submitWagwan" onclick="this.disabled='true';this.form.submit();" class="btn btn-primary float-right">Submit</button>
+                 
+                </div>
+        </form>
+       
+
         </div>
-
-
     </div>
 
 
