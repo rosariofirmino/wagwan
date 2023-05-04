@@ -112,6 +112,10 @@ Once your account is created, you are ready to browse, post, and search for Wagw
 Next time you want to use Wagwan, simply navigate to the login page and enter your username and password.
 
 
+## Stack
+PHP, MySQL, Bootstrap, CSS, HTML, JavaScript, jQuery
+
+
 ## ER Diagram
 [Link](https://lucid.app/lucidchart/b41a6c36-9f1c-4ac1-9e5b-11051187af23/edit?viewport_loc=-20%2C-370%2C1629%2C1936%2C0_0&invitationId=inv_19729f28-aea7-4048-b786-7e89c587f115)
 
