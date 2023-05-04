@@ -172,6 +172,8 @@ require_once("postprinter.php");
 
 	<title>Wagwan Home Page</title>
 	<link rel="stylesheet" href="./styles.css">
+	<link rel="icon" href="homepage/hp/icon.png">
+
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
 
