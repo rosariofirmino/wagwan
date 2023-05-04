@@ -126,10 +126,16 @@ function rating(PostId, Rating, Row) {
 
 function quickSearch() { // redirect to search with search bar value
 
-    // get value of search bar (id = quick)
+    // check if logged in
+    if (isLoggedIn == false) {
+        window.location.href = "php/login.php"; // redirect to login page
+        return 0;
+    }
 
+
+    // get value of search bar (id = quick)
     var search = document.getElementById("quick").value;
     console.log(search);
-    window.location.href = "search.php?text="+search+"&category=any&price=any&age=any";
+    window.location.href = "search.php?text="+search+"&category=any&price=any&age=any"; // redirect to search page with search bar value
 }
 
