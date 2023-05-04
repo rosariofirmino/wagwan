@@ -348,6 +348,22 @@ require_once("postprinter.php");
 		?>
 	</div>
 	<br>
+	<h2 class="app-header"><strong>Top Wagwans (All Time)</strong></h2>
+	<div class="d-flex flex-row flex-nowrap overflow-auto" id="TopAllTime">
+		<?php
+		$postsArr = $topPostsArray;
+
+		$row = $row + 1;
+
+		foreach ($postsArr as $key => $value) {
+			printEvent($value, $row);
+		}
+		if (empty($postsArr)) {
+			echo "</div><h2 class='app-header' style='text-align: center;'>No Wagwans for 21+ have been posted recently...</h2><div>";
+		}
+		?>
+	</div>
+	<br>
 	<h2 class="app-header"><strong>Your liked Wagwans</strong></h2>
 	<div class="d-flex flex-row flex-nowrap overflow-auto" id="Liked">
 		<?php
@@ -362,6 +378,7 @@ require_once("postprinter.php");
 		}
 		?>
 	</div>
+	<br>
 
 	<script>
 		// quick search functionality
