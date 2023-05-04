@@ -21,6 +21,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	<title>Your Posted Wagwans</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -40,7 +41,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 	?>
 </head>
 
-<body style="background-color: black; color: white;">
+<body style="background-color:#211d2d; color:#D1D7E0;">
 	<div id="root"></div>
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2D283E ;">
 		<div class="container">
